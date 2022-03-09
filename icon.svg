@@ -11,23 +11,16 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
      id="defs2" />
-  <g
-     id="layer1">
-    <path
-       style="fill:none;stroke:#000000;stroke-width:3.96875;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 29.633333,16.933333 12.7,25.4 v 25.399999 l 16.933333,2.11667 25.4,-2.11667 V 25.4 Z"
-       id="path3493" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 29.633333,16.933333 V 52.916669"
-       id="path3768" />
-    <path
-       id="path911"
-       style="color:#000000;fill:#000000;stroke-width:0.822784;-inkscape-stroke:none"
-       d="m 46.180809,26.12239 v 20.518901 l 3.96875,-0.223895 V 27.017969 Z" />
-    <path
-       id="path1674"
-       style="color:#000000;fill:#000000;stroke-width:0.765002;-inkscape-stroke:none"
-       d="m 40.366716,28.818781 v 19.844803 l 3.547439,-0.216539 V 29.684938 Z" />
-  </g>
+  <path
+     id="path3493"
+     style="color:#000000;fill:#000044;stroke-width:1;-inkscape-stroke:none;fill-opacity:1"
+     d="m 29.480373,14.790829 -0.734324,0.367419 -18.031457,9.015471 v 28.379147 l 18.877401,2.35903 27.425717,-2.286682 V 23.97063 Z m 1.740461,4.763533 21.828126,7.275526 V 48.974789 L 31.220834,50.793284 Z M 28.0448,19.94762 V 50.718354 L 14.683342,49.048687 V 26.6268 Z" />
+  <path
+     id="path911"
+     style="color:#000000;fill:#000044;stroke-width:0.822784;-inkscape-stroke:none;fill-opacity:1"
+     d="m 46.180809,26.12239 v 20.518901 l 3.96875,-0.223895 V 27.017969 Z" />
+  <path
+     id="path1674"
+     style="color:#000000;fill:#000044;stroke-width:0.765002;-inkscape-stroke:none;fill-opacity:1"
+     d="m 40.366716,28.818781 v 19.844803 l 3.547439,-0.216539 V 29.684938 Z" />
 </svg>
