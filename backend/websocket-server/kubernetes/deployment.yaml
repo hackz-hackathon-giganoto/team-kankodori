@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ws-server
+  name: ws-server
+  namespace: ws-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ws-server
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ws-server
+    spec:
+      containers:
+      - image: docker.io/onsd/ws-server:0.2
+        name: ws-server
