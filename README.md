@@ -1,1 +1,1 @@
-# team-kankodori
+# ![Inol](./logo.svg)
