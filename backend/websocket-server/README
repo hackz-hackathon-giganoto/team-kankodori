@@ -1,0 +1,13 @@
+# websocket-server
+
+websocket server の練習
+
+だいぶ適当に作っている
+
+## deploy
+
+```console
+$ docker build -t onsd/ws-server:0.x . --platform=linux/amd64
+
+$ docker push onsd/ws-server:0.x
+```
