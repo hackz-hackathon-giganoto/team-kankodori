@@ -31,6 +31,9 @@ export default function Index() {
         <li>
           <Link to="/new">作成ページ</Link>
         </li>
+        <li>
+          <Link to="/posts">なめくじを生成するページ</Link>
+        </li>
       </ul>
     </div>
   );
