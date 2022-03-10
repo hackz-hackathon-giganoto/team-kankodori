@@ -1,3 +1,5 @@
+import { Link } from "remix";
+
 export default function Index() {
   return (
     <div className="p-4">
@@ -25,6 +27,9 @@ export default function Index() {
           <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
             Remix Docs
           </a>
+        </li>
+        <li>
+          <Link to="/new">作成ページ</Link>
         </li>
       </ul>
     </div>
