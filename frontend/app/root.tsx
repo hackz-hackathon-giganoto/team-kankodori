@@ -6,16 +6,14 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "remix";
-import type { MetaFunction } from "remix";
-import styles from "./tailwind.css";
+} from 'remix';
+import type { MetaFunction } from 'remix';
+import styles from './tailwind.css';
 
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: styles },
-];
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
 export const meta: MetaFunction = () => {
-  return { title: "Inol" };
+  return { title: 'Inol' };
 };
 
 export default function App() {
