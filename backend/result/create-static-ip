@@ -1,0 +1,35 @@
+az network public-ip create --resource-group inol --name inolPublicIP --sku Standard --allocation-method static
+[Coming breaking change] In the coming release, the default behavior will be changed as follows when sku is Standard and zone is not provided: For zonal regions, you will get a zone-redundant IP indicated by zones:["1","2","3"]; For non-zonal regions, you will get a non zone-redundant IP indicated by zones:null.
+{
+  "publicIp": {
+    "ddosSettings": null,
+    "deleteOption": null,
+    "dnsSettings": null,
+    "etag": "W/\"f8f87bdc-d4fc-464b-907d-2f3ab84fa088\"",
+    "extendedLocation": null,
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Network/publicIPAddresses/inolPublicIP",
+    "idleTimeoutInMinutes": 4,
+    "ipAddress": "20.231.44.172",
+    "ipConfiguration": null,
+    "ipTags": [],
+    "linkedPublicIpAddress": null,
+    "location": "eastus",
+    "migrationPhase": null,
+    "name": "inolPublicIP",
+    "natGateway": null,
+    "provisioningState": "Succeeded",
+    "publicIpAddressVersion": "IPv4",
+    "publicIpAllocationMethod": "Static",
+    "publicIpPrefix": null,
+    "resourceGroup": "inol",
+    "resourceGuid": "8ac49750-22ce-4d69-a29c-029b2dc3715d",
+    "servicePublicIpAddress": null,
+    "sku": {
+      "name": "Standard",
+      "tier": "Regional"
+    },
+    "tags": null,
+    "type": "Microsoft.Network/publicIPAddresses",
+    "zones": null
+  }
+}
