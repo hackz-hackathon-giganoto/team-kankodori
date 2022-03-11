@@ -1,6 +1,7 @@
-import { PointerEvent, useCallback, VFC } from 'react';
+import { PointerEvent, useCallback, useEffect, VFC } from 'react';
 import { useCanvasFrame } from '~/utils/useCanvasFrame';
 import { usePointerIdRef, useStrokeRef, useStrokes } from './hooks';
+import { NetworkController } from './network';
 import { Svg } from './Svg';
 import { drawFrame, getCanvasPoint, roundPoint } from './utils';
 
@@ -8,9 +9,14 @@ export type Props = {
   width?: number;
   height?: number;
   backgroundSvg?: string;
+  networkController?: NetworkController;
 };
 
-export const SvgCanvas: VFC<Props> = ({ width = 640, height = 640 }: Props) => {
+export const SvgCanvas: VFC<Props> = ({
+  width = 640,
+  height = 640,
+  networkController,
+}: Props) => {
   const { strokeRef, appendPoint, setStroke } = useStrokeRef();
   const canvasRef = useCanvasFrame((ctx) => drawFrame(ctx, strokeRef.current));
   const [pointerIdRef, setPointerId] = usePointerIdRef();
@@ -41,13 +47,31 @@ export const SvgCanvas: VFC<Props> = ({ width = 640, height = 640 }: Props) => {
       if (canvasRef.current === null)
         throw new Error('Unexpected Error: Canvas element is null');
       if (e.pointerId !== pointerIdRef.current) return;
+      const roundedStroke = strokeRef.current.map(roundPoint);
       canvasRef.current.releasePointerCapture(e.pointerId);
       setPointerId(undefined);
-      appendStroke(strokeRef.current.map(roundPoint));
+      appendStroke(roundedStroke);
+      networkController?.addStroke(roundedStroke);
       setTimeout(() => setStroke([]), 0);
     },
-    [appendStroke, canvasRef, pointerIdRef, setPointerId, setStroke, strokeRef],
+    [
+      appendStroke,
+      canvasRef,
+      networkController,
+      pointerIdRef,
+      setPointerId,
+      setStroke,
+      strokeRef,
+    ],
   );
+
+  useEffect(() => {
+    if (networkController === undefined) return;
+    networkController.addEventListener('stroke', appendStroke);
+    networkController.addEventListener('syncrequest', () =>
+      networkController.sync(strokes),
+    );
+  }, [appendStroke, networkController, strokes]);
 
   return (
     <div style={{ position: 'relative', width: '50vmin', height: '50vmin' }}>
