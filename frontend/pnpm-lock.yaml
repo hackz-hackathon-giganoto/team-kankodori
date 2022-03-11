@@ -15,6 +15,7 @@ specifiers:
   react-dom: ^17.0.2
   remix: ^1.2.3
   typescript: ^4.5.5
+  use-callback-ref: ^1.2.5
   wrangler: beta
 
 dependencies:
@@ -23,6 +24,7 @@ dependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   remix: 1.2.3
+  use-callback-ref: 1.2.5_a0c521d4794c7ad97f5f4c1c4a7d5818
 
 devDependencies:
   '@cloudflare/workers-types': 3.4.0
@@ -34,7 +36,7 @@ devDependencies:
   eslint: 8.10.0
   npm-run-all: 4.1.5
   typescript: 4.6.2
-  wrangler: 0.0.18
+  wrangler: 0.0.19
 
 packages:
 
@@ -4715,6 +4717,20 @@ packages:
       punycode: 2.1.1
     dev: true
 
+  /use-callback-ref/1.2.5_a0c521d4794c7ad97f5f4c1c4a7d5818:
+    resolution: {integrity: sha512-gN3vgMISAgacF7sqsLPByqoePooY3n2emTH59Ur5d/M8eg4WTWu1xp8i8DHjohftIyEx0S08RiYxbffr4j8Peg==}
+    engines: {node: '>=8.5.0'}
+    peerDependencies:
+      '@types/react': ^16.8.0 || ^17.0.0
+      react: ^16.8.0 || ^17.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': 17.0.39
+      react: 17.0.2
+    dev: false
+
   /uvu/0.5.3:
     resolution: {integrity: sha512-brFwqA3FXzilmtnIyJ+CxdkInkY/i4ErvP7uV0DnUVxQcQ55reuHphorpF+tZoVHK2MniZ/VJzI7zJQoc9T9Yw==}
     engines: {node: '>=8'}
@@ -4783,8 +4799,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /wrangler/0.0.18:
-    resolution: {integrity: sha512-Ll3sZtOPlI23wy5Vos3LAqtr1tWfKhWCxfua47O/q6ZoTOfNqkO+bZ0NGKwmyWuuPeUa8zFEpnwAvWaU9HnDfQ==}
+  /wrangler/0.0.19:
+    resolution: {integrity: sha512-WRfWf4Kbbo1M3GiXPUXDHCXWe2ANoArTtr8lX7oxiEFahAISgkgMtTupD7hFtVZs6F9MdGv2cV0dzBcg/pgRvA==}
     engines: {node: '>=16.7.0'}
     hasBin: true
     dependencies:
