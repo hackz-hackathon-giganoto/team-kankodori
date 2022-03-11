@@ -11,6 +11,7 @@ specifiers:
   cross-env: ^7.0.3
   eslint: ^8.9.0
   npm-run-all: ^4.1.5
+  prettier: ^2.5.1
   react: ^17.0.2
   react-dom: ^17.0.2
   remix: ^1.2.3
@@ -29,11 +30,12 @@ devDependencies:
   '@cloudflare/workers-types': 3.4.0
   '@remix-run/dev': 1.2.3_react-dom@17.0.2+react@17.0.2
   '@remix-run/eslint-config': 1.2.3_56ffc67857808b91cf4ce450bd1b66d6
-  '@types/react': 17.0.39
+  '@types/react': 17.0.40
   '@types/react-dom': 17.0.13
   cross-env: 7.0.3
   eslint: 8.10.0
   npm-run-all: 4.1.5
+  prettier: 2.5.1
   tailwindcss: 3.0.23
   typescript: 4.6.2
   wrangler: 0.0.19
@@ -852,11 +854,11 @@ packages:
   /@types/react-dom/17.0.13:
     resolution: {integrity: sha512-wEP+B8hzvy6ORDv1QBhcQia4j6ea4SFIBttHYpXKPFZRviBvknq0FRh3VrIxeXUmsPkwuXVZrVGG7KUVONmXCQ==}
     dependencies:
-      '@types/react': 17.0.39
+      '@types/react': 17.0.40
     dev: true
 
-  /@types/react/17.0.39:
-    resolution: {integrity: sha512-UVavlfAxDd/AgAacMa60Azl7ygyQNRwC/DsHZmKgNvPmRR5p70AJ5Q9EAmL2NWOJmeV+vVUI4IAP7GZrN8h8Ug==}
+  /@types/react/17.0.40:
+    resolution: {integrity: sha512-UrXhD/JyLH+W70nNSufXqMZNuUD2cXHu6UjCllC6pmOQgBX4SGXOH8fjRka0O0Ee0HrFxapDD8Bwn81Kmiz6jQ==}
     dependencies:
       '@types/prop-types': 15.7.4
       '@types/scheduler': 0.16.2
@@ -4103,6 +4105,12 @@ packages:
   /prelude-ls/1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+    dev: true
+
+  /prettier/2.5.1:
+    resolution: {integrity: sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /pretty-format/27.5.1:

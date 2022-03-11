@@ -15,12 +15,12 @@ export const links: LinksFunction = () => [
 ];
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+  return { title: "Inol" };
 };
 
 export default function App() {
   return (
-    <html lang="en">
+    <html lang="ja">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
