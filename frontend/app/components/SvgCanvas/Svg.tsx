@@ -1,6 +1,12 @@
-import { CSSProperties } from "react";
-import { fill, stroke, strokeLinecap, strokeLinejoin, strokeLineWidth } from "./constants";
-import { Stroke } from "./types";
+import { CSSProperties } from 'react';
+import {
+  fill,
+  stroke,
+  strokeLinecap,
+  strokeLinejoin,
+  strokeLineWidth,
+} from './constants';
+import { Stroke } from './types';
 
 export type Props = {
   width: number;
@@ -8,7 +14,7 @@ export type Props = {
   style?: CSSProperties;
   className?: string;
   strokes: Stroke[];
-}
+};
 
 export const Svg = ({ width, height, style, className, strokes }: Props) => (
   <svg
@@ -19,20 +25,19 @@ export const Svg = ({ width, height, style, className, strokes }: Props) => (
     style={style}
     className={className}
   >
-    <g 
+    <g
       fill={fill}
       stroke={stroke}
       strokeWidth={strokeLineWidth}
       strokeLinecap={strokeLinecap}
-      strokeLinejoin={strokeLinejoin}>
-    {strokes.map((stroke, k) => {
-      const d = stroke.map(({ x, y }, i) => `${i === 0 ? 'M' : ''}${x},${y}`).join(' ');
-      return (
-        <path
-          key={k}
-          d={d}
-        />);
-    })}
+      strokeLinejoin={strokeLinejoin}
+    >
+      {strokes.map((stroke, k) => {
+        const d = stroke
+          .map(({ x, y }, i) => `${i === 0 ? 'M' : ''}${x},${y}`)
+          .join(' ');
+        return <path key={k} d={d} />;
+      })}
     </g>
   </svg>
 );
