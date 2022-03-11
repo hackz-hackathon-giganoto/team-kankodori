@@ -6,10 +6,14 @@
   "sideEffects": false,
   "scripts": {
     "postinstall": "remix setup cloudflare-pages",
-    "build": "cross-env NODE_ENV=production remix build",
+    "build": "run-p build:*",
+    "build:css": "npm run generate:css -- --minify",
+    "build:remix": "cross-env NODE_ENV=production remix build",
+    "dev:css": "npm run generate:css -- --watch",
     "dev:remix": "cross-env NODE_ENV=development remix watch",
     "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public",
     "dev": "cross-env NODE_ENV=development remix build && run-p dev:*",
+    "generate:css": "tailwindcss -i ./app/styles/tailwind.css -o ./app/tailwind.css",
     "start": "cross-env NODE_ENV=production npm run dev:wrangler"
   },
   "dependencies": {
