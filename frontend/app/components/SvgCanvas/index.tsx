@@ -8,7 +8,7 @@ import { drawFrame, getCanvasPoint, roundPoint } from './utils';
 export type Props = {
   width?: number;
   height?: number;
-  backgroundSvg?: string;
+  BackgroundSvg?: () => JSX.Element;
   networkController?: NetworkController;
 };
 
@@ -16,6 +16,7 @@ export const SvgCanvas: VFC<Props> = ({
   width = 640,
   height = 640,
   networkController,
+  BackgroundSvg,
 }: Props) => {
   const { strokeRef, appendPoint, setStroke } = useStrokeRef();
   const canvasRef = useCanvasFrame((ctx) => drawFrame(ctx, strokeRef.current));
@@ -87,6 +88,7 @@ export const SvgCanvas: VFC<Props> = ({
         height={height}
         style={{ width: '100%', height: '100%', position: 'absolute' }}
         strokes={strokes}
+        BackgroundSvg={BackgroundSvg}
       />
       <canvas
         ref={canvasRef}

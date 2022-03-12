@@ -14,9 +14,17 @@ export type Props = {
   style?: CSSProperties;
   className?: string;
   strokes: Stroke[];
+  BackgroundSvg?: () => JSX.Element;
 };
 
-export const Svg = ({ width, height, style, className, strokes }: Props) => (
+export const Svg = ({
+  width,
+  height,
+  style,
+  className,
+  strokes,
+  BackgroundSvg,
+}: Props) => (
   <svg
     width={width}
     height={height}
@@ -25,6 +33,7 @@ export const Svg = ({ width, height, style, className, strokes }: Props) => (
     style={style}
     className={className}
   >
+    {BackgroundSvg && <BackgroundSvg />}
     <g
       fill={fill}
       stroke={stroke}

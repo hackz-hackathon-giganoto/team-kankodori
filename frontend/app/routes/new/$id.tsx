@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { json, LoaderFunction, useLoaderData } from 'remix';
+import { Padlock } from '~/components/baseSvg';
 import { SvgCanvas } from '~/components/SvgCanvas';
 import {
   AyameController,
@@ -29,7 +30,7 @@ export default function Index() {
   );
   return (
     <div>
-      <SvgCanvas networkController={controller} />
+      <SvgCanvas networkController={controller} BackgroundSvg={Padlock} />
     </div>
   );
 }
