@@ -2,41 +2,51 @@ lockfileVersion: 5.3
 
 specifiers:
   '@cloudflare/workers-types': ^3.2.0
+  '@open-ayame/ayame-web-sdk': ^2022.1.0
   '@remix-run/cloudflare-pages': ^1.2.3
   '@remix-run/dev': ^1.2.3
   '@remix-run/eslint-config': ^1.2.3
   '@remix-run/react': ^1.2.3
   '@types/react': ^17.0.24
   '@types/react-dom': ^17.0.9
+  autoprefixer: ^10.4.2
   cross-env: ^7.0.3
   eslint: ^8.9.0
+  eventmit: ^1.1.0
   npm-run-all: ^4.1.5
+  postcss: ^8.4.8
   prettier: ^2.5.1
   react: ^17.0.2
   react-dom: ^17.0.2
   remix: ^1.2.3
   tailwindcss: ^3.0.23
   typescript: ^4.5.5
+  use-callback-ref: ^1.2.5
   wrangler: beta
 
 dependencies:
+  '@open-ayame/ayame-web-sdk': 2022.1.0
   '@remix-run/cloudflare-pages': 1.2.3_abc5c18a24dffdd7ae2647150b801da6
   '@remix-run/react': 1.2.3_react-dom@17.0.2+react@17.0.2
+  eventmit: 1.1.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   remix: 1.2.3
+  use-callback-ref: 1.2.5_a0c521d4794c7ad97f5f4c1c4a7d5818
 
 devDependencies:
   '@cloudflare/workers-types': 3.4.0
   '@remix-run/dev': 1.2.3_react-dom@17.0.2+react@17.0.2
   '@remix-run/eslint-config': 1.2.3_56ffc67857808b91cf4ce450bd1b66d6
-  '@types/react': 17.0.40
+  '@types/react': 17.0.39
   '@types/react-dom': 17.0.13
+  autoprefixer: 10.4.2_postcss@8.4.8
   cross-env: 7.0.3
   eslint: 8.10.0
   npm-run-all: 4.1.5
+  postcss: 8.4.8
   prettier: 2.5.1
-  tailwindcss: 3.0.23
+  tailwindcss: 3.0.23_autoprefixer@10.4.2
   typescript: 4.6.2
   wrangler: 0.0.19
 
@@ -604,6 +614,10 @@ packages:
       rimraf: 3.0.2
     dev: true
 
+  /@open-ayame/ayame-web-sdk/2022.1.0:
+    resolution: {integrity: sha512-WPPqQTfGmOVcJUOR87lxNbUpwtIZVbzwrk9DqoSGh/hhtmDPuVU3GUzyNR1CUdxtFDVI8sS7VhWVyIOfWIqCrQ==}
+    dev: false
+
   /@remix-run/cloudflare-pages/1.2.3_abc5c18a24dffdd7ae2647150b801da6:
     resolution: {integrity: sha512-Z1gYM4dXgTUbF/BUoRZzan9bdc7xuq+FKkT++irHkhXHEtTjVrQN3WI5cMnbS+v0PcVOTs7Bl0BHitZpLfX1Rw==}
     peerDependencies:
@@ -854,11 +868,11 @@ packages:
   /@types/react-dom/17.0.13:
     resolution: {integrity: sha512-wEP+B8hzvy6ORDv1QBhcQia4j6ea4SFIBttHYpXKPFZRviBvknq0FRh3VrIxeXUmsPkwuXVZrVGG7KUVONmXCQ==}
     dependencies:
-      '@types/react': 17.0.40
+      '@types/react': 17.0.39
     dev: true
 
-  /@types/react/17.0.40:
-    resolution: {integrity: sha512-UrXhD/JyLH+W70nNSufXqMZNuUD2cXHu6UjCllC6pmOQgBX4SGXOH8fjRka0O0Ee0HrFxapDD8Bwn81Kmiz6jQ==}
+  /@types/react/17.0.39:
+    resolution: {integrity: sha512-UVavlfAxDd/AgAacMa60Azl7ygyQNRwC/DsHZmKgNvPmRR5p70AJ5Q9EAmL2NWOJmeV+vVUI4IAP7GZrN8h8Ug==}
     dependencies:
       '@types/prop-types': 15.7.4
       '@types/scheduler': 0.16.2
@@ -1160,6 +1174,22 @@ packages:
     hasBin: true
     dev: true
 
+  /autoprefixer/10.4.2_postcss@8.4.8:
+    resolution: {integrity: sha512-9fOPpHKuDW1w/0EKfRmVnxTDt8166MAnLI3mgZ1JCnhNtYWxcJ6Ud5CO/AVOZi/AvFa8DY9RTy3h3+tFBlrrdQ==}
+    engines: {node: ^10 || ^12 || >=14}
+    hasBin: true
+    peerDependencies:
+      postcss: ^8.1.0
+    dependencies:
+      browserslist: 4.20.0
+      caniuse-lite: 1.0.30001314
+      fraction.js: 4.2.0
+      normalize-range: 0.1.2
+      picocolors: 1.0.0
+      postcss: 8.4.8
+      postcss-value-parser: 4.2.0
+    dev: true
+
   /axe-core/4.4.1:
     resolution: {integrity: sha512-gd1kmb21kwNuWr6BQz8fv6GNECPBnUasepcoLbekws23NVBLODdsClRZ+bQ8+9Uomf3Sm3+Vwn0oYG9NvwnJCw==}
     engines: {node: '>=4'}
@@ -1213,7 +1243,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001314
-      electron-to-chromium: 1.4.81
+      electron-to-chromium: 1.4.77
       escalade: 3.1.1
       node-releases: 2.0.2
       picocolors: 1.0.0
@@ -1622,8 +1652,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /electron-to-chromium/1.4.81:
-    resolution: {integrity: sha512-Gs7xVpIZ7tYYSDA+WgpzwpPvfGwUk3KSIjJ0akuj5XQHFdyQnsUoM76EA4CIHXNLPiVwTwOFay9RMb0ChG3OBw==}
+  /electron-to-chromium/1.4.77:
+    resolution: {integrity: sha512-fiDxw8mO9Ph1Z0bjX2sFTPpi0J0QkOiwOJF+5Q0J0baNc/F9lLePAvDPlnoxvbUYYMizqrKPeotRRkJ9LtxAew==}
     dev: true
 
   /emoji-regex/9.2.2:
@@ -2451,6 +2481,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /eventmit/1.1.0:
+    resolution: {integrity: sha512-H8+aEVjVGAvvlpEmNm4NnQu9yNEeV0RJfNoeTQizfj6LS+6wAvESFzHzubDkjw5I2HU+LA4eFe+jg2jEtbj1zw==}
+    dev: false
+
   /exit-hook/2.2.1:
     resolution: {integrity: sha512-eNTPlAD67BmP31LDINZ3U7HSF8l57TxOY2PmBJ1shpCvpnxBF93mWCE8YHBnXs8qiUZJc9WDcWIeC3a2HIAMfw==}
     engines: {node: '>=6'}
@@ -2544,6 +2578,10 @@ packages:
   /format/0.2.2:
     resolution: {integrity: sha1-1hcBB+nv3E7TDJ3DkBbflCtctYs=}
     engines: {node: '>=0.4.x'}
+    dev: true
+
+  /fraction.js/4.2.0:
+    resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: true
 
   /fs-extra/10.0.1:
@@ -3778,6 +3816,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /normalize-range/0.1.2:
+    resolution: {integrity: sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
   /normalize-url/6.1.0:
     resolution: {integrity: sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==}
     engines: {node: '>=10'}
@@ -4659,7 +4702,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /tailwindcss/3.0.23:
+  /tailwindcss/3.0.23_autoprefixer@10.4.2:
     resolution: {integrity: sha512-+OZOV9ubyQ6oI2BXEhzw4HrqvgcARY38xv3zKcjnWtMIZstEsXdI9xftd1iB7+RbOnj2HOEzkA0OyB5BaSxPQA==}
     engines: {node: '>=12.13.0'}
     hasBin: true
@@ -4667,6 +4710,7 @@ packages:
       autoprefixer: ^10.0.2
     dependencies:
       arg: 5.0.1
+      autoprefixer: 10.4.2_postcss@8.4.8
       chalk: 4.1.2
       chokidar: 3.5.3
       color-name: 1.1.4
@@ -4902,6 +4946,20 @@ packages:
     dependencies:
       punycode: 2.1.1
     dev: true
+
+  /use-callback-ref/1.2.5_a0c521d4794c7ad97f5f4c1c4a7d5818:
+    resolution: {integrity: sha512-gN3vgMISAgacF7sqsLPByqoePooY3n2emTH59Ur5d/M8eg4WTWu1xp8i8DHjohftIyEx0S08RiYxbffr4j8Peg==}
+    engines: {node: '>=8.5.0'}
+    peerDependencies:
+      '@types/react': ^16.8.0 || ^17.0.0
+      react: ^16.8.0 || ^17.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': 17.0.39
+      react: 17.0.2
+    dev: false
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
