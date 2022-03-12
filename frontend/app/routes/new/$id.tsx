@@ -4,6 +4,7 @@ import { SvgCanvas } from '~/components/SvgCanvas';
 import {
   AyameController,
   DummyController,
+  NetworkController,
 } from '~/components/SvgCanvas/network';
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -12,7 +13,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function Index() {
   const id = useLoaderData<string>();
-  const controller = useMemo(
+  const controller = useMemo<NetworkController>(
     () =>
       typeof document === 'undefined'
         ? new DummyController()
