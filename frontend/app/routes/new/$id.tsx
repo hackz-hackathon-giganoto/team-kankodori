@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { json, LoaderFunction, useLoaderData } from 'remix';
 import { Padlock } from '~/components/baseSvg';
 import { SvgCanvas } from '~/components/SvgCanvas';
@@ -7,12 +7,14 @@ import {
   DummyController,
   NetworkController,
 } from '~/components/SvgCanvas/network';
+import { Mode } from '~/components/SvgCanvas/types';
 
 export const loader: LoaderFunction = async ({ params }) => {
   return json(params.id);
 };
 
 export default function Index() {
+  const [mode, setMode] = useState<Mode>('pen');
   const id = useLoaderData<string>();
   const controller = useMemo<NetworkController>(
     () =>
@@ -30,7 +32,16 @@ export default function Index() {
   );
   return (
     <div>
-      <SvgCanvas networkController={controller} BackgroundSvg={Padlock} />
+      <SvgCanvas
+        networkController={controller}
+        BackgroundSvg={Padlock}
+        mode={mode}
+      />
+      <input
+        type="checkbox"
+        checked={mode === 'pen'}
+        onChange={(e) => setMode(e.target.checked ? 'pen' : 'eraser')}
+      />
     </div>
   );
 }

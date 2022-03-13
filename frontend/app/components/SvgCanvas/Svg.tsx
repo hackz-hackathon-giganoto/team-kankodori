@@ -6,14 +6,15 @@ import {
   strokeLinejoin,
   strokeLineWidth,
 } from './constants';
-import { Stroke } from './types';
+import { Control } from './types';
+import { controlsToStrokes } from './utils';
 
 export type Props = {
   width: number;
   height: number;
   style?: CSSProperties;
   className?: string;
-  strokes: Stroke[];
+  controls: Control[];
   BackgroundSvg?: () => JSX.Element;
 };
 
@@ -22,7 +23,7 @@ export const Svg = ({
   height,
   style,
   className,
-  strokes,
+  controls,
   BackgroundSvg,
 }: Props) => (
   <svg
@@ -41,8 +42,8 @@ export const Svg = ({
       strokeLinecap={strokeLinecap}
       strokeLinejoin={strokeLinejoin}
     >
-      {strokes.map((stroke, k) => {
-        const d = stroke
+      {controlsToStrokes(controls).map((stroke, k) => {
+        const d = stroke.points
           .map(({ x, y }, i) => `${i === 0 ? 'M' : ''}${x},${y}`)
           .join(' ');
         return <path key={k} d={d} />;

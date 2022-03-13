@@ -1,12 +1,12 @@
 import { connection, defaultOptions } from '@open-ayame/ayame-web-sdk';
 import type { ConnectionOptions } from '@open-ayame/ayame-web-sdk/dist/connection/options';
 import { eventmit, Eventmitter } from 'eventmit';
-import type { Stroke } from '../types';
+import type { Control, Stroke } from '../types';
 import type { NetworkController, NetworkControllerEventMap } from './interface';
 import type {
   CompleteMessage,
   Message,
-  StrokeMessage,
+  ControlMessage,
   SyncMessage,
 } from './message';
 
@@ -85,10 +85,10 @@ export class AyameController implements NetworkController {
     >;
     eventmitter.off(listener);
   }
-  async addStroke(stroke: Stroke): Promise<void> {
-    const message: StrokeMessage = {
+  async addControl(control: Control): Promise<void> {
+    const message: ControlMessage = {
       type: 'stroke',
-      data: stroke,
+      data: control,
     };
     this.send(message);
   }

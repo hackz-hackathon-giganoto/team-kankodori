@@ -1,13 +1,13 @@
-import { Stroke } from '../types';
+import { Control } from '../types';
 
-export type StrokeMessage = {
+export type ControlMessage = {
   type: 'stroke';
-  data: Stroke;
+  data: Control;
 };
 
 export type SyncMessage = {
   type: 'sync';
-  data: Stroke[];
+  data: Control[];
 };
 
 export type SyncRequestMessage = {
@@ -19,7 +19,7 @@ export type CompleteMessage = {
 };
 
 export type Message =
-  | StrokeMessage
+  | ControlMessage
   | SyncMessage
   | SyncRequestMessage
   | CompleteMessage;
