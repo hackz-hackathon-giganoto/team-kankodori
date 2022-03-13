@@ -25,6 +25,7 @@ func main() {
 		{
 			item.GET("/:name", handler.GetItem)
 			item.GET("/:country/:pref/:city", handler.GetItem)
+			item.POST("/:country/:pref/:city", handler.CreateItem)
 		}
 	}
 
