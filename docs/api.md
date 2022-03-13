@@ -43,13 +43,26 @@
 | ------------ | ------ | ---------------- |
 | code         | number | ステータスコード |
 | message      | string | メッセージ       |
+| Item         | array  | アイテム         |
+
+#### Item オブジェクト
+
+| パラメータ名 | 型     | 内容                 |
+| ------------ | ------ | -------------------- |
+| id           | string | イノる id ≒NFT の id |
+| svgUrl       | string | svg の保存先の URL   |
+| country      | number | 区画の番号           |
+| pref         | number | 区画の番号           |
+| city         | number | 区画の番号           |
+| name         | number | 区画の番号(1－1－1)  |
 
 #### レスポンスサンプル
 
 ```JSON
 {
 "code":200,
-"mesage":"OK"
+"mesage":"OK",
+"Item":
 }
 ```
 
@@ -80,13 +93,6 @@ type Item struct {
 - GET
   - JSON (Req/Res)
 
-#### ファイルオブジェクト
-
-| パラメータ名 | 型     | 内容       |
-| ------------ | ------ | ---------- |
-| country      | number | 区画の番号 |
-| pref         | number | 区画の番号 |
-
 ### レスポンス
 
 ### 成功時
@@ -105,9 +111,12 @@ type Item struct {
 
 | パラメータ名 | 型     | 内容                 |
 | ------------ | ------ | -------------------- |
-| Inolid       | string | イノる id ≒NFT の id |
-| svgurl       | string | svg の保存先の URL   |
+| id           | string | イノる id ≒NFT の id |
+| svgUrl       | string | svg の保存先の URL   |
+| country      | number | 区画の番号           |
+| pref         | number | 区画の番号           |
 | city         | number | 区画の番号           |
+| name         | number | 区画の番号(1－1－1)  |
 
 #### レスポンスサンプル
 
@@ -118,13 +127,19 @@ type Item struct {
 "Items":[
   {
   "inolId":"1234abcd",
-  "svgurl:"https//:hogehoge",
+  "svgUrl:"https//:hogehoge",
   "city":1
+  .
+  .
+  .
   },
   {
   "inolId":"1234abcd",
-  "svgurl:"https//:hogehoge",
+  "svgUrl:"https//:hogehoge",
   "city":1
+  .
+  .
+  .
   }
 ]
 }
@@ -146,14 +161,6 @@ country, pref, city のすべてを指定する.
 - GET
   - JSON (Req/Res)
 
-### パラメータ
-
-| パラメータ名 | 型     | 内容       |
-| ------------ | ------ | ---------- |
-| country      | number | 区画の番号 |
-| pref         | number | 区画の番号 |
-| city         | number | 区画の番号 |
-
 ### レスポンス
 
 ### 成功時
@@ -166,7 +173,7 @@ country, pref, city のすべてを指定する.
 | ------------ | ------ | ---------------- |
 | code         | number | ステータスコード |
 | message      | string | メッセージ       |
-| svgurl       | string | svg 保存先の URL |
+| svgUrl       | string | svg 保存先の URL |
 
 #### レスポンスサンプル
 
@@ -174,7 +181,7 @@ country, pref, city のすべてを指定する.
 {
 "code":200,
 "mesage":"OK",
-"svgurl":"https//:hogehoge"
+"svgUrl":"https//:hogehoge"
 }
 ```
 
@@ -212,7 +219,7 @@ nft の id を指定する.
 | ------------ | ------ | ------------------------ |
 | code         | number | ステータスコード         |
 | message      | string | メッセージ               |
-| svgurl       | string | SVG が格納されている URL |
+| svgUrl       | string | SVG が格納されている URL |
 
 #### レスポンスサンプル
 
@@ -220,7 +227,7 @@ nft の id を指定する.
 {
 "code":200,
 "mesage":"OK",
-"svgurl":"https//:hogehoge"
+"svgUrl":"https//:hogehoge"
 }
 ```
 
