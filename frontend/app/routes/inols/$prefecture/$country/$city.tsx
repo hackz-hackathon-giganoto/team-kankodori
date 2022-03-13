@@ -1,4 +1,4 @@
-export function SingleInol() {
+export default function SingleInol() {
   return (
     <div>
       <h1>単体で見るページ</h1>
