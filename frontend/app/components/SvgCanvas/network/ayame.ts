@@ -99,6 +99,10 @@ export class AyameController implements NetworkController {
     };
     this.send(message);
   }
+  async syncRequest(): Promise<void> {
+    const message: Message = { type: 'syncrequest' };
+    this.send(message);
+  }
   async complete(): Promise<void> {
     const message: CompleteMessage = { type: 'complete' };
     this.send(message);

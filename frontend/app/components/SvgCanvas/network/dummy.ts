@@ -22,6 +22,9 @@ export class DummyController implements NetworkController {
   async sync(_strokes: Stroke[]): Promise<void> {
     noop();
   }
+  async syncRequest(): Promise<void> {
+    noop();
+  }
   async close(): Promise<void> {
     noop();
   }

@@ -139,14 +139,21 @@ export const SvgCanvas: VFC<Props> = ({
 
   useEffect(() => {
     if (networkController === undefined) return;
-    const sync = () => networkController.sync(controls);
+    const onSyncRequest = () => networkController.sync(controls);
+    const onSync = (controls: Control[]) =>
+      controls.forEach((c) => appendControl(c));
+    const onOpen = () => networkController?.syncRequest();
+    networkController.addEventListener('open', onOpen);
     networkController.addEventListener('stroke', appendControl);
-    networkController.addEventListener('syncrequest', sync);
+    networkController.addEventListener('syncrequest', onSyncRequest);
+    networkController.addEventListener('sync', onSync);
     networkController.addEventListener('close', location.reload);
     networkController.addEventListener('error', location.reload);
     return () => {
+      networkController.removeEventListener('open', onOpen);
       networkController.removeEventListener('stroke', appendControl);
-      networkController.removeEventListener('syncrequest', sync);
+      networkController.removeEventListener('syncrequest', onSyncRequest);
+      networkController.removeEventListener('sync', onSync);
       networkController.removeEventListener('close', location.reload);
       networkController.removeEventListener('error', location.reload);
     };
