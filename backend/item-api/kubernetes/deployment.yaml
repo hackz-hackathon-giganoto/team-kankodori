@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: item-api
+  name: item-api
+  namespace: item-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: item-api
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: item-api
+    spec:
+      containers:
+      - image: docker.io/onsd/item-api0.15
+        name: item-api
