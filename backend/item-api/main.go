@@ -31,6 +31,7 @@ func main() {
 			item.GET("/:country/:pref/:city", handler.GetItem)
 		}
 	}
+
 	e.GET("/", func(c echo.Context) error {
 		return c.String(200, "hello from gin")
 	})
