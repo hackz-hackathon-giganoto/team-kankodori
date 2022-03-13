@@ -77,7 +77,7 @@
 
 ### パス
 
-`/v1/item/:country/:pref`
+`/v1/items/:country/:pref`
 
 ### メソッド
 
