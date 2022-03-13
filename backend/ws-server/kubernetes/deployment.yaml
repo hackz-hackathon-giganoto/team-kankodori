@@ -19,5 +19,5 @@ spec:
         app: ws-server
     spec:
       containers:
-      - image: docker.io/onsd/ws-server:0.13
+      - image: docker.io/onsd/ws-server:0.15
         name: ws-server
