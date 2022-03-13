@@ -4,7 +4,7 @@
 
 ### 概要
 
-作成した Item を登録する
+作成した item を登録する
 
 ### パス
 
@@ -56,13 +56,13 @@ Liff で取れるユーザー情報
 
 | パラメータ名 | 型    | 内容     |
 | ------------ | ----- | -------- |
-| Items        | array | アイテム |
+| items        | array | アイテム |
 
-#### Item オブジェクト
+#### item オブジェクト
 
 | パラメータ名 | 型     | 内容                |
 | ------------ | ------ | ------------------- |
-| id           | string | Item id ≒NFT の id  |
+| id           | string | item id ≒NFT の id  |
 | svg_url      | string | svg の保存先の URL  |
 | country      | number | 区画の番号(1－×－×) |
 | pref         | number | 区画の番号(×－1－×) |
@@ -74,7 +74,7 @@ Liff で取れるユーザー情報
 
 ```json
 {
-  "Item": {
+  "item": {
     "id": "1234abcd",
     "svg_url": "https://hoghoge",
     "country": 1,
@@ -90,7 +90,7 @@ Liff で取れるユーザー情報
 
 ### 概要
 
-区画の Item のリストを取得する
+区画の item のリストを取得する
 
 ### パス
 
@@ -180,11 +180,11 @@ Liff で取れるユーザー情報
 }
 ```
 
-## Item 単体取得用 API その 1
+## item 単体取得用 API その 1
 
 ### 概要
 
-Item を 1 つだけ取得する.
+item を 1 つだけ取得する.
 country, pref, city のすべてを指定する.
 
 ### パス
@@ -222,11 +222,11 @@ country, pref, city のすべてを指定する.
 }
 ```
 
-## Item 単体取得用 API その 2
+## item 単体取得用 API その 2
 
 ### 概要
 
-Item を 1 つだけ取得する.
+item を 1 つだけ取得する.
 nft の id を指定する.
 
 ### パス
@@ -242,7 +242,7 @@ nft の id を指定する.
 
 | パラメータ名 | 型     | 内容              |
 | ------------ | ------ | ----------------- |
-| id           | string | Item id≒NFT の id |
+| id           | string | item id≒NFT の id |
 
 ### レスポンス
 
@@ -270,7 +270,7 @@ nft の id を指定する.
 }
 ```
 
-## Item 非公開用 API
+## item 非公開用 API
 
 ### 概要
 
