@@ -19,7 +19,7 @@
 
 | パラメータ名 | 型     | 内容       |
 | ------------ | ------ | ---------- |
-| SVG          | string | svg の本体 |
+| svg          | string | svg の本体 |
 
 #### リクエストサンプル
 
@@ -107,6 +107,7 @@ type Item struct {
 | ------------ | ------ | -------------------- |
 | Inolid       | string | イノる id ≒NFT の id |
 | svgurl       | string | svg の保存先の URL   |
+| city         | number | 区画の番号           |
 
 #### レスポンスサンプル
 
@@ -117,11 +118,13 @@ type Item struct {
 "Items":[
   {
   "inolId":"1234abcd",
-  "svg:"https//:hogehoge",
+  "svgurl:"https//:hogehoge",
+  "city":1
   },
   {
   "inolId":"1234abcd",
-  "svg:"https//:hogehoge",
+  "svgurl:"https//:hogehoge",
+  "city":1
   }
 ]
 }
@@ -171,7 +174,7 @@ country, pref, city のすべてを指定する.
 {
 "code":200,
 "mesage":"OK",
-"Item":"https//:hogehoge"
+"svgurl":"https//:hogehoge"
 }
 ```
 
@@ -217,7 +220,7 @@ nft の id を指定する.
 {
 "code":200,
 "mesage":"OK",
-"Item":"https//:hogehoge"
+"svgurl":"https//:hogehoge"
 }
 ```
 
