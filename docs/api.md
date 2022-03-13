@@ -20,7 +20,7 @@
 | パラメータ名 | 型     | 内容        |
 | ------------ | ------ | ----------- |
 | svg          | string | svg の本体  |
-| author       | string | LINE の sub |
+| owner        | string | LINE の sub |
 
 Liff で取れるユーザー情報
 
@@ -41,7 +41,7 @@ Liff で取れるユーザー情報
 
 ```json
 {
-  "author": "U1234567890abcdef1234567890abcdef",
+  "owner": "U1234567890abcdef1234567890abcdef",
   "svg": "<svg x=0 y=0 width=100 height=60 style=\"background-color: #ddd\"><polygon points=\"50 10, 70 30, 50 50, 30 30\" fill=\"#99f\" /></svg>"
 }
 ```
@@ -68,7 +68,7 @@ Liff で取れるユーザー情報
 | pref         | number | 区画の番号(×－1－×) |
 | city         | number | 区画の番号(×－×-1)  |
 | name         | string | 区画の番号(1－1－1) |
-| author       | string | user id             |
+| owner        | string | user id             |
 
 #### レスポンスサンプル
 
@@ -81,7 +81,7 @@ Liff で取れるユーザー情報
     "pref": 2,
     "city": 3,
     "name": "1-2-3",
-    "author": "U1234567890abcdef1234567890abcdef"
+    "owner": "U1234567890abcdef1234567890abcdef"
   }
 }
 ```
@@ -125,7 +125,7 @@ Liff で取れるユーザー情報
       "pref": 2,
       "city": 3,
       "name": "1-2-3",
-      "author": "U1234567890abcdef1234567890abcdef"
+      "owner": "U1234567890abcdef1234567890abcdef"
     },
     {
       "id": "1234abcd",
@@ -134,7 +134,7 @@ Liff で取れるユーザー情報
       "pref": 2,
       "city": 3,
       "name": "1-2-3",
-      "author": "U1234567890abcdef1234567890abcdef"
+      "owner": "U1234567890abcdef1234567890abcdef"
     }
   ]
 }
@@ -218,7 +218,7 @@ country, pref, city のすべてを指定する.
   "pref": 2,
   "city": 3,
   "name": "1-2-3",
-  "author": "U1234567890abcdef1234567890abcdef"
+  "owner": "U1234567890abcdef1234567890abcdef"
 }
 ```
 
@@ -266,7 +266,7 @@ nft の id を指定する.
   "pref": 2,
   "city": 3,
   "name": "1-2-3",
-  "author": "U1234567890abcdef1234567890abcdef"
+  "owner": "U1234567890abcdef1234567890abcdef"
 }
 ```
 
