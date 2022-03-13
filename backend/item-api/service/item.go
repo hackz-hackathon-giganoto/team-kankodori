@@ -9,20 +9,23 @@ import (
 	"github.com/pkg/errors"
 )
 
+const TABLE_NAME = "item_test"
+
 type Item struct {
-	Id        string // NFT を特定する id
-	SvgUrl    string
-	Country   string
-	Pref      string
-	City      string
-	Name      string
-	CreatedAt time.Time
+	Id        string    `db:"id" json:"id"` // NFT を特定する id
+	SvgUrl    string    `db:"svg_url" json:"svg_url"`
+	Country   string    `db:"country" json:"country"`
+	Pref      string    `db:"pref" json:"pref"`
+	City      string    `db:"city" json:"city"`
+	Name      string    `db:"name" json:"name"`
+	CreatedAt time.Time `db:"created_at" json:"created_at"`
 }
 
 func GetItem(db *sqlx.DB, country, pref, city string) (*Item, error) {
 	fmt.Println("GetItem")
 	item := Item{}
-	if err := db.QueryRowx("SELECT * FROM items WHERE country = $1 AND pref = $2 AND city = $3", country, pref, city).StructScan(&item); err != nil {
+	sql := fmt.Sprintf("SELECT * FROM %s WHERE country = $1 AND pref = $2 AND city = $3", TABLE_NAME)
+	if err := db.QueryRowx(sql, country, pref, city).StructScan(&item); err != nil {
 		fmt.Println(err)
 		return nil, errors.Wrapf(err, "cannnot connect SQL")
 	}

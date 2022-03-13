@@ -27,7 +27,7 @@ func main() {
 		// }
 		item := v0.Group("/item")
 		{
-			// item.Get("/:id", )
+			item.GET("/:name", handler.GetItem)
 			item.GET("/:country/:pref/:city", handler.GetItem)
 		}
 	}
