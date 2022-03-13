@@ -13,7 +13,7 @@
     "dev:remix": "cross-env NODE_ENV=development remix watch",
     "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public",
     "dev": "cross-env NODE_ENV=development remix build && run-p dev:*",
-    "generate:css": "tailwindcss -i ./app/styles/tailwind.css -o ./app/tailwind.css",
+    "generate:css": "tailwindcss -i ./app/styles/tailwind.css -o ./app/styles/generated.css",
     "start": "cross-env NODE_ENV=production npm run dev:wrangler",
     "fmt": "prettier -w ."
   },
