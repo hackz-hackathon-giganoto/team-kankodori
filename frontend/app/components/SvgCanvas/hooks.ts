@@ -18,7 +18,15 @@ export const useControls = (
   initialControls: Control[] = [],
 ): [Control[], React.Dispatch<Control>] => {
   const [controls, setControls] = useState<Control[]>(initialControls);
-  return [controls, (control: Control) => setControls((c) => [...c, control])];
+  return [
+    controls,
+    (control: Control) =>
+      setControls((c) =>
+        c.find(({ id }) => control.id === id) === undefined // duplicate check
+          ? [...c, control]
+          : c,
+      ),
+  ];
 };
 
 export const useStrokeRef = (): {
