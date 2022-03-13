@@ -142,12 +142,15 @@ export const SvgCanvas: VFC<Props> = ({
     const onSyncRequest = () => networkController.sync(controls);
     const onSync = (controls: Control[]) =>
       controls.forEach((c) => appendControl(c));
+    const onOpen = () => networkController?.syncRequest();
+    networkController.addEventListener('open', onOpen);
     networkController.addEventListener('stroke', appendControl);
     networkController.addEventListener('syncrequest', onSyncRequest);
     networkController.addEventListener('sync', onSync);
     networkController.addEventListener('close', location.reload);
     networkController.addEventListener('error', location.reload);
     return () => {
+      networkController.removeEventListener('open', onOpen);
       networkController.removeEventListener('stroke', appendControl);
       networkController.removeEventListener('syncrequest', onSyncRequest);
       networkController.removeEventListener('sync', onSync);

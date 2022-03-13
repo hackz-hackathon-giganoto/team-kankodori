@@ -22,6 +22,7 @@ export interface NetworkController {
 
   addControl(control: Control): Promise<void>;
   sync(controls: Control[]): Promise<void>;
+  syncRequest(): Promise<void>;
   close(): Promise<void>;
   complete(): Promise<void>;
 }
