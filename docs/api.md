@@ -25,8 +25,8 @@
 
 ```JSON
 {
-  "svg": "<svg x=0 y=0 width=100 height=60 style="background-color: #ddd">
-  <polygon points="50 10, 70 30, 50 50, 30 30" fill="#99f" />
+  "svg": "<svg x=0 y=0 width=100 height=60 style=\"background-color: #ddd\">
+  <polygon points=\"50 10, 70 30, 50 50, 30 30\" fill=\"#99f\" />
 </svg>"
 }
 ```
@@ -47,14 +47,14 @@
 
 #### Item オブジェクト
 
-| パラメータ名 | 型     | 内容                 |
-| ------------ | ------ | -------------------- |
-| id           | string | イノる id ≒NFT の id |
-| svgUrl       | string | svg の保存先の URL   |
-| country      | number | 区画の番号           |
-| pref         | number | 区画の番号           |
-| city         | number | 区画の番号           |
-| name         | number | 区画の番号(1－1－1)  |
+| パラメータ名 | 型     | 内容                |
+| ------------ | ------ | ------------------- |
+| id           | string | Item id ≒NFT の id  |
+| svgUrl       | string | svg の保存先の URL  |
+| country      | number | 区画の番号          |
+| pref         | number | 区画の番号          |
+| city         | number | 区画の番号          |
+| name         | number | 区画の番号(1－1－1) |
 
 #### レスポンスサンプル
 
@@ -127,7 +127,7 @@ type Item struct {
 "Items":[
   {
   "inolId":"1234abcd",
-  "svgUrl:"https//:hogehoge",
+  "svgUrl":"https:\/\/hogehoge",
   "city":1
   .
   .
@@ -135,7 +135,7 @@ type Item struct {
   },
   {
   "inolId":"1234abcd",
-  "svgUrl:"https//:hogehoge",
+  "svgUrl":"https:\/\/hogehoge",
   "city":1
   .
   .
@@ -247,9 +247,9 @@ nft の id を指定する.
 
 ### パラメータ
 
-| パラメータ名 | 型     | 内容                |
-| ------------ | ------ | ------------------- |
-| id           | string | イノる id≒NFT の id |
+| パラメータ名 | 型     | 内容              |
+| ------------ | ------ | ----------------- |
+| id           | string | Item id≒NFT の id |
 
 ### レスポンス
 
@@ -292,9 +292,9 @@ nft の id を指定する.
 
 ### パラメータ
 
-| パラメータ名 | 型     | 内容      |
-| ------------ | ------ | --------- |
-| id           | string | イノる id |
+| パラメータ名 | 型     | 内容    |
+| ------------ | ------ | ------- |
+| id           | string | Item id |
 
 #### リクエストサンプル
 
