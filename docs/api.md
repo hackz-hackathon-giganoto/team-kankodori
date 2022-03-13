@@ -4,7 +4,7 @@
 
 ### 概要
 
-作成した SVG を登録する
+作成した Item を登録する
 
 ### パス
 
@@ -13,7 +13,7 @@
 ### メソッド
 
 - POST
-  - JSON (Req/Res)
+  - json (Req/Res)
 
 ### パラメータ
 
@@ -23,7 +23,7 @@
 
 #### リクエストサンプル
 
-```JSON
+```json
 {
   "svg": "<svg x=0 y=0 width=100 height=60 style=\"background-color: #ddd\">
   <polygon points=\"50 10, 70 30, 50 50, 30 30\" fill=\"#99f\" />
@@ -39,50 +39,41 @@
 
 #### パラメータ
 
-| パラメータ名 | 型     | 内容             |
-| ------------ | ------ | ---------------- |
-| code         | number | ステータスコード |
-| message      | string | メッセージ       |
-| Item         | array  | アイテム         |
+| パラメータ名 | 型    | 内容     |
+| ------------ | ----- | -------- |
+| Item         | array | アイテム |
 
 #### Item オブジェクト
 
 | パラメータ名 | 型     | 内容                |
 | ------------ | ------ | ------------------- |
 | id           | string | Item id ≒NFT の id  |
-| svgUrl       | string | svg の保存先の URL  |
-| country      | number | 区画の番号          |
-| pref         | number | 区画の番号          |
-| city         | number | 区画の番号          |
-| name         | number | 区画の番号(1－1－1) |
+| svg_url      | string | svg の保存先の URL  |
+| country      | number | 区画の番号(1－×－×) |
+| pref         | number | 区画の番号(×－1－×) |
+| city         | number | 区画の番号(×－×-1)  |
+| name         | string | 区画の番号(1－1－1) |
 
 #### レスポンスサンプル
 
-```JSON
+```json
 {
-"code":200,
-"mesage":"OK",
-"Item":
+  "Item": {
+    "id": "1234abcd",
+    "svg_url": "https://hoghoge",
+    "country": 1,
+    "pref": 1,
+    "city": 1,
+    "name": "1-1-1"
+  }
 }
 ```
 
-## SVG 一覧取得用 API
-
-```
-type Item struct {
-	svgUrl string
-	country string
-	pref string
-	city string
-	name string
-	created_at time.Time
-	id string // NFT を特定する id
-}
-```
+## Page の SVG リスト取得用 API
 
 ### 概要
 
-区画の SVG の一覧を取得する
+区画の Item 一覧を取得する
 
 ### パス
 
@@ -91,7 +82,7 @@ type Item struct {
 ### メソッド
 
 - GET
-  - JSON (Req/Res)
+  - json (Req/Res)
 
 ### レスポンス
 
@@ -101,47 +92,32 @@ type Item struct {
 
 #### パラメータ
 
-| パラメータ名 | 型     | 内容             |
-| ------------ | ------ | ---------------- |
-| code         | number | ステータスコード |
-| message      | string | メッセージ       |
-| Items        | array  | Item の一覧      |
-
-#### Item オブジェクト
-
-| パラメータ名 | 型     | 内容                 |
-| ------------ | ------ | -------------------- |
-| id           | string | イノる id ≒NFT の id |
-| svgUrl       | string | svg の保存先の URL   |
-| country      | number | 区画の番号           |
-| pref         | number | 区画の番号           |
-| city         | number | 区画の番号           |
-| name         | number | 区画の番号(1－1－1)  |
+| パラメータ名 | 型    | 内容          |
+| ------------ | ----- | ------------- |
+| Items        | array | Item のリスト |
 
 #### レスポンスサンプル
 
-```JSON
+```json
 {
-"code":200,
-"mesage":"OK",
-"Items":[
-  {
-  "inolId":"1234abcd",
-  "svgUrl":"https:\/\/hogehoge",
-  "city":1
-  .
-  .
-  .
-  },
-  {
-  "inolId":"1234abcd",
-  "svgUrl":"https:\/\/hogehoge",
-  "city":1
-  .
-  .
-  .
-  }
-]
+  "Items": [
+    {
+      "id": "1234abcd",
+      "svg_url": "https://hoghoge",
+      "country": 1,
+      "pref": 1,
+      "city": 1,
+      "name": "1-1-1"
+    },
+    {
+      "id": "1234abcd",
+      "svg_url": "https://hoghoge",
+      "country": 1,
+      "pref": 1,
+      "city": 1,
+      "name": "1-1-1"
+    }
+  ]
 }
 ```
 
@@ -157,8 +133,8 @@ type Item struct {
 
 ### メソッド
 
-- GET?
-  - JSON (Req/Res)
+- POST
+  - json (Req/Res)
 
 ### パラメータ
 
@@ -175,25 +151,21 @@ type Item struct {
 
 | パラメータ名 | 型     | 内容                    |
 | ------------ | ------ | ----------------------- |
-| code         | number | ステータスコード        |
-| message      | string | メッセージ              |
-| canvasUrl    | string | 共同編集用の URL を返す |
+| canvas_url   | string | 共同編集用の URL を返す |
 
 #### レスポンスサンプル
 
-```JSON
+```json
 {
-"code":200,
-"mesage":"OK",
-"svgUrl":"https//:new/1234abcd"
+  "canvas_url": "https//:new/1234abcd"
 }
 ```
 
-## SVG 単体取得用 API その 1
+## Item 単体取得用 API その 1
 
 ### 概要
 
-SVG を 1 つだけ取得する.
+Item を 1 つだけ取得する.
 country, pref, city のすべてを指定する.
 
 ### パス
@@ -203,7 +175,7 @@ country, pref, city のすべてを指定する.
 ### メソッド
 
 - GET
-  - JSON (Req/Res)
+  - json (Req/Res)
 
 ### レスポンス
 
@@ -215,25 +187,21 @@ country, pref, city のすべてを指定する.
 
 | パラメータ名 | 型     | 内容             |
 | ------------ | ------ | ---------------- |
-| code         | number | ステータスコード |
-| message      | string | メッセージ       |
-| svgUrl       | string | svg 保存先の URL |
+| svg_url      | string | svg 保存先の URL |
 
 #### レスポンスサンプル
 
-```JSON
+```json
 {
-"code":200,
-"mesage":"OK",
-"svgUrl":"https//:hogehoge"
+  "svg_url": "https//:hogehoge"
 }
 ```
 
-## SVG 単体取得用 API その 2
+## Item 単体取得用 API その 2
 
 ### 概要
 
-SVG を 1 つだけ取得する.
+Item を 1 つだけ取得する.
 nft の id を指定する.
 
 ### パス
@@ -243,7 +211,7 @@ nft の id を指定する.
 ### メソッド
 
 - GET
-  - JSON (Req/Res)
+  - json (Req/Res)
 
 ### パラメータ
 
@@ -261,34 +229,30 @@ nft の id を指定する.
 
 | パラメータ名 | 型     | 内容                     |
 | ------------ | ------ | ------------------------ |
-| code         | number | ステータスコード         |
-| message      | string | メッセージ               |
-| svgUrl       | string | SVG が格納されている URL |
+| svg_url      | string | SVG が格納されている URL |
 
 #### レスポンスサンプル
 
-```JSON
+```json
 {
-"code":200,
-"mesage":"OK",
-"svgUrl":"https//:hogehoge"
+  "svg_url": "https//:hogehoge"
 }
 ```
 
-## SVG 削除用 API
+## SVG 非公開用 API
 
 ### 概要
 
-如何わしい SVG を削除する
+如何わしい SVG を非公開にするリクエスト
 
 ### パス
 
-`/v1/delete`
+`/v1/hiddenreq`
 
 ### メソッド
 
-- PATCH
-  - JSON (Req/Res)
+- PUT
+  - json (Req/Res)
 
 ### パラメータ
 
@@ -298,7 +262,7 @@ nft の id を指定する.
 
 #### リクエストサンプル
 
-```JSON
+```json
 {
   "id": "1234abcd"
 }
@@ -312,16 +276,5 @@ nft の id を指定する.
 
 #### パラメータ
 
-| パラメータ名 | 型     | 内容             |
-| ------------ | ------ | ---------------- |
-| code         | number | ステータスコード |
-| message      | string | メッセージ       |
-
-#### レスポンスサンプル
-
-```JSON
-{
-"code":200,
-"mesage":"DELETE SUCCES",
-}
-```
+| パラメータ名 | 型  | 内容 |
+| ------------ | --- | ---- |
