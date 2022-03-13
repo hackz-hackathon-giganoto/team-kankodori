@@ -2,12 +2,11 @@ module github.com/hackz-hackathon-giganoto/team-kankodori/backend/item-api
 
 go 1.17
 
-require github.com/pkg/errors v0.9.1
-
 require (
+	github.com/pkg/errors v0.9.1
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/jmoiron/sqlx v1.3.4
-	github.com/labstack/echo/v4 v4.7.0 // indirect
+	github.com/labstack/echo/v4 v4.7.0
 	github.com/labstack/gommon v0.3.1 // indirect
 	github.com/lib/pq v1.10.4
 	github.com/mattn/go-colorable v0.1.11 // indirect

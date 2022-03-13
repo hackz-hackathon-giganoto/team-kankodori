@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"os"
+
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
@@ -13,8 +15,12 @@ type Handler struct {
 
 func init() {
 	var err error
-	// Db, err = sql.Open("postgres", "user=dbuser dbname=defaultdb password=password sslmode=disable host=cockroachdb-public.cockroachdb port=26257")
-	Db, err = sqlx.Open("postgres", "postgres://dbuser:password@cockroachdb-public.cockroachdb:26257/defaultdb?sslmode=require")
+	databaseUrl := os.Getenv("DATABASE_URL")
+	if databaseUrl == "" {
+		panic("DATABASE_URL must be specified.")
+	}
+
+	Db, err = sqlx.Open("postgres", databaseUrl)
 	if err != nil {
 		panic(err)
 	}

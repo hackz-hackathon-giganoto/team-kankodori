@@ -19,5 +19,10 @@ spec:
         app: item-api
     spec:
       containers:
-      - image: docker.io/onsd/item-api0.15
+      - image: docker.io/onsd/item-api:0.1
         name: item-api
+        env:
+        - name: PORT
+          value: "8080"
+        - name: DATABASE_URL
+          value: "postgres://dbuser:password@cockroachdb-public.cockroachdb:26257/defaultdb?sslmode=require"
