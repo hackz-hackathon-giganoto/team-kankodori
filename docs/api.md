@@ -25,9 +25,7 @@
 
 ```json
 {
-  "svg": "<svg x=0 y=0 width=100 height=60 style=\"background-color: #ddd\">
-  <polygon points=\"50 10, 70 30, 50 50, 30 30\" fill=\"#99f\" />
-</svg>"
+  "svg": "<svg x=0 y=0 width=100 height=60 style=\"background-color: #ddd\"><polygon points=\"50 10, 70 30, 50 50, 30 30\" fill=\"#99f\" /></svg>"
 }
 ```
 
@@ -41,7 +39,7 @@
 
 | パラメータ名 | 型    | 内容     |
 | ------------ | ----- | -------- |
-| Item         | array | アイテム |
+| Items        | array | アイテム |
 
 #### Item オブジェクト
 
@@ -73,7 +71,7 @@
 
 ### 概要
 
-区画の Item 一覧を取得する
+区画の Item のリストを取得する
 
 ### パス
 
@@ -94,13 +92,13 @@
 
 | パラメータ名 | 型    | 内容          |
 | ------------ | ----- | ------------- |
-| Items        | array | Item のリスト |
+| items        | array | item のリスト |
 
 #### レスポンスサンプル
 
 ```json
 {
-  "Items": [
+  "items": [
     {
       "id": "1234abcd",
       "svg_url": "https://hoghoge",
@@ -185,15 +183,20 @@ country, pref, city のすべてを指定する.
 
 #### パラメータ
 
-| パラメータ名 | 型     | 内容             |
-| ------------ | ------ | ---------------- |
-| svg_url      | string | svg 保存先の URL |
+| パラメータ名 | 型    | 内容              |
+| ------------ | ----- | ----------------- |
+| item         | array | item オブジェクト |
 
 #### レスポンスサンプル
 
 ```json
 {
-  "svg_url": "https//:hogehoge"
+  "id": "1234abcd",
+  "svg_url": "https://hoghoge",
+  "country": 1,
+  "pref": 1,
+  "city": 1,
+  "name": "1-1-1"
 }
 ```
 
@@ -227,27 +230,32 @@ nft の id を指定する.
 
 #### パラメータ
 
-| パラメータ名 | 型     | 内容                     |
-| ------------ | ------ | ------------------------ |
-| svg_url      | string | SVG が格納されている URL |
+| パラメータ名 | 型    | 内容                |
+| ------------ | ----- | ------------------- |
+| item         | array | item のオブジェクト |
 
 #### レスポンスサンプル
 
 ```json
 {
-  "svg_url": "https//:hogehoge"
+  "id": "1234abcd",
+  "svg_url": "https://hoghoge",
+  "country": 1,
+  "pref": 1,
+  "city": 1,
+  "name": "1-1-1"
 }
 ```
 
-## SVG 非公開用 API
+## Item 非公開用 API
 
 ### 概要
 
-如何わしい SVG を非公開にするリクエスト
+不適切な SVG を非公開にするリクエスト
 
 ### パス
 
-`/v1/hiddenreq`
+`/v1/hiderequest`
 
 ### メソッド
 
@@ -256,9 +264,9 @@ nft の id を指定する.
 
 ### パラメータ
 
-| パラメータ名 | 型     | 内容    |
-| ------------ | ------ | ------- |
-| id           | string | Item id |
+| パラメータ名 | 型     | 内容       |
+| ------------ | ------ | ---------- |
+| id           | string | item の id |
 
 #### リクエストサンプル
 
