@@ -4,7 +4,7 @@ import { useCanvasFrame } from '~/utils/useCanvasFrame';
 import { useControls, usePointerIdRef, useStrokeRef } from './hooks';
 import { NetworkController } from './network';
 import { Svg } from './Svg';
-import { Mode, Point } from './types';
+import { Control, Mode, Point } from './types';
 import {
   controlsToStrokes,
   createControlFromPoints,
@@ -82,18 +82,28 @@ export const SvgCanvas: VFC<Props> = ({
               })
               .map(({ id }) => id);
             if (erasingIds.length > 0) {
-              appendControl({
+              const control: Control = {
                 type: 'eraser',
                 id: uuid(),
                 erasedStrokeIds: erasingIds,
-              });
+              };
+              appendControl(control);
+              networkController?.addControl(control);
             }
           }
           prevErasePointRef.current = p;
           break;
       }
     },
-    [appendControl, appendPoint, canvasRef, controls, mode, pointerIdRef],
+    [
+      appendControl,
+      appendPoint,
+      canvasRef,
+      controls,
+      mode,
+      networkController,
+      pointerIdRef,
+    ],
   );
   const onStrokeEnd = useCallback(
     (e: PointerEvent<HTMLCanvasElement>) => {
