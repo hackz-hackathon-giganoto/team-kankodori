@@ -1,5 +1,5 @@
 import { Dispatch, MutableRefObject, useRef, useState } from 'react';
-import { Point, Stroke } from './types';
+import { Point, Control } from './types';
 
 export const usePointerIdRef = (): [
   Readonly<MutableRefObject<number | undefined>>,
@@ -14,19 +14,19 @@ export const usePointerIdRef = (): [
   ];
 };
 
-export const useStrokes = (
-  initialStrokes: Stroke[] = [],
-): [Stroke[], React.Dispatch<Stroke>] => {
-  const [strokes, setStrokes] = useState<Stroke[]>(initialStrokes);
-  return [strokes, (stroke: Stroke) => setStrokes((s) => [...s, stroke])];
+export const useControls = (
+  initialControls: Control[] = [],
+): [Control[], React.Dispatch<Control>] => {
+  const [controls, setControls] = useState<Control[]>(initialControls);
+  return [controls, (control: Control) => setControls((c) => [...c, control])];
 };
 
 export const useStrokeRef = (): {
-  strokeRef: Readonly<MutableRefObject<Stroke>>;
+  strokeRef: Readonly<MutableRefObject<Point[]>>;
   appendPoint: Dispatch<Point>;
   setStroke: Dispatch<Point[]>;
 } => {
-  const strokeRef = useRef<Stroke>([]);
+  const strokeRef = useRef<Point[]>([]);
   return {
     strokeRef,
     appendPoint: (point: Point) => {

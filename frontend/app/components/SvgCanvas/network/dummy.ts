@@ -1,4 +1,4 @@
-import { Stroke } from '../types';
+import { Control, Stroke } from '../types';
 import { NetworkController, NetworkControllerEventMap } from './interface';
 
 const noop = () => {};
@@ -16,7 +16,7 @@ export class DummyController implements NetworkController {
   ): void {
     noop();
   }
-  async addStroke(_stroke: Stroke): Promise<void> {
+  async addControl(control: Control): Promise<void> {
     noop();
   }
   async sync(_strokes: Stroke[]): Promise<void> {

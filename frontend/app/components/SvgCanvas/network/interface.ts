@@ -1,9 +1,9 @@
-import { Stroke } from '../types';
+import { Control } from '../types';
 
 export type NetworkControllerEventMap = {
   open: never | undefined;
-  stroke: Stroke;
-  sync: Stroke[];
+  stroke: Control;
+  sync: Control[];
   syncrequest: never | undefined;
   close: string;
   error: Error;
@@ -20,8 +20,8 @@ export interface NetworkController {
     listener: (e: NetworkControllerEventMap[T]) => unknown,
   ): void;
 
-  addStroke(stroke: Stroke): Promise<void>;
-  sync(strokes: Stroke[]): Promise<void>;
+  addControl(control: Control): Promise<void>;
+  sync(controls: Control[]): Promise<void>;
   close(): Promise<void>;
   complete(): Promise<void>;
 }
