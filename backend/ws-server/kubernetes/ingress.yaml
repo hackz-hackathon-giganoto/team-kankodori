@@ -5,7 +5,7 @@ metadata:
   namespace: ws-server
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-staging
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
@@ -26,12 +26,12 @@ metadata:
         proxy_cache_bypass $http_upgrade;
       }
 spec:
-  tls:
-  - hosts:
-    - inol.cf
-    secretName: tls-secret
+  # tls:
+  # - hosts:
+  #   - api.inol.cf
+  #   secretName: tls-secret
   rules:
-  - host: inol.cf
+  - host: api.inol.cf
     http:
       paths:
       - path: /ws-server(/|$)(.*)

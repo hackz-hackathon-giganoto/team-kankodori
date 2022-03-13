@@ -10,11 +10,11 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   tls:
-  - hosts:
-    - inol.cf
-    secretName: tls-secret
+  # - hosts:
+  #   - inol.cf
+  #   secretName: tls-secret
   rules:
-  - host: inol.cf
+  - host: api.inol.cf
     http:
       paths:
       - path: /hello-world-one(/|$)(.*)
