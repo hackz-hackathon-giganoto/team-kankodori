@@ -19,21 +19,17 @@ func main() {
 
 	// ルートを設定
 	handler := handlers.NewHandler()
-	v0 := e.Group("/v0")
+	v1 := e.Group("/v1")
 	{
-		// items := v0.Group("/items")
-		// {
-		// 	items.Get("/:country/:pref")
-		// }
-		item := v0.Group("/item")
+		item := v1.Group("/item")
 		{
 			item.GET("/:name", handler.GetItem)
 			item.GET("/:country/:pref/:city", handler.GetItem)
 		}
 	}
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(200, "hello from gin")
+	e.GET("/ping", func(c echo.Context) error {
+		return c.String(200, "pong")
 	})
 
 	port := os.Getenv("PORT")
