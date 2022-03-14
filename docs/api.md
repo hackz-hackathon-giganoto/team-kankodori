@@ -20,7 +20,6 @@
 | パラメータ名 | 型     | 内容       |
 | ------------ | ------ | ---------- |
 | svg          | string | svg の本体 を base64 エンコードしたもの |
-
 | owner        | string | user id    |
 
 - user id には LIFF で取得される情報の `sub` を利用予定
