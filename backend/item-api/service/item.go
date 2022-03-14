@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"hash/fnv"
 	"math/rand"
 	"os"
 	"strconv"
@@ -93,13 +94,14 @@ func (s *Service) CreateItem(createItemRequest *CreateItemRequest) (*Item, error
 	// ('test-item-1111', 'https://cdn.shopify.com/s/files/1/0496/1029/files/Freesample.svg', 5,5,5, '5-5-5', NOW())
 	ctx := context.TODO()
 
-	id := createItemRequest.UserId // might be replaced by NFT id (?)
-	svgUrl, err := s.UploadSVGToBlob(ctx, createItemRequest.UserId, createItemRequest.Svg)
+	id := generateId(createItemRequest.UserId) // might be replaced by NFT id (?)
+	svgUrl, err := s.UploadSVGToBlob(ctx, id, createItemRequest.Svg)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to upload svg to blob storage")
 	}
 
 	// generate new place each loop to find empty place
+	// TODO: find better algorithm?
 	for {
 		item := CreateNewItem(id)
 		item.SvgUrl = svgUrl
@@ -126,4 +128,11 @@ func mustGetEnv(key string) string {
 		panic(fmt.Sprintf("you must set %s", key))
 	}
 	return v
+}
+
+// TODO: must be replaced other logic
+func generateId(id string) string {
+	h := fnv.New32()
+	h.Write([]byte(id + time.Now().String()))
+	return fmt.Sprintf("%x", h.Sum(nil))
 }
