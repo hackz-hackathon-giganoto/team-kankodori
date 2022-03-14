@@ -33,6 +33,11 @@ func main() {
 			item.GET("/:country/:pref/:city", handler.GetItem)
 			item.POST("/", handler.CreateItem)
 		}
+
+		items := v1.Group("/items")
+		{
+			items.GET("/:country/:pref", handler.ListItemsByCity)
+		}
 	}
 
 	e.GET("/ping", func(c echo.Context) error {

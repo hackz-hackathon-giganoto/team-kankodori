@@ -25,6 +25,27 @@ func (ctr *Handler) GetItem(c echo.Context) error {
 	return c.JSON(200, i)
 }
 
+func (ctr *Handler) ListItemsByCity(c echo.Context) error {
+	c.Logger().Info("ListItemsByCity involved")
+	country := c.Param("country")
+	pref := c.Param("pref")
+
+	itemList, err := ctr.Service.ListItemsByCountryAndPref(country, pref)
+	if err != nil {
+		if err != service.ERR_NO_RESULT {
+			c.Logger().Errorf("failed to call GetItem: %v", err.Error())
+			return c.String(http.StatusInternalServerError, err.Error())
+		}
+		return c.NoContent(http.StatusNotFound)
+	}
+
+	if len(*itemList) == 0 {
+		c.Logger().Debug("itemList is emtpy")
+		return c.NoContent(http.StatusNotFound)
+	}
+	return c.JSON(200, itemList)
+}
+
 func (ctr *Handler) GetItemById(c echo.Context) error {
 	c.Logger().Info("func (ctr *Handler) GetItemById(c echo.Context)")
 	id := c.Param("id")

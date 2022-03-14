@@ -61,6 +61,29 @@ func (s *Service) GetItemById(id string) (*Item, error) {
 	return &item, nil
 }
 
+func (s *Service) ListItemsByCountryAndPref(country, pref string) (*[]Item, error) {
+	sql := fmt.Sprintf("SELECT * FROM %s WHERE country = $1 AND pref = $2", TABLE_NAME)
+	rows, err := s.Db.Queryx(sql, country, pref)
+	if err != nil {
+		if err.Error() != "sql: no rows in result set" {
+			return nil, errors.Wrapf(err, "unexpected result")
+		}
+		return nil, ERR_NO_RESULT
+	}
+
+	var itemList []Item
+	var item Item
+	for rows.Next() {
+		err := rows.StructScan(&item)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to call StructScan")
+		}
+		fmt.Println("item:", item)
+		itemList = append(itemList, item)
+	}
+	return &itemList, nil
+}
+
 func (s *Service) CreateItem(createItemRequest *CreateItemRequest) (*Item, error) {
 	// ('test-item-1111', 'https://cdn.shopify.com/s/files/1/0496/1029/files/Freesample.svg', 5,5,5, '5-5-5', NOW())
 	ctx := context.TODO()
