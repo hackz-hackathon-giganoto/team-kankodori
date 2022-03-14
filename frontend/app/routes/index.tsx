@@ -1,17 +1,9 @@
-import { Link } from "remix";
+import { CatchPhrase } from '~/components/CatchPhrase';
 
 export default function Index() {
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <ul>
-        <li>
-          <Link to="/new">イノる</Link>
-        </li>
-        <li>
-          <Link to="/inols/1">みんなのイノりを見る</Link>
-        </li>
-      </ul>
-    </div>
+    <main className="bg-gradient-to-b from-[#f3d9a0] to-[#f7db8e] min-h-screen relative">
+      <CatchPhrase className="absolute top-0 w-full -translate-y-full rotate-90 origin-bottom-left" />
+    </main>
   );
 }
