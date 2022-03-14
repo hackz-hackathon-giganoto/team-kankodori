@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/labstack/echo/v4"
@@ -29,7 +28,7 @@ func (ctr *Handler) GetItem(c echo.Context) error {
 		city = names[2]
 	}
 
-	i, err := service.GetItem(ctr.Db, country, pref, city)
+	i, err := ctr.Service.GetItem(country, pref, city)
 	if err != nil {
 		return errors.Wrapf(err, "failed to call getItem")
 	}
@@ -38,16 +37,12 @@ func (ctr *Handler) GetItem(c echo.Context) error {
 
 func (ctr *Handler) CreateItem(c echo.Context) error {
 	c.Logger().Info("func (ctr *Handler) CreateItem(c echo.Context)")
-	item := service.Item{}
-	c.Bind(&item)
-	item.Country = c.Param("country")
-	item.Pref = c.Param("pref")
-	item.City = c.Param("city")
-	item.Name = fmt.Sprintf("%s-%s-%s", item.Country, item.Pref, item.City)
+	createItemRequest := service.CreateItemRequest{}
+	c.Bind(&createItemRequest)
 
-	_, err := service.CreateItem(ctr.Db, &item)
+	item, err := ctr.Service.CreateItem(&createItemRequest)
 	if err != nil {
-		return c.String(30000, err.Error())
+		return c.String(500, err.Error())
 	}
 	return c.JSON(200, item)
 }
