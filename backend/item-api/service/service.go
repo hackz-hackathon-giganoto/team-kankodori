@@ -1,10 +1,11 @@
 package service
 
 import (
+	"bytes"
 	"context"
+	"encoding/base64"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/streaming"
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob"
@@ -12,12 +13,15 @@ import (
 	"github.com/pkg/errors"
 )
 
+const CONTAINER_NAME = "item-test-test"
+
 var (
 	Db              *sqlx.DB
 	ContainerClient azblob.ContainerClient
 )
 
 type CreateItemRequest struct {
+	// Svg contains base64-decoded svg image
 	Svg    string `json:"svg"`
 	UserId string `json:"user_id"`
 }
@@ -69,11 +73,7 @@ func init() {
 	// ===== 1. Creating a container =====
 
 	// First, branch off of the service client and create a container client.
-	ContainerClient = service.NewContainerClient("item-test-test")
-	// _, err = ContainerClient.Create(context.TODO(), nil)
-	// if err != nil {
-	// 	panic(err)
-	// }
+	ContainerClient = service.NewContainerClient(CONTAINER_NAME)
 }
 
 // UploadSVGToBlob returns URL which can public access
@@ -82,15 +82,19 @@ func (s *Service) UploadSVGToBlob(ctx context.Context, id, svg string) (string, 
 	// We'll specify our data up-front, rather than reading a file for simplicity's sake.
 
 	// Branch off of the container into a block blob client
-	blockBlob := s.ContainerClient.NewBlockBlobClient(id + ".svg")
-	fmt.Println("	blockBlob := s.ContainerClient.NewBlockBlobClient(id + 	")
-	// Upload data to the block blob
-	_, err := blockBlob.Upload(ctx, streaming.NopCloser(strings.NewReader(svg)), nil)
+	filename := id + ".svg"
+	blockBlob := s.ContainerClient.NewBlockBlobClient(filename)
+
+	data, err := base64.StdEncoding.DecodeString(svg)
 	if err != nil {
+		return "", errors.Wrap(err, "failed to decode base64 encoded svg image")
+	}
+
+	// Upload data to the block blob
+	if _, err = blockBlob.Upload(ctx, streaming.NopCloser(bytes.NewReader(data)), nil); err != nil {
 		return "", errors.Wrap(err, "failed to upload")
 	}
 
-	url := "https://inolstorageaccount.blob.core.windows.net/items-test/" + id + ".svg"
-	fmt.Println(url)
-	return url, nil
+	upload_path := fmt.Sprintf("https://inolstorageaccount.blob.core.windows.net/%s/%s", CONTAINER_NAME, filename)
+	return upload_path, nil
 }

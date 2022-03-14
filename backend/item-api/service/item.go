@@ -51,7 +51,6 @@ func (s *Service) CreateItem(createItemRequest *CreateItemRequest) (*Item, error
 
 	var err error
 	item.SvgUrl, err = s.UploadSVGToBlob(ctx, item.Id, createItemRequest.Svg)
-	fmt.Println("	item.SvgUrl, err = s.UploadSVGToBlob(ctx, item.Id, createItemRequest.Svg)	")
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to upload svg to blob storage")
 	}

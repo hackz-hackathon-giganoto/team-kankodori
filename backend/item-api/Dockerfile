@@ -19,6 +19,8 @@ RUN go build -o bin/server
 ##-----------------------------------------------
 FROM debian:bullseye-slim
 
+RUN apt update && apt install -y ca-certificates
+
 WORKDIR /app/bin
 #  Timezone
 #-----------------------------------------------

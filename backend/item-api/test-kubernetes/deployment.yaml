@@ -4,8 +4,8 @@ metadata:
   creationTimestamp: null
   labels:
     app: item-api
-  name: item-api
-  namespace: item-api
+  name: onsd-item-api
+  namespace: onsd-item-api
 spec:
   replicas: 1
   selector:
