@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
 } from 'remix';
 import type { MetaFunction } from 'remix';
 import styles from './tailwind.css';
@@ -32,5 +33,25 @@ export default function App() {
         <LiveReload />
       </body>
     </html>
+  );
+}
+
+export function CatchBoundary() {
+  const caught = useCatch();
+  return (
+    <div className="error-container">
+      <h1>
+        {caught.status} {caught.statusText}
+      </h1>
+    </div>
+  );
+}
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  return (
+    <div className="error-container">
+      <h1>App Error</h1>
+      <pre>{error.message}</pre>
+    </div>
   );
 }
