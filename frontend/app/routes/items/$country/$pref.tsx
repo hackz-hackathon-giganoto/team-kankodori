@@ -1,10 +1,9 @@
-import { Link, LoaderFunction, Outlet, useLoaderData } from 'remix';
+import { json, Link, LoaderFunction, Outlet, useLoaderData } from 'remix';
 import { getItems } from '~/data/getItems';
 import { Address, Item } from '~/data/types';
 
 export const loader: LoaderFunction = async ({ params }) => {
   if (params.country === undefined || params.pref === undefined) {
-    console.log('error');
     throw new Response('params is not defind', {
       status: 404,
       statusText: 'Not Found',
@@ -16,7 +15,7 @@ export const loader: LoaderFunction = async ({ params }) => {
       pref: params.pref,
     };
     const items = getItems(address);
-    return items;
+    return json(items);
   } catch (e) {
     console.error(e);
     throw new Response('loader error', {
