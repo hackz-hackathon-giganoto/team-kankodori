@@ -36,22 +36,22 @@ export default function App() {
   );
 }
 
-export function CatchBoundary() {
+export const CatchBoundary = () => {
   const caught = useCatch();
   return (
-    <div className="error-container">
+    <div>
       <h1>
         {caught.status} {caught.statusText}
       </h1>
     </div>
   );
-}
+};
 
-export function ErrorBoundary({ error }: { error: Error }) {
+export const ErrorBoundary = ({ error }: { error: Error }) => {
   return (
-    <div className="error-container">
+    <div>
       <h1>{error.name}</h1>
       <pre>{error.message}</pre>
     </div>
   );
-}
+};

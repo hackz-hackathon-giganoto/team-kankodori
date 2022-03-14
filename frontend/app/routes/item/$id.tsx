@@ -4,7 +4,7 @@ import { Item } from '~/data/type';
 
 export const loader: LoaderFunction = async ({ params }) => {
   try {
-    const id = params.id;
+    const id: string | undefined = params.id;
     const item = getItemById(id);
     return item;
   } catch (e) {

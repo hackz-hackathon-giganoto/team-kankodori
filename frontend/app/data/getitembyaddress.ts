@@ -14,7 +14,7 @@ export async function getItemByAddress(address: Address): Promise<Item> {
   }
   console.log(address);
   const url = new URL(
-    `https://api.inol.cf/v1/item/${address.country}/${address.pref}/${address.city}`,
+    `https://api.inol.cf/v1/items/${address.country}/${address.pref}/${address.city}`,
   );
   const res = await fetch(url.href);
   console.log(res);

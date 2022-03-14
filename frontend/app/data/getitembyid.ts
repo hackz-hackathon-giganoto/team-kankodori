@@ -7,7 +7,7 @@ export async function getItemById(id: string | undefined): Promise<Item> {
       statusText: 'Not Found',
     });
   }
-  const url = new URL(`https://api.inol.cf/v1/res/${id}`);
+  const url = new URL(`https://api.inol.cf/v1/item/${id}`);
   const res = await fetch(url.href);
   console.log(res.status);
   if (res.status !== 200) {
