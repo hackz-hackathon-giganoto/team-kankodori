@@ -38,6 +38,13 @@ func main() {
 		{
 			items.GET("/:country/:pref", handler.ListItemsByCity)
 		}
+
+		v1.POST("/nft", handler.CreateNFT)
+		nft := v1.Group("/nft")
+		{
+			nft.GET("/transaction", handler.GetTransaction)
+			nft.POST("/mint", handler.MintNFT)
+		}
 	}
 
 	e.GET("/ping", func(c echo.Context) error {

@@ -4,9 +4,12 @@ import (
 	"context"
 	"fmt"
 	"hash/fnv"
+	"math/rand"
 	"os"
+	"strconv"
 	"time"
 
+	"github.com/labstack/gommon/log"
 	_ "github.com/lib/pq"
 	"github.com/pkg/errors"
 )
@@ -25,13 +28,16 @@ type Item struct {
 	CreatedAt time.Time `db:"created_at" json:"created_at"`
 }
 
-func CreateNewItem(id, country, pref, city string) *Item {
+func CreateNewItem(id string) *Item {
+	country := 1 + rand.Intn(5)
+	pref := 1 + rand.Intn(5)
+	city := 1 + rand.Intn(5)
 	return &Item{
-		Id:      id,
-		Country: country,
-		Pref:    pref,
-		City:    city,
-		Name:    fmt.Sprintf("%s-%s-%s", country, pref, city),
+		Id:      fmt.Sprintf("%s-%d-%d-%d", id, country, pref, city),
+		Country: strconv.Itoa(country),
+		Pref:    strconv.Itoa(pref),
+		City:    strconv.Itoa(city),
+		Name:    fmt.Sprintf("%d-%d-%d", country, pref, city),
 	}
 
 }
@@ -78,7 +84,7 @@ func (s *Service) ListItemsByCountryAndPref(country, pref string) (*[]Item, erro
 		if err != nil {
 			return nil, errors.Wrap(err, "failed to call StructScan")
 		}
-		fmt.Println("item:", item)
+		log.Debugf("item: %v\n", item)
 		itemList = append(itemList, item)
 	}
 	return &itemList, nil
@@ -87,26 +93,33 @@ func (s *Service) ListItemsByCountryAndPref(country, pref string) (*[]Item, erro
 func (s *Service) CreateItem(createItemRequest *CreateItemRequest) (*Item, error) {
 	// ('test-item-1111', 'https://cdn.shopify.com/s/files/1/0496/1029/files/Freesample.svg', 5,5,5, '5-5-5', NOW())
 	ctx := context.TODO()
-	item := CreateNewItem("some-id", "6", "6", "6")
 
-	var err error
-	item.SvgUrl, err = s.UploadSVGToBlob(ctx, item.Id, createItemRequest.Svg)
+	id := generateId(createItemRequest.UserId) // might be replaced by NFT id (?)
+	svgUrl, err := s.UploadSVGToBlob(ctx, id, createItemRequest.Svg)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to upload svg to blob storage")
 	}
 
-	sql := fmt.Sprintf("INSERT INTO %s values (:id, :svg_url, :country, :pref, :city, :name, NOW());", TABLE_NAME)
-	_, err = s.Db.NamedExec(sql, item)
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to insert data")
-	}
-	return item, nil
-}
+	// generate new place each loop to find empty place
+	// TODO: find better algorithm?
+	for {
+		item := CreateNewItem(id)
+		item.SvgUrl = svgUrl
 
-func createId(s string) string {
-	h := fnv.New32()
-	h.Write([]byte(s))
-	return fmt.Sprintf("%x", h.Sum(nil))
+		log.Infof("Item Created: %v\n", item)
+		sql := fmt.Sprintf("INSERT INTO %s values (:id, :svg_url, :country, :pref, :city, :name, NOW());", TABLE_NAME)
+		_, err = s.Db.NamedExec(sql, item)
+		if err == nil {
+			return item, nil
+		}
+		if err.Error() == "pq: duplicate key value violates unique constraint \"item_test_id_key\"" {
+			log.Infof("item_test_id_key should be unique, retry...")
+			// continue loop...
+			continue
+		}
+		log.Errorf("unexpected error: %v\n", err)
+		return nil, errors.Wrap(err, "failed to create new Item")
+	}
 }
 
 func mustGetEnv(key string) string {
@@ -115,4 +128,11 @@ func mustGetEnv(key string) string {
 		panic(fmt.Sprintf("you must set %s", key))
 	}
 	return v
+}
+
+// TODO: must be replaced other logic
+func generateId(id string) string {
+	h := fnv.New32()
+	h.Write([]byte(id + time.Now().String()))
+	return fmt.Sprintf("%x", h.Sum(nil))
 }

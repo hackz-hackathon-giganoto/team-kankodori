@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
 } from 'remix';
 import type { MetaFunction } from 'remix';
 import tailwind from '~/styles/generated.css';
@@ -40,3 +41,23 @@ export default function App() {
     </html>
   );
 }
+
+export const CatchBoundary = () => {
+  const caught = useCatch();
+  return (
+    <div>
+      <h1>
+        {caught.status} {caught.statusText}
+      </h1>
+    </div>
+  );
+};
+
+export const ErrorBoundary = ({ error }: { error: Error }) => {
+  return (
+    <div>
+      <h1>{error.name}</h1>
+      <pre>{error.message}</pre>
+    </div>
+  );
+};
