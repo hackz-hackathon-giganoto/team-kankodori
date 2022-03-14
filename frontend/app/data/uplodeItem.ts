@@ -5,14 +5,15 @@ export const uplodeItem = async (request: ItemInput): Promise<Item> => {
   const url = new URL(`${API_ENDPOINT}/item`);
   const encoded = Buffer.from(request.svg).toString('base64');
 
-  const post = {
+  const input = {
     owner: request.owner,
     svg: encoded,
   };
 
   const res = await fetch(url.href, {
     method: 'POST',
-    body: JSON.stringify(post),
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(input),
   });
 
   if (res.status !== 200) {
