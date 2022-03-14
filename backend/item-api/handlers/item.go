@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"net/http"
 	"strings"
 
 	"github.com/labstack/echo/v4"
@@ -14,7 +15,6 @@ func (ctr *Handler) GetItem(c echo.Context) error {
 	country := c.Param("country")
 	pref := c.Param("pref")
 	city := c.Param("city")
-
 	name := c.Param("name")
 
 	if name != "" {
@@ -37,12 +37,13 @@ func (ctr *Handler) GetItem(c echo.Context) error {
 
 func (ctr *Handler) CreateItem(c echo.Context) error {
 	c.Logger().Info("func (ctr *Handler) CreateItem(c echo.Context)")
-	createItemRequest := service.CreateItemRequest{}
-	c.Bind(&createItemRequest)
-
-	item, err := ctr.Service.CreateItem(&createItemRequest)
+	createItemRequest := new(service.CreateItemRequest)
+	if err := c.Bind(createItemRequest); err != nil {
+		return c.String(http.StatusBadRequest, err.Error())
+	}
+	item, err := ctr.Service.CreateItem(createItemRequest)
 	if err != nil {
-		return c.String(500, err.Error())
+		return c.String(http.StatusInternalServerError, err.Error())
 	}
 	return c.JSON(200, item)
 }
