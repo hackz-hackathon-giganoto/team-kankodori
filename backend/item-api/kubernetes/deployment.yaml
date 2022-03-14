@@ -19,7 +19,7 @@ spec:
         app: item-api
     spec:
       containers:
-      - image: docker.io/onsd/item-api:0.7
+      - image: docker.io/onsd/item-api:0.9
         name: item-api
         env:
         - name: PORT
