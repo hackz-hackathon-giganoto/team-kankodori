@@ -19,11 +19,13 @@ spec:
         app: item-api
     spec:
       containers:
-      - image: docker.io/onsd/item-api:0.4
+      - image: docker.io/onsd/item-api:0.7
         name: item-api
         env:
         - name: PORT
           value: "8080"
+        - name: DEBUG
+          value: "true"
         - name: DATABASE_URL
           value: "postgres://dbuser:password@cockroachdb-public.cockroachdb:26257/defaultdb?sslmode=require"
         - name: AZURE_STORAGE_ACCOUNT_NAME

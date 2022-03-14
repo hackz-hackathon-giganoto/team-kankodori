@@ -43,6 +43,7 @@ func (ctr *Handler) CreateItem(c echo.Context) error {
 	}
 	item, err := ctr.Service.CreateItem(createItemRequest)
 	if err != nil {
+		c.Logger().Error(err.Error())
 		return c.String(http.StatusInternalServerError, err.Error())
 	}
 	return c.JSON(200, item)

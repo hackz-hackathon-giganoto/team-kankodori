@@ -74,10 +74,6 @@ func init() {
 
 	// First, branch off of the service client and create a container client.
 	ContainerClient = service.NewContainerClient(CONTAINER_NAME)
-	// _, err = ContainerClient.Create(context.TODO(), nil)
-	// if err != nil {
-	// 	panic(err)
-	// }
 }
 
 // UploadSVGToBlob returns URL which can public access
