@@ -23,6 +23,7 @@ export const loader: LoaderFunction = async ({ params }) => {
     const item = await getItemByAddress(address);
     return json(item);
   } catch (e) {
+    console.error(e);
     throw new Response('loader error', {
       status: 500,
       statusText: 'Internal Server Error',
