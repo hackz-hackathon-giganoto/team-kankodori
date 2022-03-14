@@ -17,7 +17,7 @@ const links = [
     ),
   },
   {
-    to: '/inols',
+    to: '/items',
     el: (
       <span className="text-[10vw]">
         <span className="text-[12vw]">祈</span>りを
