@@ -16,10 +16,12 @@ export const loader: LoaderFunction = async ({ params }) => {
   return item;
 };
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = ({ data }) => {
   return {
-    title: 'タイトル',
-    description: '説明',
+    title: 'いい感じのタイトル',
+    description: 'いい感じの説明',
+    url: 'https://inol.cf/item/' + data.id,
+    image: data.svg_url,
   };
 };
 
