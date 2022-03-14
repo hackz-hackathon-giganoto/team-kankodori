@@ -84,7 +84,6 @@ func (s *Service) UploadSVGToBlob(ctx context.Context, id, svg string) (string, 
 	// Branch off of the container into a block blob client
 	filename := id + ".svg"
 	blockBlob := s.ContainerClient.NewBlockBlobClient(filename)
-	fmt.Println("blockBlob := s.ContainerClient.NewBlockBlobClient(id")
 
 	data, err := base64.StdEncoding.DecodeString(svg)
 	if err != nil {
