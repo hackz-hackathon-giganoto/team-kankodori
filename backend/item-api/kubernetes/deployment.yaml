@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: item-api
+  name: item-api
+  namespace: item-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: item-api
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: item-api
+    spec:
+      containers:
+      - image: docker.io/onsd/item-api:0.3
+        name: item-api
+        env:
+        - name: PORT
+          value: "8080"
+        - name: DATABASE_URL
+          value: "postgres://dbuser:password@cockroachdb-public.cockroachdb:26257/defaultdb?sslmode=require"

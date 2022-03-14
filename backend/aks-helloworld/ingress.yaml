@@ -10,9 +10,6 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   tls:
-  # - hosts:
-  #   - inol.cf
-  #   secretName: tls-secret
   rules:
   - host: api.inol.cf
     http:
@@ -29,12 +26,5 @@ spec:
         backend:
           service:
             name: aks-helloworld-two
-            port:
-              number: 80
-      - path: /(.*)
-        pathType: Prefix
-        backend:
-          service:
-            name: aks-helloworld-one
             port:
               number: 80
