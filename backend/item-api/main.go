@@ -30,9 +30,13 @@ func main() {
 		item := v1.Group("/item")
 		{
 			item.GET("/:id", handler.GetItemById)
-			item.GET("/:country/:pref", handler.GetItemsByCity)
 			item.GET("/:country/:pref/:city", handler.GetItem)
 			item.POST("/", handler.CreateItem)
+		}
+
+		items := v1.Group("/items")
+		{
+			items.GET("/:country/:pref", handler.ListItemsByCity)
 		}
 	}
 

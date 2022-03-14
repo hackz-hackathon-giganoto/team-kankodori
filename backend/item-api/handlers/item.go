@@ -25,8 +25,8 @@ func (ctr *Handler) GetItem(c echo.Context) error {
 	return c.JSON(200, i)
 }
 
-func (ctr *Handler) GetItemsByCity(c echo.Context) error {
-	c.Logger().Info("GetItemsByCity involved")
+func (ctr *Handler) ListItemsByCity(c echo.Context) error {
+	c.Logger().Info("ListItemsByCity involved")
 	country := c.Param("country")
 	pref := c.Param("pref")
 
