@@ -26,8 +26,7 @@ export const meta: MetaFunction = ({ data }) => {
   return {
     title: 'inol',
     description: 'PRAY WITH YOU, PRAY WITH ME',
-    url: `https://inol.cf/item/${data.id}`,
-    image: `https://inol.cf/png/${data.id}`,
+    'og:image': `https://inol.cf/png/${data.id}`,
   };
 };
 
