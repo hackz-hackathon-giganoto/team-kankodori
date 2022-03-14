@@ -9,7 +9,7 @@ export default function Index() {
           <Link to="/new">イノる</Link>
         </li>
         <li>
-          <Link to="/items/1/1">みんなのイノりを見る</Link>
+          <Link to="/items/5/5">みんなのイノりを見る</Link>
         </li>
       </ul>
     </div>
