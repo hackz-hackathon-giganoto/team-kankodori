@@ -1,10 +1,9 @@
 package handlers
 
 import (
-	"strings"
+	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/pkg/errors"
 
 	"github.com/hackz-hackathon-giganoto/team-kankodori/backend/item-api/service"
 )
@@ -15,34 +14,64 @@ func (ctr *Handler) GetItem(c echo.Context) error {
 	pref := c.Param("pref")
 	city := c.Param("city")
 
-	name := c.Param("name")
-
-	if name != "" {
-		c.Logger().Infof("specified name: %s\n", name)
-		names := strings.Split(name, "-")
-		if len(names) != 3 {
-			return errors.New("id must be like x-y-z")
-		}
-		country = names[0]
-		pref = names[1]
-		city = names[2]
-	}
-
 	i, err := ctr.Service.GetItem(country, pref, city)
 	if err != nil {
-		return errors.Wrapf(err, "failed to call getItem")
+		if err != service.ERR_NO_RESULT {
+			c.Logger().Errorf("failed to call GetItem: %v", err.Error())
+			return c.String(http.StatusInternalServerError, err.Error())
+		}
+		return c.NoContent(http.StatusNotFound)
+	}
+	return c.JSON(200, i)
+}
+
+func (ctr *Handler) ListItemsByCity(c echo.Context) error {
+	c.Logger().Info("ListItemsByCity involved")
+	country := c.Param("country")
+	pref := c.Param("pref")
+
+	itemList, err := ctr.Service.ListItemsByCountryAndPref(country, pref)
+	if err != nil {
+		if err != service.ERR_NO_RESULT {
+			c.Logger().Errorf("failed to call GetItem: %v", err.Error())
+			return c.String(http.StatusInternalServerError, err.Error())
+		}
+		return c.NoContent(http.StatusNotFound)
+	}
+
+	if len(*itemList) == 0 {
+		c.Logger().Debug("itemList is emtpy")
+		return c.NoContent(http.StatusNotFound)
+	}
+	return c.JSON(200, itemList)
+}
+
+func (ctr *Handler) GetItemById(c echo.Context) error {
+	c.Logger().Info("func (ctr *Handler) GetItemById(c echo.Context)")
+	id := c.Param("id")
+	c.Logger().Info("requested id:", id)
+
+	i, err := ctr.Service.GetItemById(id)
+	if err != nil {
+		if err != service.ERR_NO_RESULT {
+			c.Logger().Errorf("failed to call GetItemById: %v", err.Error())
+			return c.String(http.StatusInternalServerError, err.Error())
+		}
+		return c.NoContent(http.StatusNotFound)
 	}
 	return c.JSON(200, i)
 }
 
 func (ctr *Handler) CreateItem(c echo.Context) error {
 	c.Logger().Info("func (ctr *Handler) CreateItem(c echo.Context)")
-	createItemRequest := service.CreateItemRequest{}
-	c.Bind(&createItemRequest)
-
-	item, err := ctr.Service.CreateItem(&createItemRequest)
+	createItemRequest := new(service.CreateItemRequest)
+	if err := c.Bind(createItemRequest); err != nil {
+		return c.String(http.StatusBadRequest, err.Error())
+	}
+	item, err := ctr.Service.CreateItem(createItemRequest)
 	if err != nil {
-		return c.String(500, err.Error())
+		c.Logger().Error(err.Error())
+		return c.String(http.StatusInternalServerError, err.Error())
 	}
 	return c.JSON(200, item)
 }

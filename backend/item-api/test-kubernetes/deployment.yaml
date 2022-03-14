@@ -4,8 +4,8 @@ metadata:
   creationTimestamp: null
   labels:
     app: item-api
-  name: item-api
-  namespace: item-api
+  name: onsd-item-api
+  namespace: onsd-item-api
 spec:
   replicas: 1
   selector:
@@ -19,7 +19,7 @@ spec:
         app: item-api
     spec:
       containers:
-      - image: docker.io/onsd/item-api:0.10
+      - image: docker.io/onsd/item-api:0.9
         name: item-api
         env:
         - name: PORT

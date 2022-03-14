@@ -1,20 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: item-api-ingress
-  namespace: item-api
+  name: onsd-item-api-ingress
+  namespace: onsd-item-api
   annotations:
     kubernetes.io/ingress.class: nginx
-    # nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
   - host: api.inol.cf
     http:
       paths:
-      - path: /(.*)
+      - path: /onsd/(.*)
         pathType: Prefix
         backend:
           service:
-            name: item-api
+            name: onsd-item-api
             port:
               number: 80

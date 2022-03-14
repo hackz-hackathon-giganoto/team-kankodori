@@ -5,6 +5,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/labstack/gommon/log"
 
 	"github.com/hackz-hackathon-giganoto/team-kankodori/backend/item-api/handlers"
 )
@@ -12,6 +13,11 @@ import (
 func main() {
 	// インスタンスを作成
 	e := echo.New()
+
+	// set mode
+	if os.Getenv("DEBUG") != "" {
+		e.Logger.SetLevel(log.DEBUG)
+	}
 
 	// ミドルウェアを設定
 	e.Use(middleware.Logger())
@@ -23,9 +29,14 @@ func main() {
 	{
 		item := v1.Group("/item")
 		{
-			item.GET("/:name", handler.GetItem)
+			item.GET("/:id", handler.GetItemById)
 			item.GET("/:country/:pref/:city", handler.GetItem)
 			item.POST("/", handler.CreateItem)
+		}
+
+		items := v1.Group("/items")
+		{
+			items.GET("/:country/:pref", handler.ListItemsByCity)
 		}
 	}
 
