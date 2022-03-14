@@ -13,6 +13,6 @@ export const getItems = async (
   if (res.status !== 200) {
     throw new Error('fetch error');
   }
-  const datas = await res.json();
-  return datas as Item[];
+  const items = await res.json();
+  return items as Item[];
 };

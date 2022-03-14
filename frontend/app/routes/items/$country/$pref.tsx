@@ -1,6 +1,6 @@
 import { json, Link, LoaderFunction, Outlet, useLoaderData } from 'remix';
 import { getItems } from '~/data/getItems';
-import { Address, Item } from '~/data/types';
+import { Item } from '~/data/types';
 
 export const loader: LoaderFunction = async ({ params }) => {
   if (params.country === undefined || params.pref === undefined) {
@@ -10,11 +10,10 @@ export const loader: LoaderFunction = async ({ params }) => {
     });
   }
   try {
-    const address: Omit<Address, 'city'> = {
+    const items = await getItems({
       country: params.country,
       pref: params.pref,
-    };
-    const items = getItems(address);
+    });
     return json(items);
   } catch (e) {
     console.error(e);
