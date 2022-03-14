@@ -50,7 +50,7 @@ export function CatchBoundary() {
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
     <div className="error-container">
-      <h1>App Error</h1>
+      <h1>{error.name}</h1>
       <pre>{error.message}</pre>
     </div>
   );

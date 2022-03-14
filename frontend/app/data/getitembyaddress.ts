@@ -6,6 +6,11 @@ export async function getItemByAddress(params: Params<string>) {
   );
   const item = await fetch(url.href);
   console.log(item.status);
-  if (item.status !== 200) throw new Error('Failed to fetch');
+  if (item.status !== 200) {
+    throw new Response('Not Found', {
+      status: item.status,
+      statusText: 'Not Found',
+    });
+  }
   return item;
 }
