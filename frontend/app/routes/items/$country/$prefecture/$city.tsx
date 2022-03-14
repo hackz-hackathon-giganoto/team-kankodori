@@ -1,18 +1,13 @@
 import { LoaderFunction, useLoaderData } from 'remix';
 import type { MetaFunction } from 'remix';
-import type { Item } from '~/type/item';
+import type { Item } from '~/data/type';
+import { getItemByCity } from '~/data/getitembycity';
 
 export const loader: LoaderFunction = async ({ params }) => {
-  console.log('params', params.country);
-  const item = await fetch(
-    'https://api.inol.cf/v1/item/' +
-      params.country +
-      '/' +
-      params.prefecture +
-      '/' +
-      params.city,
-  );
-
+  if (!params) {
+    return;
+  }
+  const item = await getItemByCity(params);
   return item;
 };
 
