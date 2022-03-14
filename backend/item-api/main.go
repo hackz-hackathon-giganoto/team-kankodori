@@ -29,7 +29,7 @@ func main() {
 	{
 		item := v1.Group("/item")
 		{
-			item.GET("/:name", handler.GetItem)
+			item.GET("/:id", handler.GetItemById)
 			item.GET("/:country/:pref/:city", handler.GetItem)
 			item.POST("/", handler.CreateItem)
 		}

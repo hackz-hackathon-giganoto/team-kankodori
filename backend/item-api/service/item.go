@@ -13,6 +13,8 @@ import (
 
 const TABLE_NAME = "item_test"
 
+var ERR_NO_RESULT = errors.New("no rows in result set")
+
 type Item struct {
 	Id        string    `db:"id" json:"id"` // NFT を特定する id
 	SvgUrl    string    `db:"svg_url" json:"svg_url"`
@@ -38,8 +40,23 @@ func (s *Service) GetItem(country, pref, city string) (*Item, error) {
 	item := Item{}
 	sql := fmt.Sprintf("SELECT * FROM %s WHERE country = $1 AND pref = $2 AND city = $3", TABLE_NAME)
 	if err := s.Db.QueryRowx(sql, country, pref, city).StructScan(&item); err != nil {
-		fmt.Println(err)
-		return nil, errors.Wrapf(err, "cannnot connect SQL")
+		if err.Error() != "sql: no rows in result set" {
+			return nil, errors.Wrapf(err, "unexpected result")
+		}
+		return nil, ERR_NO_RESULT
+	}
+	return &item, nil
+}
+
+func (s *Service) GetItemById(id string) (*Item, error) {
+	item := Item{}
+	sql := fmt.Sprintf("SELECT * FROM %s WHERE id = $1", TABLE_NAME)
+	err := s.Db.QueryRowx(sql, id).StructScan(&item)
+	if err != nil {
+		if err.Error() != "sql: no rows in result set" {
+			return nil, errors.Wrapf(err, "unexpected result")
+		}
+		return nil, ERR_NO_RESULT
 	}
 	return &item, nil
 }
