@@ -1,10 +1,21 @@
 import { LoaderFunction, useLoaderData } from 'remix';
 import type { MetaFunction } from 'remix';
-import type { Item, Address } from '~/data/type';
-import { getItemByAddress } from '~/data/getitembyaddress';
+import type { Item, Address } from '~/data/types';
+import { getItemByAddress } from '~/data/getItemByAddress';
 
 export const loader: LoaderFunction = async ({ params }) => {
   try {
+    if (
+      params.country === undefined ||
+      params.pref === undefined ||
+      params.city === undefined
+    ) {
+      console.log('error');
+      throw new Response('params is not defind', {
+        status: 404,
+        statusText: 'Not Found',
+      });
+    }
     const address: Address = {
       country: params.country,
       pref: params.pref,
@@ -15,7 +26,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   } catch (e) {
     throw new Response('loader error', {
       status: 500,
-      statusText: 'getItemByAddress could not be done',
+      statusText: 'Internal Server Error',
     });
   }
 };

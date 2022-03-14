@@ -9,7 +9,7 @@ export type Item = {
 };
 
 export type Address = {
-  country: string | undefined;
-  pref: string | undefined;
-  city: string | undefined;
+  country: string;
+  pref: string;
+  city: string;
 };
