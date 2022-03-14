@@ -13,3 +13,8 @@ export type Address = {
   pref: string;
   city: string;
 };
+
+export type Post = {
+  owner: string;
+  svg: string;
+};
