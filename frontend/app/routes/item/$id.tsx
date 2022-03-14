@@ -18,8 +18,8 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export const meta: MetaFunction = ({ data }) => {
   return {
-    title: 'いい感じのタイトル',
-    description: 'いい感じの説明',
+    title: 'inol',
+    description: 'PRAY WITH YOU, PRAY WITH ME',
     url: `https://inol.cf/item/${data.id}`,
     image: `https://svg2png.deno.dev/${data.svg_url}`,
   };
