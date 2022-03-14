@@ -10,11 +10,10 @@ export const loader: LoaderFunction = async ({ params }) => {
     });
   }
   try {
-    const address: Omit<Address, 'city'> = {
+    const items = getItems({
       country: params.country,
       pref: params.pref,
-    };
-    const items = getItems(address);
+    });
     return json(items);
   } catch (e) {
     console.error(e);
