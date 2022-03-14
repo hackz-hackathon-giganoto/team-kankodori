@@ -6,7 +6,7 @@ export const uplodeItem = async ({ owner, svg }: ItemInput): Promise<Item> => {
   const encoded = Buffer.from(svg).toString('base64');
 
   const input = {
-    owner: owner,
+    owner,
     svg: encoded,
   };
 
