@@ -1,18 +1,18 @@
-import { LoaderFunction, MetaFunction, useLoaderData } from 'remix';
+import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix';
 import { getItemById } from '~/data/getItemById';
 import { Item } from '~/data/types';
 
 export const loader: LoaderFunction = async ({ params }) => {
+  const { id } = params;
+  if (id === undefined) {
+    throw new Response('address is not defind', {
+      status: 404,
+      statusText: 'Not Found',
+    });
+  }
   try {
-    const id: string | undefined = params.id;
-    if (id === undefined) {
-      throw new Response('address is not defind', {
-        status: 404,
-        statusText: 'Not Found',
-      });
-    }
-    const item = getItemById(id);
-    return item;
+    const item = await getItemById(id);
+    return json(item);
   } catch (e) {
     console.error(e);
     throw new Response('loader error', {
