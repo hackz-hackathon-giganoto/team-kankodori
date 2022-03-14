@@ -1,14 +1,22 @@
 import { LoaderFunction, useLoaderData } from 'remix';
 import type { MetaFunction } from 'remix';
-import type { Item } from '~/data/type';
+import type { Item, Address } from '~/data/type';
 import { getItemByAddress } from '~/data/getitembyaddress';
 
 export const loader: LoaderFunction = async ({ params }) => {
   try {
-    const item = getItemByAddress(params);
+    const address: Address = {
+      country: params.country,
+      pref: params.pref,
+      city: params.city,
+    };
+    const item = getItemByAddress(address);
     return item;
   } catch (e) {
-    console.log(e);
+    throw new Response('loader error', {
+      status: 500,
+      statusText: 'getItemByAddress could not be done',
+    });
   }
 };
 
@@ -16,12 +24,12 @@ export const meta: MetaFunction = ({ data }) => {
   return {
     title: 'いい感じのタイトル',
     description: 'いい感じの説明',
-    url: 'https://inol.cf/item/' + data.id,
-    image: data.svg_url,
+    url: `https://inol.cf/item/${data.id}`,
+    image: `https://svg2png.deno.dev/${data.svg_url}`,
   };
 };
 
-export default function SingleInol() {
+export default function Inol() {
   const item = useLoaderData<Item>();
   return (
     <div>

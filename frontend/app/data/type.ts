@@ -7,3 +7,9 @@ export type Item = {
   city: number;
   owner: string;
 };
+
+export type Address = {
+  country: string | undefined;
+  pref: string | undefined;
+  city: string | undefined;
+};
