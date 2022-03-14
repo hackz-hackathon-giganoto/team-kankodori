@@ -1,12 +1,12 @@
 import { API_ENDPOINT } from './constants';
 import { Item, ItemInput } from './types';
 
-export const uplodeItem = async (request: ItemInput): Promise<Item> => {
+export const uplodeItem = async ({ owner, svg }: ItemInput): Promise<Item> => {
   const url = new URL(`${API_ENDPOINT}/item`);
-  const encoded = Buffer.from(request.svg).toString('base64');
+  const encoded = Buffer.from(svg).toString('base64');
 
   const input = {
-    owner: request.owner,
+    owner: owner,
     svg: encoded,
   };
 
