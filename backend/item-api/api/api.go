@@ -18,6 +18,14 @@ import (
 	"strings"
 )
 
+func mustGetEnv(key string) string {
+	s := os.Getenv(key)
+	if s == "" {
+		panic("you must specify: " + key)
+	}
+	return s
+}
+
 func CallAPI(path, method string, query map[string]string, params map[string]interface{}) ([]byte, error) {
 	client := http.Client{}
 	var body io.Reader
@@ -50,7 +58,7 @@ func CallAPI(path, method string, query map[string]string, params map[string]int
 	sig := getSignature(nonce, timestamp, method, path, queryStr, params)
 
 	req.Header.Add("Content-Type", "application/json")
-	req.Header.Add("service-api-key", os.Getenv("LINE_BV_SERVICE_API_KEY"))
+	req.Header.Add("service-api-key", mustGetEnv("LINE_BC_SERVICE_API_KEY"))
 	req.Header.Add("signature", sig)
 	req.Header.Add("nonce", nonce)
 	req.Header.Add("timestamp", timestamp)
@@ -125,7 +133,7 @@ func getSignature(nonce, timestamp, method, path string, query string, params ma
 		}
 	}
 
-	hash := hmac.New(sha512.New, []byte(os.Getenv("LINE_BV_SERVICE_API_SECRET")))
+	hash := hmac.New(sha512.New, []byte(mustGetEnv("LINE_BC_SERVICE_API_SECRET")))
 	hash.Write([]byte(msg))
 
 	return base64.StdEncoding.EncodeToString(hash.Sum(nil))
@@ -156,7 +164,7 @@ func GetServerTime() (string, error) {
 	}
 
 	req.Header.Add("Content-Type", "application/json")
-	req.Header.Add("service-api-key", os.Getenv("LINE_BC_API_KEY"))
+	req.Header.Add("service-api-key", mustGetEnv("LINE_BC_SERVICE_API_KEY"))
 
 	resp, err := client.Do(req)
 
