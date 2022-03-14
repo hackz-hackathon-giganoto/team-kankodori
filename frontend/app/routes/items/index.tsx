@@ -5,37 +5,37 @@ export default function CountrySelector() {
     <main className="h-full w-full">
       <div className="overflow-x-auto flex touch-pan-x">
         <Link
-          to="./1/1"
+          to="./1"
           className="aspect-square w-2/3 flex-shrink-0 flex-grow-0"
         >
           絵馬掛所の絵？？？？
         </Link>
         <Link
-          to="./2/1"
+          to="./2"
           className="aspect-square w-2/3 flex-shrink-0 flex-grow-0"
         >
           絵馬掛所の絵？？？？
         </Link>
         <Link
-          to="./3/1"
+          to="./3"
           className="aspect-square w-2/3 flex-shrink-0 flex-grow-0"
         >
           絵馬掛所の絵？？？？
         </Link>
         <Link
-          to="./4/1"
+          to="./4"
           className="aspect-square w-2/3 flex-shrink-0 flex-grow-0"
         >
           絵馬掛所の絵？？？？
         </Link>
         <Link
-          to="./5/1"
+          to="./5"
           className="aspect-square w-2/3 flex-shrink-0 flex-grow-0"
         >
           絵馬掛所の絵？？？？
         </Link>
         <Link
-          to="./6/1"
+          to="./6"
           className="aspect-square w-2/3 flex-shrink-0 flex-grow-0"
         >
           絵馬掛所の絵？？？？
