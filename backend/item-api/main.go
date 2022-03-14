@@ -43,6 +43,7 @@ func main() {
 		nft := v1.Group("/nft")
 		{
 			nft.GET("/transaction", handler.GetTransaction)
+			nft.POST("/mint", handler.MintNFT)
 		}
 	}
 

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/hackz-hackathon-giganoto/team-kankodori/backend/item-api/service"
@@ -41,6 +42,30 @@ type GetTransactionRequest struct {
 func (ctr *Handler) GetTransaction(c echo.Context) error {
 	txHash := c.QueryParam("txhash")
 	tx, err := service.GetTransaction(txHash)
+	if err != nil {
+		return c.String(http.StatusInternalServerError, err.Error())
+	}
+	return c.JSON(http.StatusOK, tx)
+}
+
+type MintNFTRequest struct {
+	Name    string `json:"name"`
+	UserID  string `json:"userId"`
+	NFTType string `json:"nftType"`
+}
+
+func (ctr *Handler) MintNFT(c echo.Context) error {
+	// createNFTRequest := new(CreateNFTRequest)
+	// if err := c.Bind(createNFTRequest); err != nil {
+	// 	return c.String(http.StatusBadRequest, err.Error())
+	// }
+	MintNFTRequest := new(MintNFTRequest)
+	if err := c.Bind(MintNFTRequest); err != nil {
+		return c.String(http.StatusBadRequest, err.Error())
+	}
+
+	fmt.Println(MintNFTRequest)
+	tx, err := service.MintNonFungible(MintNFTRequest.Name, MintNFTRequest.UserID, MintNFTRequest.NFTType)
 	if err != nil {
 		return c.String(http.StatusInternalServerError, err.Error())
 	}
