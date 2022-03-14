@@ -32,7 +32,7 @@ export default function Inols() {
       <p>グリッドで表示</p>
       <ul>
         {items.map((item) => (
-          <li key={item.id}>
+          <li key={item.city}>
             <img src={item.svg_url} alt="test"></img>
           </li>
         ))}
