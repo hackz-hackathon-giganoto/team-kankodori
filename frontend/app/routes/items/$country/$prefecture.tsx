@@ -6,7 +6,7 @@ export default function Inols() {
       <h1>一覧を見るページ</h1>
       <p>グリッドで表示</p>
 
-      <Link to="/inol/1">最初のイノりを見る</Link>
+      <Link to="/items/1/1/1">最初のイノりを見る</Link>
       <Outlet />
     </main>
   );
