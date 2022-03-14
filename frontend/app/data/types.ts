@@ -14,7 +14,7 @@ export type Address = {
   city: string;
 };
 
-export type Post = {
+export type ItemInput = {
   owner: string;
   svg: string;
 };
