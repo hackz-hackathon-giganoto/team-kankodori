@@ -1,10 +1,10 @@
-import { constant } from './constant';
+import { API_ENDPOINT } from './constants';
 import { Address, Item } from './types';
 
 export const getItemByAddress = async (address: Address): Promise<Item> => {
   console.log(address);
   const url = new URL(
-    `${constant.api_url}/item/${address.country}/${address.pref}/${address.city}`,
+    `${API_ENDPOINT}/item/${address.country}/${address.pref}/${address.city}`,
   );
   const res = await fetch(url.href);
   console.log(res);
