@@ -30,7 +30,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <div className="bg-gradient-to-b from-[#fae5b9] to-[#f7db8e] min-h-screen max-h-screen overflow-hidden">
+        <div className="bg-gradient-to-b from-[#fae5b9] to-[#f7db8e] h-screen max-h-screen overflow-hidden">
           <Outlet />
         </div>
         <ScrollRestoration />
