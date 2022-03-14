@@ -22,7 +22,7 @@
 | svg          | string | svg の本体  |
 | owner        | string | LINE の sub |
 
-Liff で取れるユーザー情報
+#### LIFF で取れるユーザー情報のサンプル
 
 ```json
 {
@@ -54,9 +54,9 @@ Liff で取れるユーザー情報
 
 #### パラメータ
 
-| パラメータ名 | 型    | 内容     |
-| ------------ | ----- | -------- |
-| items        | array | アイテム |
+| パラメータ名 | 型          | 内容                      |
+| ------------ | ----------- | ------------------------- |
+| items        | array<item> | item オブジェクトのリスト |
 
 #### item オブジェクト
 
@@ -76,7 +76,7 @@ Liff で取れるユーザー情報
 {
   "item": {
     "id": "1234abcd",
-    "svg_url": "https://hoghoge",
+    "svg_url": "https://raw.githubusercontent.com/ssssota/svg2png-wasm/main/logo.svg",
     "country": 1,
     "pref": 2,
     "city": 3,
@@ -109,9 +109,9 @@ Liff で取れるユーザー情報
 
 #### パラメータ
 
-| パラメータ名 | 型    | 内容          |
-| ------------ | ----- | ------------- |
-| items        | array | item のリスト |
+| パラメータ名 | 型          | 内容          |
+| ------------ | ----------- | ------------- |
+| items        | array<item> | item のリスト |
 
 #### レスポンスサンプル
 
@@ -120,7 +120,7 @@ Liff で取れるユーザー情報
   "items": [
     {
       "id": "1234abcd",
-      "svg_url": "https://hoghoge",
+      "svg_url": "https://raw.githubusercontent.com/ssssota/svg2png-wasm/main/logo.svg",
       "country": 1,
       "pref": 2,
       "city": 3,
@@ -129,7 +129,7 @@ Liff で取れるユーザー情報
     },
     {
       "id": "1234abcd",
-      "svg_url": "https://hoghoge",
+      "svg_url": "https://raw.githubusercontent.com/ssssota/svg2png-wasm/main/logo.svg",
       "country": 1,
       "pref": 2,
       "city": 3,
@@ -213,7 +213,7 @@ country, pref, city のすべてを指定する.
 ```json
 {
   "id": "1234abcd",
-  "svg_url": "https://hoghoge",
+  "svg_url": "https://raw.githubusercontent.com/ssssota/svg2png-wasm/main/logo.svg",
   "country": 1,
   "pref": 2,
   "city": 3,
@@ -252,16 +252,16 @@ nft の id を指定する.
 
 #### パラメータ
 
-| パラメータ名 | 型    | 内容                |
-| ------------ | ----- | ------------------- |
-| item         | array | item のオブジェクト |
+| パラメータ名 | 型          | 内容                |
+| ------------ | ----------- | ------------------- |
+| item         | array<item> | item のオブジェクト |
 
 #### レスポンスサンプル
 
 ```json
 {
   "id": "1234abcd",
-  "svg_url": "https://hoghoge",
+  "svg_url": "https://raw.githubusercontent.com/ssssota/svg2png-wasm/main/logo.svg",
   "country": 1,
   "pref": 2,
   "city": 3,
