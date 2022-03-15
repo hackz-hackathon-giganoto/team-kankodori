@@ -18,8 +18,10 @@ spec:
       labels:
         app: item-api
     spec:
+      imagePullSecrets:
+      - name: azure-cr
       containers:
-      - image: docker.io/onsd/item-api:0.22
+      - image: kankodori.azurecr.io/onsd/test-api
         name: item-api
         env:
         - name: PORT
@@ -54,3 +56,4 @@ spec:
             secretKeyRef:
               name: item-api-secret
               key: WALLET_SECRET
+
