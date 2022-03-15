@@ -1,8 +1,4 @@
-export default function New() {
-  return (
-    <main>
-      <h1>作成ページ</h1>
-      <p> ベース画像選択、キャンバス、サブミットボタンを表示</p>
-    </main>
-  );
-}
+import { LoaderFunction, redirect } from 'remix';
+import { v4 as uuid } from 'uuid';
+
+export const loader: LoaderFunction = () => redirect(`/new/${uuid()}`, 303);
