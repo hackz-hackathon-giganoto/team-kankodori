@@ -38,7 +38,7 @@ export default function Inol() {
   return (
     <>
       <Logo />
-      <main className="flex justify-center items-center h-full">
+      <main className="flex justify-center items-center h-4/6">
         <ItemDetails item={item} />
       </main>
     </>
