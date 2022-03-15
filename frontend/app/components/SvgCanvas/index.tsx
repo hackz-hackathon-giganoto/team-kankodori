@@ -70,6 +70,7 @@ export const SvgCanvas: VFC<Props> = ({
       if (canvasRef.current === null)
         throw new Error('Unexpected Error: Canvas element is null');
       if (e.pointerId !== pointerIdRef.current) return;
+      e.preventDefault();
       const p = getCanvasPoint(e);
       switch (mode) {
         case 'pen':
@@ -183,7 +184,7 @@ export const SvgCanvas: VFC<Props> = ({
         ref={canvasRef}
         width={width}
         height={height}
-        className="absolute w-full h-full"
+        className="absolute w-full h-full touch-none"
         onPointerDown={onStrokeBegin}
         onPointerMove={onStrokeMove}
         onPointerUp={onStrokeEnd}
