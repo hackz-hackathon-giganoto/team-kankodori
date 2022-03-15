@@ -1,12 +1,10 @@
-import liff from '@line/liff';
 import { hydrate } from 'react-dom';
 import { RemixBrowser } from 'remix';
+import { LiffProvider } from './utils/liff';
 
-liff
-  .init({ liffId: '1656968667-pzoJ0Do7' || '' })
-  .then(() => {
-    hydrate(<RemixBrowser />, document);
-  })
-  .catch((e) => {
-    console.error(e);
-  });
+hydrate(
+  <LiffProvider liffId="1656968667-pzoJ0Do7">
+    <RemixBrowser />
+  </LiffProvider>,
+  document,
+);

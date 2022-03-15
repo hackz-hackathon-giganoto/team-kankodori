@@ -1,7 +1,5 @@
-import liffLib from '@line/liff';
 import { createContext, FC, useContext, useEffect, useState } from 'react';
-
-export type Liff = typeof liffLib;
+import type { Liff } from '@line/liff';
 
 // 初期値
 // SSR を考慮すると undefined
@@ -18,12 +16,13 @@ export const LiffProvider: FC<Props> = ({ children, liffId }) => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     (async () => {
+      const liffLib = (await import('@line/liff')).default;
       await liffLib.init({ liffId }).catch((e) => {
         console.error(e);
       });
       setLiff(liffLib);
     })();
-  }, [setLiff]);
+  }, [liffId, setLiff]);
 
   return <LiffContext.Provider value={liff}>{children}</LiffContext.Provider>;
 };
