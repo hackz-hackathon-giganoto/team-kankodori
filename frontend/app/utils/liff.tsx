@@ -28,3 +28,16 @@ export const LiffProvider: FC<Props> = ({ children, liffId }) => {
 };
 
 export const useLiff = () => useContext(LiffContext);
+
+export const useLiffUserId = (): string | undefined => {
+  const liff = useLiff();
+  const [userId, setUserId] = useState<string | undefined>();
+  useEffect(() => {
+    // ユーザーの生ID
+    (async () => {
+      const prof = await liff?.getProfile();
+      setUserId(prof?.userId);
+    })();
+  }, [liff]);
+  return userId;
+};

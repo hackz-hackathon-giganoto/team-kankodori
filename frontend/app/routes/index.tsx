@@ -2,13 +2,15 @@ import { useEffect } from 'react';
 import { CatchPhrase } from '~/components/CatchPhrase';
 import { Circle } from '~/components/Circle';
 import { Menu } from '~/components/Menu';
-import { useLiff } from '~/utils/liff';
+import { useLiffUserId } from '~/utils/liff';
 
 export default function Index() {
-  const liff = useLiff();
+  const userId = useLiffUserId();
   useEffect(() => {
-    alert(liff?.isLoggedIn());
-  }, [liff]);
+    if (userId !== undefined) {
+      alert(userId);
+    }
+  }, [userId]);
 
   return (
     <main>
