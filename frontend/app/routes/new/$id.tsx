@@ -90,16 +90,6 @@ export default function Index() {
           />
           <Selector
             className="m-2"
-            selectedIndex={background}
-            items={[
-              { content: '絵馬', key: 'ema' },
-              { content: '南京錠', key: 'padlock' },
-            ]}
-            name="background"
-            onChange={setBackground}
-          />
-          <Selector
-            className="m-2"
             selectedIndex={color}
             items={[
               { content: '黒', key: 'black' },
@@ -108,6 +98,16 @@ export default function Index() {
             ]}
             name="background"
             onChange={setColor}
+          />
+          <Selector
+            className="m-2"
+            selectedIndex={background}
+            items={[
+              { content: '絵馬', key: 'ema' },
+              { content: '南京錠', key: 'padlock' },
+            ]}
+            name="background"
+            onChange={setBackground}
           />
           <Button
             className="m-2"
