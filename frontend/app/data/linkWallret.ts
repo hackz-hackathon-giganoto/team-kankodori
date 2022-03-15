@@ -1,10 +1,10 @@
 import { API_ENDPOINT } from './constants';
-import { Item, Wallet } from './types';
+import { MintRequestInput } from './types';
 
 export const linkWallet = async ({
   user_id,
   item_id,
-}: Wallet): Promise<Item> => {
+}: MintRequestInput): Promise<void> => {
   const url = new URL(`${API_ENDPOINT}/item/${item_id}/mint`);
   const res = await fetch(url.href, {
     method: 'POST',
@@ -15,7 +15,4 @@ export const linkWallet = async ({
   if (res.status !== 200) {
     throw new Error('fetch error');
   }
-
-  const data = await res.json();
-  return data as Item;
 };
