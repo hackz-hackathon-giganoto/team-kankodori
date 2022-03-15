@@ -40,7 +40,7 @@ export const meta: MetaFunction = ({ data }) => {
     'og:image': ogImage,
     'twitter:card': 'summary_large_image',
     'twitter:title': 'inol',
-    'twitter:description': 'PRAY WITH YOU, PRAY WITH ME',
+    'twitter:description': 'あなたもインターネット神社inolで祈誓しませんか',
     'twitter:image': ogImage,
   };
 };
