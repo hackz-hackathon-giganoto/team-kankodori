@@ -1,14 +1,14 @@
-import { Control } from '../types';
+import { Background, Control } from '../types';
 
 export type SyncData = {
   controls: Control[];
-  background?: string;
+  background?: Background;
 };
 
 export type NetworkControllerEventMap = {
   open: never | undefined;
   stroke: Control;
-  background: string;
+  background: Background;
   sync: SyncData;
   syncrequest: never | undefined;
   close: string;
@@ -29,7 +29,7 @@ export interface NetworkController {
   addControl(control: Control): Promise<void>;
   sync(data: SyncData): Promise<void>;
   syncRequest(): Promise<void>;
-  changeBackground(background: string): Promise<void>;
+  changeBackground(background: Background): Promise<void>;
   close(): Promise<void>;
   complete(): Promise<void>;
 }

@@ -9,11 +9,12 @@ import {
 } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useCanvasFrame } from '~/utils/useCanvasFrame';
+import { Ema, Padlock } from '../baseSvg';
 import { usePointerIdRef, useStrokeRef } from './hooks';
 import { NetworkController } from './network';
 import { SyncData } from './network/interface';
 import { Svg } from './Svg';
-import { Control, Mode, Point } from './types';
+import { Background, Control, Mode, Point } from './types';
 import {
   controlsToStrokes,
   createControlFromPoints,
@@ -28,8 +29,8 @@ export type Props = {
   height?: number;
   controls: Control[];
   appendControl: Dispatch<Control>;
-  BackgroundSvg?: () => JSX.Element;
-  onBackgroundChange?: (bg: string) => unknown;
+  background?: Background;
+  onBackgroundChange?: (bg: Background) => unknown;
   networkController?: NetworkController;
   mode?: Mode;
   className?: string;
@@ -42,7 +43,7 @@ export const SvgCanvas: VFC<Props> = ({
   controls,
   appendControl,
   networkController,
-  BackgroundSvg,
+  background,
   onBackgroundChange,
   mode = 'pen',
   className = '',
@@ -159,9 +160,10 @@ export const SvgCanvas: VFC<Props> = ({
   useEffect(() => {
     if (networkController === undefined) return;
     const onSyncRequest = () =>
-      networkController.sync({ controls, background: BackgroundSvg?.name });
-    const onSync = ({ controls, background }: SyncData) => {
-      onBackgroundChange && background && onBackgroundChange(background);
+      networkController.sync({ controls, background });
+    const onSync = (data: SyncData) => {
+      if (onBackgroundChange !== undefined && data.background !== undefined)
+        onBackgroundChange(data.background);
       controls.forEach((c) => appendControl(c));
     };
     const onOpen = () => networkController?.syncRequest();
@@ -190,13 +192,13 @@ export const SvgCanvas: VFC<Props> = ({
     networkController,
     controls,
     onBackgroundChange,
-    BackgroundSvg?.name,
+    background,
   ]);
 
   useEffect(() => {
-    if (BackgroundSvg !== undefined)
-      networkController?.changeBackground(BackgroundSvg.name);
-  }, [BackgroundSvg, networkController]);
+    if (background !== undefined)
+      networkController?.changeBackground(background);
+  }, [background, networkController]);
 
   return (
     <div className={`relative ${className}`} style={style}>
@@ -205,7 +207,7 @@ export const SvgCanvas: VFC<Props> = ({
         height={height}
         className="absolute w-full h-full"
         controls={controls}
-        BackgroundSvg={BackgroundSvg}
+        BackgroundSvg={background === 'ema' ? Ema : Padlock}
       />
       <canvas
         ref={canvasRef}

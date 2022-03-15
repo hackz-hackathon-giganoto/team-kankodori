@@ -29,3 +29,5 @@ export type Erase = ControlBase & {
 };
 
 export type Control = Stroke | Erase;
+
+export type Background = 'ema' | 'padlock';
