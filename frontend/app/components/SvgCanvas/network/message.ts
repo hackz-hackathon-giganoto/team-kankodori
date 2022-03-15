@@ -5,6 +5,11 @@ export type ControlMessage = {
   data: Control;
 };
 
+export type BackgroundMessage = {
+  type: 'background';
+  data: string;
+};
+
 export type SyncMessage = {
   type: 'sync';
   data: Control[];
@@ -20,6 +25,7 @@ export type CompleteMessage = {
 
 export type Message =
   | ControlMessage
+  | BackgroundMessage
   | SyncMessage
   | SyncRequestMessage
   | CompleteMessage;
