@@ -18,3 +18,8 @@ export type ItemInput = {
   owner: string;
   svg: string;
 };
+
+export type MintRequestInput = {
+  user_id: string;
+  item_id: string;
+};
