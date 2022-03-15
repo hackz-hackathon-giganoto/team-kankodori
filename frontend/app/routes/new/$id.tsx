@@ -41,7 +41,7 @@ export const action: ActionFunction = async ({ request }) => {
     backgroundString === 'ema' ? Ema : Padlock,
   );
 
-  const item = await uplodeItem({ owner: ownerString, svg });
+  const item = await uplodeItem({ owner, svg });
   return redirect(`/item/${item.name}`);
 };
 
