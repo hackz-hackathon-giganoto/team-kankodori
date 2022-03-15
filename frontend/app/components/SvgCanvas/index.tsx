@@ -153,6 +153,7 @@ export const SvgCanvas: VFC<Props> = ({
     [
       appendControl,
       canvasRef,
+      color,
       mode,
       networkController,
       pointerIdRef,
