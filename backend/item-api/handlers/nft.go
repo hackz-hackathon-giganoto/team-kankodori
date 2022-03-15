@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -40,25 +39,23 @@ func (ctr *Handler) GetTransaction(c echo.Context) error {
 }
 
 type MintNFTRequest struct {
-	Name    string `json:"name"`
-	UserID  string `json:"userId"`
-	NFTType string `json:"nftType"`
+	UserID string `json:"userId"`
 }
 
-func (ctr *Handler) MintNFT(c echo.Context) error {
-	// createNFTRequest := new(CreateNFTRequest)
-	// if err := c.Bind(createNFTRequest); err != nil {
-	// 	return c.String(http.StatusBadRequest, err.Error())
-	// }
-	MintNFTRequest := new(MintNFTRequest)
-	if err := c.Bind(MintNFTRequest); err != nil {
+func (ctr *Handler) MintNFTById(c echo.Context) error {
+	nftId := c.Param("id")
+	req := new(MintNFTRequest)
+	if err := c.Bind(req); err != nil {
 		return c.String(http.StatusBadRequest, err.Error())
 	}
+	if req.UserID == "" {
+		return c.String(http.StatusBadRequest, "userId is null")
+	}
 
-	fmt.Println(MintNFTRequest)
-	tx, err := ctr.Service.MintNonFungible(MintNFTRequest.Name, MintNFTRequest.UserID, MintNFTRequest.NFTType)
+	c.Logger().Info("MintNFTRequest", req)
+	_, err := ctr.Service.MintNonFungible(req.UserID, nftId)
 	if err != nil {
 		return c.String(http.StatusInternalServerError, err.Error())
 	}
-	return c.JSON(http.StatusOK, tx)
+	return c.NoContent(http.StatusOK)
 }

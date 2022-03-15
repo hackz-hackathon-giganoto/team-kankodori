@@ -30,6 +30,7 @@ func main() {
 		item := v1.Group("/item")
 		{
 			item.GET("/:id", handler.GetItemById)
+			item.POST("/:id/mint", handler.MintNFTById)
 			item.GET("/:country/:pref/:city", handler.GetItem)
 			item.POST("/", handler.CreateItem)
 		}
@@ -43,7 +44,6 @@ func main() {
 		nft := v1.Group("/nft")
 		{
 			nft.GET("/transaction", handler.GetTransaction)
-			nft.POST("/mint", handler.MintNFT)
 		}
 	}
 
