@@ -18,7 +18,20 @@ export const links: LinksFunction = () => [
 ];
 
 export const meta: MetaFunction = () => {
-  return { title: 'Inol' };
+  const ogImage = `https://inol.cf/brand/logo.png`;
+  const description =
+    'PRAY WITH YOU, PRAY WITH ME. インターネット神社inolであなたの願いをNFTに保存しましょう!友達や恋人と一緒に誓うこともできます！';
+  return {
+    title: 'Inol',
+    description: description,
+    'og:title': 'Inol',
+    'og:description': description,
+    'og:image': ogImage,
+    'twitter:card': 'summary_large_image',
+    'twitter:title': 'Inol',
+    'twitter:description': description,
+    'twitter:image': ogImage,
+  };
 };
 
 export default function App() {
