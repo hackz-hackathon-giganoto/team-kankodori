@@ -71,6 +71,7 @@
 | city         | number | 区画の番号(×－×-1)  |
 | name         | string | 区画の番号(1－1－1) |
 | owner        | string | user id             |
+|created_at | string| 作成された時間 |
 
 #### レスポンスサンプル
 
@@ -83,7 +84,8 @@
     "pref": 2,
     "city": 3,
     "name": "1-2-3",
-    "owner": "U1234567890abcdef1234567890abcdef"
+    "owner": "U1234567890abcdef1234567890abcdef",
+    "created_at":"2022-03-15T20:19:49.975761Z"
   }
 }
 ```
@@ -131,7 +133,8 @@
       "pref": 2,
       "city": 3,
       "name": "1-2-3",
-      "owner": "U1234567890abcdef1234567890abcdef"
+      "owner": "U1234567890abcdef1234567890abcdef",
+      "created_at":"2022-03-15T20:19:49.975761Z"
     },
     {
       "id": "1234abcd",
@@ -140,7 +143,8 @@
       "pref": 2,
       "city": 3,
       "name": "1-2-3",
-      "owner": "U1234567890abcdef1234567890abcdef"
+      "owner": "U1234567890abcdef1234567890abcdef",
+      "created_at":"2022-03-15T20:19:49.975761Z"
     }
   ]
 }
@@ -184,7 +188,8 @@ country, pref, city のすべてを指定する.
   "pref": 2,
   "city": 3,
   "name": "1-2-3",
-  "owner": "U1234567890abcdef1234567890abcdef"
+  "owner": "U1234567890abcdef1234567890abcdef",
+  "created_at":"2022-03-15T20:19:49.975761Z"
 }
 ```
 
@@ -232,7 +237,8 @@ nft の id を指定する.
   "pref": 2,
   "city": 3,
   "name": "1-2-3",
-  "owner": "U1234567890abcdef1234567890abcdef"
+  "owner": "U1234567890abcdef1234567890abcdef",
+  "created_at":"2022-03-15T20:19:49.975761Z"
 }
 ```
 
