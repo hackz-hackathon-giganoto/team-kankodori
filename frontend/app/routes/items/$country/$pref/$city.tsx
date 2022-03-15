@@ -33,10 +33,15 @@ export const loader: LoaderFunction = async ({ params }) => {
 };
 
 export const meta: MetaFunction = ({ data }) => {
+  const ogImage = `https://inol.cf/png/${data.id}`;
   return {
-    title: 'inol',
-    description: 'PRAY WITH YOU, PRAY WITH ME',
-    'og:image': `https://inol.cf/png/${data.id}`,
+    'og:title': 'inol',
+    'og:description': 'PRAY WITH YOU, PRAY WITH ME',
+    'og:image': ogImage,
+    'twitter:card': 'summary_large_image',
+    'twitter:title': 'inol',
+    'twitter:description': 'PRAY WITH YOU, PRAY WITH ME',
+    'twitter:image': ogImage,
   };
 };
 
