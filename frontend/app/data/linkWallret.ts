@@ -1,7 +1,7 @@
 import { API_ENDPOINT } from './constants';
 import { Wallet } from './types';
 
-export const linkWallet = async ({ user_id, item_id }: Wallet) => {
+export const linkWallet = async ({ user_id, item_id }: Wallet): Promise<Item> => {
   const url = new URL(`${API_ENDPOINT}/item/${item_id}/mint`);
   const res = await fetch(url.href, {
     method: 'POST',
