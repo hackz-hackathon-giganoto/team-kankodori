@@ -32,8 +32,8 @@ export const action: ActionFunction = async ({ request }) => {
   const body = await request.formData();
   const backgroundString = body.get('background')?.toString();
   const controlsString = body.get('strokes')?.toString();
-  const ownerString = body.get('owner')?.toString();
-  if (controlsString == null || backgroundString == null || ownerString == null)
+  const owner = body.get('owner')?.toString();
+  if (controlsString == null || backgroundString == null || owner == null)
     throw new Response('Unexpected error', { status: 500 });
   const controls = JSON.parse(controlsString) as Control[];
   const svg = renderSvgComponent(
