@@ -77,70 +77,40 @@ export default function Index() {
   return (
     <>
       <div>
-        <SvgCanvas
-          controls={controls}
-          appendControl={appendControl}
-          networkController={controller}
-          background={background === 0 ? 'ema' : 'padlock'}
-          onBackgroundChange={(bg) => setBackground(bg === 'ema' ? 0 : 1)}
-          mode={mode === 0 ? 'pen' : 'eraser'}
-          className="h-[90vmin] w-[90vmin] mx-auto bg-white/50 rounded-xl select-none"
-          color={color === 0 ? 'black' : color === 1 ? 'red' : 'blue'}
-        />
         <div>
           <Selector
+            className="m-2"
             selectedIndex={mode}
             items={[
-              {
-                el: () => <span className="px-4 py-2">pen</span>,
-                key: 'pen',
-              },
-              {
-                el: () => <span className="px-4 py-2">eraser</span>,
-                key: 'eraser',
-              },
+              { content: 'ペン', key: 'pen' },
+              { content: '消しゴム', key: 'eraser' },
             ]}
             name="tool"
             onChange={setMode}
-            className="bg-white/50"
           />
           <Selector
-            selectedIndex={background}
-            items={[
-              {
-                el: () => <span className="px-4 py-2">絵馬</span>,
-                key: 'ema',
-              },
-              {
-                el: () => <span className="px-4 py-2">南京錠</span>,
-                key: 'padlock',
-              },
-            ]}
-            name="background"
-            onChange={setBackground}
-            className="bg-white/50"
-          />
-          <Selector
+            className="m-2"
             selectedIndex={color}
             items={[
-              {
-                el: () => <span className="px-4 py-2">黒</span>,
-                key: 'black',
-              },
-              {
-                el: () => <span className="px-4 py-2">赤</span>,
-                key: 'red',
-              },
-              {
-                el: () => <span className="px-4 py-2">青</span>,
-                key: 'blue',
-              },
+              { content: '黒', key: 'black' },
+              { content: '赤', key: 'red' },
+              { content: '青', key: 'blue' },
             ]}
             name="background"
             onChange={setColor}
-            className="bg-white/50"
+          />
+          <Selector
+            className="m-2"
+            selectedIndex={background}
+            items={[
+              { content: '絵馬', key: 'ema' },
+              { content: '南京錠', key: 'padlock' },
+            ]}
+            name="background"
+            onChange={setBackground}
           />
           <Button
+            className="m-2"
             onClick={() =>
               window.navigator.share({
                 url: window.location.href,
@@ -148,32 +118,48 @@ export default function Index() {
                 title: 'PRAY WITH YOU - Inol',
               })
             }
-            className="bg-white/50"
           >
             一緒に描く
           </Button>
+          <Form method="post" className="inline">
+            <input
+              type="hidden"
+              name="background"
+              value={background === 0 ? 'ema' : 'padlock'}
+            />
+            <input
+              type="hidden"
+              name="strokes"
+              value={JSON.stringify(controls)}
+            />
+            <input
+              type="hidden"
+              name="owner"
+              value={userId ?? 'anonymous_user'}
+            />
+            <Button type="submit" className="m-2 bg-red-400">
+              完了
+            </Button>
+          </Form>
         </div>
-        <Form method="post">
-          <input
-            type="hidden"
-            name="background"
-            value={background === 0 ? 'ema' : 'padlock'}
-          />
-          <input
-            type="hidden"
-            name="strokes"
-            value={JSON.stringify(controls)}
-          />
-          <input type="hidden" name="owner" value={userId ?? 'anonymous_user'} />
-          <input type="submit" value="完了" />
-        </Form>
+        <SvgCanvas
+          controls={controls}
+          appendControl={appendControl}
+          networkController={controller}
+          background={background === 0 ? 'ema' : 'padlock'}
+          onBackgroundChange={(bg) => setBackground(bg === 'ema' ? 0 : 1)}
+          mode={mode === 0 ? 'pen' : 'eraser'}
+          className="h-[90vmin] w-[90vmin] mx-auto bg-white/50 rounded-xl select-none m-4"
+          color={color === 0 ? 'black' : color === 1 ? 'red' : 'blue'}
+        />
       </div>
       {(transition.state === 'submitting' ||
         transition.state === 'loading') && (
         <Overlay
-          className={`${
-            transition.state === 'loading' ? 'opacity-100' : 'opacity-50'
-          } transition-opacity`}
+          className={`
+            ${transition.state === 'loading' ? 'opacity-100' : 'opacity-50'}
+            transition-opacity
+          `}
         />
       )}
     </>

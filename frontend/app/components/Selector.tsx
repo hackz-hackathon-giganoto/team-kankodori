@@ -4,7 +4,7 @@ export type Props = {
   className?: string;
   style?: CSSProperties;
   items: {
-    el: (props: { selected: boolean }) => JSX.Element;
+    content: string;
     key: string;
   }[];
   selectedIndex: number;
@@ -21,17 +21,24 @@ export const Selector: VFC<Props> = ({
   className,
 }) => (
   <div className={`inline-flex rounded-lg ${className}`} style={style}>
-    {items.map(({ el, key }, i) => (
+    {items.map(({ content, key }, i) => (
       <div
         className={`
           ${i === 0 ? 'rounded-l-lg' : ''}
           ${i === items.length - 1 ? 'rounded-r-lg' : ''}
-          ${selectedIndex === i ? 'border-indigo-500' : 'border-slate-400'}
-          border-2
+          ${
+            selectedIndex === i
+              ? 'text-gray-800 bg-white'
+              : 'text-white bg-gray-800/10'
+          }
+          border-4
+          border-white
+          px-2
+          cursor-pointer
         `}
         key={key}
       >
-        <label>
+        <label className="cursor-pointer">
           <input
             type="radio"
             name={name}
@@ -39,7 +46,7 @@ export const Selector: VFC<Props> = ({
             checked={selectedIndex === i}
             onChange={(e) => e.target.checked && onChange?.(i)}
           />
-          {el({ selected: selectedIndex === i })}
+          {content}
         </label>
       </div>
     ))}

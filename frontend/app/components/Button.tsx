@@ -1,17 +1,14 @@
-import { CSSProperties, FC } from 'react';
+import { ButtonHTMLAttributes, FC } from 'react';
 
-export type Props = {
-  className?: string;
-  style?: CSSProperties;
-  onClick?: () => unknown;
-};
-
-export const Button: FC<Props> = ({ onClick, style, className, children }) => (
-  <div
-    className={`rounded-lg ${className} border-2 border-slate-400 focus:border-indigo-500`}
-    style={style}
-    onClick={onClick}
+export const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
+  className,
+  children,
+  ...props
+}) => (
+  <button
+    className={`rounded-lg px-2 border-4 border-white text-white bg-gray-800/10 active:bg-white active:text-black ${className}`}
+    {...props}
   >
     {children}
-  </div>
+  </button>
 );
