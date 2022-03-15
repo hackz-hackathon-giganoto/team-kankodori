@@ -1,8 +1,14 @@
+import { CSSProperties, VFC } from 'react';
 import seikaiha from './seikaiha.svg';
 
-export const Overlay = () => (
+export type Props = {
+  className?: string;
+  style?: CSSProperties;
+};
+
+export const Overlay: VFC<Props> = ({ style = {}, className = '' }) => (
   <div
-    className="w-screen h-screen bg-repeat fixed bg-slate-400"
-    style={{ backgroundImage: `url(${seikaiha})` }}
+    className={`top-0 left-0 w-screen h-screen bg-repeat fixed bg-slate-400 ${className}`}
+    style={{ ...style, backgroundImage: `url(${seikaiha})` }}
   />
 );
