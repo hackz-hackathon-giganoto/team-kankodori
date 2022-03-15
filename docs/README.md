@@ -3,3 +3,4 @@
 - [ルーティング](./routing.md)
 - [キャンバス共有プロトコル](./share-canvas.md)
 - [API 仕様書](./api.md)
+- [シーケンス図](./sequence.md)
