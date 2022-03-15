@@ -21,6 +21,6 @@ export type ItemInput = {
 };
 
 export type MintRequestInput = {
-  user_id: string;
-  item_id: string;
+  userId: string;
+  itemId: string;
 };
