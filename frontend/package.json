@@ -18,6 +18,7 @@
     "fmt": "prettier -w ."
   },
   "dependencies": {
+    "@line/liff": "^2.18.2",
     "@open-ayame/ayame-web-sdk": "^2022.1.0",
     "@react-spring/web": "^9.4.4",
     "@remix-run/cloudflare-pages": "^1.2.3",
