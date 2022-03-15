@@ -20,6 +20,7 @@ export type ControlBase = {
 export type Stroke = ControlBase & {
   type: 'pen';
   points: Point[];
+  color: string;
 };
 
 export type Erase = ControlBase & {

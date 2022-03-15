@@ -35,6 +35,7 @@ export type Props = {
   mode?: Mode;
   className?: string;
   style?: CSSProperties;
+  color?: string;
 };
 
 export const SvgCanvas: VFC<Props> = ({
@@ -48,6 +49,7 @@ export const SvgCanvas: VFC<Props> = ({
   mode = 'pen',
   className = '',
   style,
+  color = "#000",
 }: Props) => {
   const { strokeRef, appendPoint, setStroke } = useStrokeRef();
   const canvasRef = useCanvasFrame((ctx) => drawFrame(ctx, strokeRef.current));
@@ -136,6 +138,7 @@ export const SvgCanvas: VFC<Props> = ({
         case 'pen':
           const control = createControlFromPoints(
             strokeRef.current.map(roundPoint),
+            color
           );
           appendControl(control);
           networkController?.addControl(control);
