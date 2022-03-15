@@ -11,11 +11,6 @@ import {
 import type { MetaFunction } from 'remix';
 import tailwind from '~/styles/generated.css';
 import { googleFontLinks } from '~/utils/googleFontLinks';
-import liff from '@line/liff';
-
-liff.init({
-  liffId: '1656968667-pzoJ0Do7',
-});
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: tailwind },
