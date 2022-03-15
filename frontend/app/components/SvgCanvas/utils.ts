@@ -1,5 +1,5 @@
 import type { PointerEvent } from 'react';
-import type { Point, Control, Stroke, Erase, BoundingRect } from './types';
+import type { Point, Control, Stroke, Erase, BoundingRect, StrokeColor } from './types';
 import { v4 as uuid } from 'uuid';
 
 const getElementOffset = (
@@ -52,10 +52,11 @@ export const roundPoint = ({ x, y }: Point): Point => ({
   y: roundNum(y),
 });
 
-export const createControlFromPoints = (pts: Point[]): Control => ({
+export const createControlFromPoints = (pts: Point[], color: StrokeColor): Control => ({
   type: 'pen',
   id: uuid(),
   points: pts,
+  color
 });
 
 export const controlsToStrokes = (controls: Control[]): Stroke[] => {
