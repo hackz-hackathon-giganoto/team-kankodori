@@ -41,7 +41,7 @@ func (ctr *Handler) ListItemsByCity(c echo.Context) error {
 
 	if len(*itemList) == 0 {
 		c.Logger().Debug("itemList is emtpy")
-		return c.NoContent(http.StatusNotFound)
+		return c.NoContent(http.StatusNoContent)
 	}
 	return c.JSON(200, itemList)
 }
