@@ -19,7 +19,7 @@ spec:
         app: item-api
     spec:
       containers:
-      - image: docker.io/onsd/item-api:0.9
+      - image: docker.io/onsd/item-api:0.15
         name: item-api
         env:
         - name: PORT
@@ -28,6 +28,12 @@ spec:
           value: "true"
         - name: DATABASE_URL
           value: "postgres://dbuser:password@cockroachdb-public.cockroachdb:26257/defaultdb?sslmode=require"
+        - name: LINE_BC_SERVICE_API_KEY
+          value: "1aa9d4fd-8564-4174-b1c8-30b23b5bd355"
+        - name: WALLET_ADDRESS
+          value: "tlink10pss3g6l4su4l40sqae3mactg7s7lme6ah4aql"
+        - name: ITEM_CONTRACT_ID
+          value: "7990d4dc"
         - name: AZURE_STORAGE_ACCOUNT_NAME
           valueFrom:
             secretKeyRef:
@@ -38,3 +44,13 @@ spec:
             secretKeyRef:
               name: item-api-secret
               key: AZURE_STORAGE_ACCOUNT_ACCESS_KEY
+        - name: LINE_BC_SERVICE_API_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: item-api-secret
+              key: LINE_BC_SERVICE_API_SECRET
+        - name: WALLET_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: item-api-secret
+              key: WALLET_SECRET
