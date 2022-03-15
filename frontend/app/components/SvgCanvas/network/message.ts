@@ -1,4 +1,4 @@
-import { Control } from '../types';
+import { Background, Control } from '../types';
 import { SyncData } from './interface';
 
 export type ControlMessage = {
@@ -8,7 +8,7 @@ export type ControlMessage = {
 
 export type BackgroundMessage = {
   type: 'background';
-  background: string;
+  background: Background;
 };
 
 export type SyncMessage = {

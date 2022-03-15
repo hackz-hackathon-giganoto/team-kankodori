@@ -1,7 +1,7 @@
 import { connection, defaultOptions } from '@open-ayame/ayame-web-sdk';
 import type { ConnectionOptions } from '@open-ayame/ayame-web-sdk/dist/connection/options';
 import { eventmit, Eventmitter } from 'eventmit';
-import type { Control, Stroke } from '../types';
+import type { Background, Control } from '../types';
 import type {
   NetworkController,
   NetworkControllerEventMap,
@@ -92,7 +92,7 @@ export class AyameController implements NetworkController {
     };
     await this.send(message);
   }
-  async changeBackground(background: string): Promise<void> {
+  async changeBackground(background: Background): Promise<void> {
     const message: Message = {
       type: 'background',
       background,

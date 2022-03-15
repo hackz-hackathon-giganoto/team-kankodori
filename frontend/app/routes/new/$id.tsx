@@ -87,7 +87,7 @@ export default function Index() {
           controls={controls}
           appendControl={appendControl}
           networkController={controller}
-          BackgroundSvg={background === 0 ? Ema : Padlock}
+          background={background === 0 ? 'ema' : 'padlock'}
           onBackgroundChange={(bg) => setBackground(bg === Ema.name ? 0 : 1)}
           mode={mode === 0 ? 'pen' : 'eraser'}
           className="h-[90vmin] w-[90vmin] mx-auto bg-white/50 rounded-xl select-none"
