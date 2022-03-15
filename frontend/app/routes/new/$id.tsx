@@ -164,7 +164,7 @@ export default function Index() {
             name="strokes"
             value={JSON.stringify(controls)}
           />
-          <input type="hidden" name="owner" value={userId} />
+          <input type="hidden" name="owner" value={userId ?? 'anonymous_user'} />
           <input type="submit" value="完了" />
         </Form>
       </div>
