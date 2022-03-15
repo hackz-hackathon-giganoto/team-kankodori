@@ -1,5 +1,6 @@
 import {
   CSSProperties,
+  Dispatch,
   PointerEvent,
   useCallback,
   useEffect,
@@ -8,8 +9,9 @@ import {
 } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useCanvasFrame } from '~/utils/useCanvasFrame';
-import { useControls, usePointerIdRef, useStrokeRef } from './hooks';
+import { usePointerIdRef, useStrokeRef } from './hooks';
 import { NetworkController } from './network';
+import { SyncData } from './network/interface';
 import { Svg } from './Svg';
 import { Control, Mode, Point } from './types';
 import {
@@ -24,6 +26,8 @@ import {
 export type Props = {
   width?: number;
   height?: number;
+  controls: Control[];
+  appendControl: Dispatch<Control>;
   BackgroundSvg?: () => JSX.Element;
   onBackgroundChange?: (bg: string) => unknown;
   networkController?: NetworkController;
@@ -35,6 +39,8 @@ export type Props = {
 export const SvgCanvas: VFC<Props> = ({
   width = 640,
   height = 640,
+  controls,
+  appendControl,
   networkController,
   BackgroundSvg,
   onBackgroundChange,
@@ -45,7 +51,6 @@ export const SvgCanvas: VFC<Props> = ({
   const { strokeRef, appendPoint, setStroke } = useStrokeRef();
   const canvasRef = useCanvasFrame((ctx) => drawFrame(ctx, strokeRef.current));
   const [pointerIdRef, setPointerId] = usePointerIdRef();
-  const [controls, appendControl] = useControls();
   const prevErasePointRef = useRef<Point>();
 
   // stroke handlers
@@ -153,9 +158,12 @@ export const SvgCanvas: VFC<Props> = ({
 
   useEffect(() => {
     if (networkController === undefined) return;
-    const onSyncRequest = () => networkController.sync(controls);
-    const onSync = (controls: Control[]) =>
+    const onSyncRequest = () =>
+      networkController.sync({ controls, background: BackgroundSvg?.name });
+    const onSync = ({ controls, background }: SyncData) => {
+      onBackgroundChange && background && onBackgroundChange(background);
       controls.forEach((c) => appendControl(c));
+    };
     const onOpen = () => networkController?.syncRequest();
     networkController.addEventListener('open', onOpen);
     networkController.addEventListener('stroke', appendControl);
@@ -177,7 +185,13 @@ export const SvgCanvas: VFC<Props> = ({
       networkController.removeEventListener('close', location.reload);
       networkController.removeEventListener('error', location.reload);
     };
-  }, [appendControl, networkController, controls, onBackgroundChange]);
+  }, [
+    appendControl,
+    networkController,
+    controls,
+    onBackgroundChange,
+    BackgroundSvg?.name,
+  ]);
 
   useEffect(() => {
     if (BackgroundSvg !== undefined)
