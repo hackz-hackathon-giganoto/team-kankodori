@@ -1,5 +1,6 @@
 import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix';
 import { ItemDetails } from '~/components/ItemDetails';
+import { Logo } from '~/components/Logo';
 import { getItemById } from '~/data/getItemById';
 import { Item } from '~/data/types';
 
@@ -35,8 +36,11 @@ export const meta: MetaFunction = ({ data }) => {
 export default function Inol() {
   const item = useLoaderData<Item>();
   return (
-    <main className="flex justify-center items-center h-full">
-      <ItemDetails item={item} />
-    </main>
+    <>
+      <Logo />
+      <main className="flex justify-center items-center h-full">
+        <ItemDetails item={item} />
+      </main>
+    </>
   );
 }
