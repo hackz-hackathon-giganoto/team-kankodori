@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { json, LoaderFunction, useLoaderData } from 'remix';
+import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix';
 import { Ema, Padlock } from '~/components/baseSvg';
 import { Button } from '~/components/Button';
 import { Selector } from '~/components/Selector';
@@ -12,6 +12,23 @@ import {
 
 export const loader: LoaderFunction = async ({ params }) => {
   return json(params.id);
+};
+
+export const meta: MetaFunction = () => {
+  const ogImage = `https://inol.cf/assets/inol-icon.png`;
+  const description = 'PRAY WITH YOU. inolで一緒に誓いを立てませんか？';
+  return {
+    'application-name': 'inol',
+    title: 'inolで一緒に祈誓しませんか？',
+    description,
+    'og:title': 'inol',
+    'og:description': description,
+    'og:image': ogImage,
+    'twitter:card': 'summary_large_image',
+    'twitter:title': 'inol',
+    'twitter:description': description,
+    'twitter:image': ogImage,
+  };
 };
 
 export default function Index() {
