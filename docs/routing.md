@@ -22,19 +22,19 @@
 
 この URL を共有することで同時に作業できる
 
-## `/inol/:id`
+## `/item/:id`
 
 - 単体見るページ
 
 OGP 画像とかが生える
 
-## `/inols/:page`
+## `/items/:country`
 
 - 一覧見るページ
 
 グリッドで表示
 
-## `/inols/:page/:id`
+## `/items/:country/:pref/:city`
 
 - 一覧ページから拡大表示
 
