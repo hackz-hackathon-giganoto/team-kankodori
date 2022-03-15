@@ -1,0 +1,71 @@
+{
+  "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/Microsoft.ConfidentialLedger-20220312005458",
+  "name": "Microsoft.ConfidentialLedger-20220312005458",
+  "type": "Microsoft.Resources/deployments",
+  "tags": {
+    "marketplaceItemId": "Microsoft.ConfidentialLedger"
+  },
+  "properties": {
+    "templateHash": "10477977218666915744",
+    "parameters": {
+      "ledgerName": {
+        "type": "String",
+        "value": "inol-test"
+      },
+      "location": {
+        "type": "String",
+        "value": "eastus"
+      },
+      "ledgerType": {
+        "type": "String",
+        "value": "Private"
+      },
+      "aadBasedSecurityPrincipals": {
+        "type": "Array",
+        "value": [
+          {
+            "principalId": "a911904a-4c9c-4320-a4a5-3802ea6c81a3",
+            "ledgerRoleName": "Administrator"
+          }
+        ]
+      },
+      "certBasedSecurityPrincipals": {
+        "type": "Array",
+        "value": []
+      },
+      "tags": {
+        "type": "Object",
+        "value": {}
+      }
+    },
+    "mode": "Incremental",
+    "debugSetting": {
+      "detailLevel": "None"
+    },
+    "provisioningState": "Succeeded",
+    "timestamp": "2022-03-11T16:00:49.6531521Z",
+    "duration": "PT4M36.1208715S",
+    "correlationId": "79028f1e-6faf-4019-b545-462c0c241550",
+    "providers": [
+      {
+        "namespace": "Microsoft.ConfidentialLedger",
+        "resourceTypes": [
+          {
+            "resourceType": "ledgers",
+            "locations": [
+              "eastus"
+            ]
+          }
+        ]
+      }
+    ],
+    "dependencies": [],
+    "outputs": {},
+    "outputResources": [
+      {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.ConfidentialLedger/ledgers/inol-test"
+      }
+    ],
+    "validationLevel": "Template"
+  }
+}

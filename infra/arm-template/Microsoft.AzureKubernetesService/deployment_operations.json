@@ -1,0 +1,100 @@
+[
+  {
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/microsoft.aks-20220311182901/operations/DCE598EC45140ECC",
+    "operationId": "DCE598EC45140ECC",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2022-03-11T09:39:36.3052612Z",
+      "duration": "PT6M39.7257248S",
+      "trackingId": "c8f61e3c-f792-4aa8-9660-571d6a2f6c85",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/AciSubnetRoleAssignmentDeployment-20220311183245",
+        "resourceType": "Microsoft.Resources/deployments",
+        "resourceName": "AciSubnetRoleAssignmentDeployment-20220311183245"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/microsoft.aks-20220311182901/operations/2B4509F828D1904D",
+    "operationId": "2B4509F828D1904D",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2022-03-11T09:39:36.3671542Z",
+      "duration": "PT21.688737S",
+      "trackingId": "56cc9a5f-c3ea-44e4-b2a7-3c42662e8ec7",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/ClusterSubnetRoleAssignmentDeployment-20220311183245",
+        "resourceType": "Microsoft.Resources/deployments",
+        "resourceName": "ClusterSubnetRoleAssignmentDeployment-20220311183245"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/microsoft.aks-20220311182901/operations/F610ABFBD41EEF40",
+    "operationId": "F610ABFBD41EEF40",
+    "properties": {
+      "provisioningOperation": "Read",
+      "provisioningState": "Succeeded",
+      "timestamp": "2022-03-11T09:39:15.3125929Z",
+      "duration": "PT0.6341757S",
+      "trackingId": "c0a58049-861d-4cd4-925e-253c5c50e9fa",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.ContainerService/managedClusters/inol-cluster",
+        "resourceType": "Microsoft.ContainerService/managedClusters",
+        "resourceName": "inol-cluster",
+        "apiVersion": "2021-07-01"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/microsoft.aks-20220311182901/operations/CE7B2A677CD7B269",
+    "operationId": "CE7B2A677CD7B269",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2022-03-11T09:39:14.634073Z",
+      "duration": "PT6M18.0545366S",
+      "trackingId": "4d7f7bb7-2c7a-458b-900c-61fb26008e26",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.ContainerService/managedClusters/inol-cluster",
+        "resourceType": "Microsoft.ContainerService/managedClusters",
+        "resourceName": "inol-cluster"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/microsoft.aks-20220311182901/operations/2818AA74F6B9FF0F",
+    "operationId": "2818AA74F6B9FF0F",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2022-03-11T09:33:05.9224217Z",
+      "duration": "PT9.3428853S",
+      "trackingId": "29ad4f04-6d0e-4c73-babf-854e27e83663",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Network/virtualNetworks/inol-vnet",
+        "resourceType": "Microsoft.Network/virtualNetworks",
+        "resourceName": "inol-vnet"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/microsoft.aks-20220311182901/operations/08585546157103037131",
+    "operationId": "08585546157103037131",
+    "properties": {
+      "provisioningOperation": "EvaluateDeploymentOutput",
+      "provisioningState": "Succeeded",
+      "timestamp": "2022-03-11T09:39:36.5334099Z",
+      "duration": "PT0.0990665S",
+      "trackingId": "38e418fe-d5ea-408c-a36e-aed994a7c6ed",
+      "statusCode": "OK"
+    }
+  }
+]

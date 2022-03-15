@@ -1,0 +1,204 @@
+{
+  "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/microsoft.aks-20220311182901",
+  "name": "microsoft.aks-20220311182901",
+  "type": "Microsoft.Resources/deployments",
+  "tags": {
+    "primaryResourceId": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourcegroups/inol/providers/Microsoft.ContainerService/managedClusters/inol-cluster",
+    "marketplaceItemId": "microsoft.aks",
+    "provisioningHash": "postCreateId"
+  },
+  "properties": {
+    "templateHash": "10970828171510150235",
+    "parameters": {
+      "resourceName": {
+        "type": "String",
+        "value": "inol-cluster"
+      },
+      "location": {
+        "type": "String",
+        "value": "eastus"
+      },
+      "dnsPrefix": {
+        "type": "String",
+        "value": "inol-cluster-dns"
+      },
+      "osDiskSizeGB": {
+        "type": "Int",
+        "value": 0
+      },
+      "kubernetesVersion": {
+        "type": "String",
+        "value": "1.21.9"
+      },
+      "networkPlugin": {
+        "type": "String",
+        "value": "azure"
+      },
+      "enableRBAC": {
+        "type": "Bool",
+        "value": true
+      },
+      "vmssNodePool": {
+        "type": "Bool",
+        "value": true
+      },
+      "windowsProfile": {
+        "type": "Bool",
+        "value": false
+      },
+      "enablePrivateCluster": {
+        "type": "Bool",
+        "value": false
+      },
+      "enableHttpApplicationRouting": {
+        "type": "Bool",
+        "value": false
+      },
+      "enableAzurePolicy": {
+        "type": "Bool",
+        "value": false
+      },
+      "enableSecretStoreCSIDriver": {
+        "type": "Bool",
+        "value": false
+      },
+      "vnetSubnetID": {
+        "type": "String",
+        "value": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Network/virtualNetworks/inol-vnet/subnets/default"
+      },
+      "serviceCidr": {
+        "type": "String",
+        "value": "10.0.0.0/16"
+      },
+      "dnsServiceIP": {
+        "type": "String",
+        "value": "10.0.0.10"
+      },
+      "dockerBridgeCidr": {
+        "type": "String",
+        "value": "172.17.0.1/16"
+      },
+      "aciVnetSubnetName": {
+        "type": "String",
+        "value": "virtual-node-aci"
+      },
+      "aciConnectorLinuxEnabled": {
+        "type": "Bool",
+        "value": true
+      }
+    },
+    "mode": "Incremental",
+    "debugSetting": {
+      "detailLevel": "None"
+    },
+    "provisioningState": "Succeeded",
+    "timestamp": "2022-03-11T09:39:36.5688052Z",
+    "duration": "PT6M40.8309383S",
+    "correlationId": "c3798da9-9c33-4e5d-88e0-66d9b4fb5dfc",
+    "providers": [
+      {
+        "namespace": "Microsoft.ContainerService",
+        "resourceTypes": [
+          {
+            "resourceType": "managedClusters",
+            "locations": [
+              "eastus"
+            ]
+          }
+        ]
+      },
+      {
+        "namespace": "Microsoft.Network",
+        "resourceTypes": [
+          {
+            "resourceType": "virtualNetworks",
+            "locations": [
+              "eastus"
+            ]
+          }
+        ]
+      },
+      {
+        "namespace": "Microsoft.Resources",
+        "resourceTypes": [
+          {
+            "resourceType": "deployments",
+            "locations": [
+              null
+            ]
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Network/virtualNetworks/inol-vnet",
+            "resourceType": "Microsoft.Network/virtualNetworks",
+            "resourceName": "inol-vnet"
+          }
+        ],
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.ContainerService/managedClusters/inol-cluster",
+        "resourceType": "Microsoft.ContainerService/managedClusters",
+        "resourceName": "inol-cluster"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Network/virtualNetworks/inol-vnet",
+            "resourceType": "Microsoft.Network/virtualNetworks",
+            "resourceName": "inol-vnet"
+          },
+          {
+            "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.ContainerService/managedClusters/inol-cluster",
+            "resourceType": "Microsoft.ContainerService/managedClusters",
+            "resourceName": "inol-cluster",
+            "apiVersion": "2021-07-01"
+          }
+        ],
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/ClusterSubnetRoleAssignmentDeployment-20220311183245",
+        "resourceType": "Microsoft.Resources/deployments",
+        "resourceName": "ClusterSubnetRoleAssignmentDeployment-20220311183245"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Network/virtualNetworks/inol-vnet",
+            "resourceType": "Microsoft.Network/virtualNetworks",
+            "resourceName": "inol-vnet"
+          },
+          {
+            "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.ContainerService/managedClusters/inol-cluster",
+            "resourceType": "Microsoft.ContainerService/managedClusters",
+            "resourceName": "inol-cluster"
+          }
+        ],
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/AciSubnetRoleAssignmentDeployment-20220311183245",
+        "resourceType": "Microsoft.Resources/deployments",
+        "resourceName": "AciSubnetRoleAssignmentDeployment-20220311183245"
+      }
+    ],
+    "outputs": {
+      "controlPlaneFQDN": {
+        "type": "String",
+        "value": "inol-cluster-dns-44cda666.hcp.eastus.azmk8s.io"
+      }
+    },
+    "outputResources": [
+      {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.ContainerService/managedClusters/inol-cluster"
+      },
+      {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Network/virtualNetworks/inol-vnet"
+      },
+      {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Network/virtualNetworks/inol-vnet/subnets/default/providers/Microsoft.Authorization/roleAssignments/584264f3-afbb-4ff3-a853-f78187709255"
+      },
+      {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Network/virtualNetworks/inol-vnet/subnets/virtual-node-aci/providers/Microsoft.Authorization/roleAssignments/6d820e25-b578-4e6e-87bc-29747c622e07"
+      }
+    ],
+    "validationLevel": "Template"
+  }
+}
