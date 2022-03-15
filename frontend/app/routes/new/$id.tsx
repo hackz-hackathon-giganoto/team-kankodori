@@ -44,19 +44,10 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export const meta: MetaFunction = () => {
-  const ogImage = `https://inol.cf/assets/inol-icon.png`;
   const description = 'PRAY WITH YOU. inolで一緒に誓いを立てませんか？';
   return {
-    'application-name': 'inol',
     title: 'inolで一緒に祈誓しませんか？',
     description,
-    'og:title': 'inol',
-    'og:description': description,
-    'og:image': ogImage,
-    'twitter:card': 'summary_large_image',
-    'twitter:title': 'inol',
-    'twitter:description': description,
-    'twitter:image': ogImage,
   };
 };
 

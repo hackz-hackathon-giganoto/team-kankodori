@@ -27,14 +27,10 @@ export const meta: MetaFunction = ({ data }) => {
   const description =
     'PRAY WITH YOU, PRAY WITH ME. インターネット神社inolで誓いを立てました';
   return {
-    'application-name': 'inol',
-    title: 'inolで誓いを立てました',
     description,
-    'og:title': 'inol',
+    'og:title': 'inol-title',
     'og:description': description,
     'og:image': ogImage,
-    'twitter:card': 'summary_large_image',
-    'twitter:title': 'inol',
     'twitter:description': description,
     'twitter:image': ogImage,
   };
