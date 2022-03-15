@@ -2,12 +2,28 @@ import type { PointerEvent } from 'react';
 import type { Point, Control, Stroke, Erase, BoundingRect } from './types';
 import { v4 as uuid } from 'uuid';
 
+const getElementOffset = (
+  elem: HTMLElement,
+): { offsetLeft: number; offsetTop: number } => {
+  let offsetLeft = 0;
+  let offsetTop = 0;
+  while (true) {
+    if (!isNaN(elem.offsetTop)) offsetTop += elem.offsetTop;
+    if (!isNaN(elem.offsetLeft)) offsetLeft += elem.offsetLeft;
+    if (elem.parentElement === null) break;
+    elem = elem.parentElement;
+  }
+  return { offsetLeft, offsetTop };
+};
+
 export const getCanvasPoint = (e: PointerEvent<HTMLCanvasElement>) => {
   const canvas = e.currentTarget;
   const rect = canvas.getBoundingClientRect();
+  const { offsetLeft, offsetTop } = getElementOffset(canvas);
+
   return {
-    x: ((e.clientX - rect.top) / rect.width) * canvas.width,
-    y: ((e.clientY - rect.left) / rect.height) * canvas.height,
+    x: ((e.pageX - offsetLeft) / rect.width) * canvas.width,
+    y: ((e.pageY - offsetTop) / rect.height) * canvas.height,
   };
 };
 
