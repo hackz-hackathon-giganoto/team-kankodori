@@ -1,13 +1,19 @@
 import { Control } from '../types';
+import { SyncData } from './interface';
 
 export type ControlMessage = {
-  type: 'stroke';
-  data: Control;
+  type: 'control';
+  control: Control;
+};
+
+export type BackgroundMessage = {
+  type: 'background';
+  background: string;
 };
 
 export type SyncMessage = {
   type: 'sync';
-  data: Control[];
+  data: SyncData;
 };
 
 export type SyncRequestMessage = {
@@ -20,6 +26,7 @@ export type CompleteMessage = {
 
 export type Message =
   | ControlMessage
+  | BackgroundMessage
   | SyncMessage
   | SyncRequestMessage
   | CompleteMessage;

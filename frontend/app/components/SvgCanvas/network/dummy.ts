@@ -1,5 +1,9 @@
-import { Control, Stroke } from '../types';
-import { NetworkController, NetworkControllerEventMap } from './interface';
+import { Control } from '../types';
+import {
+  NetworkController,
+  NetworkControllerEventMap,
+  SyncData,
+} from './interface';
 
 const noop = () => {};
 
@@ -19,7 +23,10 @@ export class DummyController implements NetworkController {
   async addControl(control: Control): Promise<void> {
     noop();
   }
-  async sync(_strokes: Stroke[]): Promise<void> {
+  async changeBackground(background: string): Promise<void> {
+    noop();
+  }
+  async sync(data: SyncData): Promise<void> {
     noop();
   }
   async syncRequest(): Promise<void> {

@@ -2,13 +2,12 @@ import { connection, defaultOptions } from '@open-ayame/ayame-web-sdk';
 import type { ConnectionOptions } from '@open-ayame/ayame-web-sdk/dist/connection/options';
 import { eventmit, Eventmitter } from 'eventmit';
 import type { Control, Stroke } from '../types';
-import type { NetworkController, NetworkControllerEventMap } from './interface';
 import type {
-  CompleteMessage,
-  Message,
-  ControlMessage,
-  SyncMessage,
-} from './message';
+  NetworkController,
+  NetworkControllerEventMap,
+  SyncData,
+} from './interface';
+import type { Message } from './message';
 
 export type AyameOptions = Partial<ConnectionOptions> & {
   signalingUrl: string;
@@ -26,6 +25,7 @@ export class AyameController implements NetworkController {
   } = {
     open: eventmit(),
     stroke: eventmit(),
+    background: eventmit(),
     sync: eventmit(),
     close: eventmit(),
     error: eventmit(),
@@ -86,26 +86,33 @@ export class AyameController implements NetworkController {
     eventmitter.off(listener);
   }
   async addControl(control: Control): Promise<void> {
-    const message: ControlMessage = {
-      type: 'stroke',
-      data: control,
+    const message: Message = {
+      type: 'control',
+      control,
     };
-    this.send(message);
+    await this.send(message);
   }
-  async sync(strokes: Stroke[]): Promise<void> {
-    const message: SyncMessage = {
-      type: 'sync',
-      data: strokes,
+  async changeBackground(background: string): Promise<void> {
+    const message: Message = {
+      type: 'background',
+      background,
     };
-    this.send(message);
+    await this.send(message);
+  }
+  async sync(data: SyncData): Promise<void> {
+    const message: Message = {
+      type: 'sync',
+      data,
+    };
+    await this.send(message);
   }
   async syncRequest(): Promise<void> {
     const message: Message = { type: 'syncrequest' };
-    this.send(message);
+    await this.send(message);
   }
   async complete(): Promise<void> {
-    const message: CompleteMessage = { type: 'complete' };
-    this.send(message);
+    const message: Message = { type: 'complete' };
+    await this.send(message);
   }
 
   async close(message = 'success'): Promise<void> {
@@ -113,21 +120,24 @@ export class AyameController implements NetworkController {
     Object.values(this.eventmitters).forEach((e) => e.offAll());
   }
 
-  private send(message: Message) {
+  private async send(message: Message) {
     this.dataChannel?.send(JSON.stringify(message));
   }
 
   private handleMessage(message: Message) {
     console.log(message);
     switch (message.type) {
-      case 'stroke':
-        this.eventmitters.stroke.emit(message.data);
+      case 'control':
+        this.eventmitters.stroke.emit(message.control);
         break;
       case 'sync':
         this.eventmitters.sync.emit(message.data);
         break;
       case 'syncrequest':
         this.eventmitters.syncrequest.emit(undefined);
+        break;
+      case 'background':
+        this.eventmitters.background.emit(message.background);
         break;
     }
   }
