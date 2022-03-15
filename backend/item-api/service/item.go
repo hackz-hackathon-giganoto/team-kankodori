@@ -25,10 +25,11 @@ type Item struct {
 	Pref      string    `db:"pref" json:"pref"`
 	City      string    `db:"city" json:"city"`
 	Name      string    `db:"name" json:"name"`
+	Owner     string    `db:"owner" json:"owner"`
 	CreatedAt time.Time `db:"created_at" json:"created_at"`
 }
 
-func CreateNewItem(id string) *Item {
+func CreateNewItem(id, userId string) *Item {
 	country := 1 + rand.Intn(5)
 	pref := 1 + rand.Intn(5)
 	city := 1 + rand.Intn(5)
@@ -38,6 +39,7 @@ func CreateNewItem(id string) *Item {
 		Pref:    strconv.Itoa(pref),
 		City:    strconv.Itoa(city),
 		Name:    id,
+		Owner:   userId,
 	}
 
 }
@@ -93,7 +95,7 @@ func (s *Service) ListItemsByCountryAndPref(country, pref string) (*[]Item, erro
 func (s *Service) CreateItem(createItemRequest *CreateItemRequest) (*Item, error) {
 	ctx := context.TODO()
 
-	tmpId := generateId(createItemRequest.UserId) // might be replaced by NFT id (?)
+	tmpId := generateId(createItemRequest.UserId)
 	log.Infof("create NFT: %s", tmpId)
 	tx, err := s.CreateNonFungible(tmpId)
 	if err != nil {
@@ -124,11 +126,11 @@ func (s *Service) CreateItem(createItemRequest *CreateItemRequest) (*Item, error
 	// generate new place each loop to find empty place
 	// TODO: find better algorithm?
 	for {
-		item := CreateNewItem(id)
+		item := CreateNewItem(id, createItemRequest.UserId)
 		item.SvgUrl = svgUrl
 
 		log.Infof("Item Created: %v\n", item)
-		sql := fmt.Sprintf("INSERT INTO %s values (:id, :svg_url, :country, :pref, :city, :name, NOW());", TABLE_NAME)
+		sql := fmt.Sprintf("INSERT INTO %s values (:id, :svg_url, :country, :pref, :city, :name, NOW(), :owner);", TABLE_NAME)
 		_, err = s.Db.NamedExec(sql, item)
 		if err == nil {
 			return item, nil
