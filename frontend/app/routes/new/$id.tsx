@@ -38,7 +38,7 @@ export default function Index() {
         networkController={controller}
         BackgroundSvg={background === 0 ? Ema : Padlock}
         mode={mode === 0 ? 'pen' : 'eraser'}
-        className="h-[90vmin] w-[90vmin] mx-auto bg-white/50 rounded-xl"
+        className="h-[90vmin] w-[90vmin] mx-auto bg-white/50 rounded-xl select-none"
       />
       <div>
         <Selector
