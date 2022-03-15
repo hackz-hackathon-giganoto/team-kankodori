@@ -13,14 +13,16 @@
     "dev:remix": "cross-env NODE_ENV=development remix watch",
     "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public",
     "dev": "cross-env NODE_ENV=development remix build && run-p dev:*",
-    "generate:css": "tailwindcss -i ./app/styles/tailwind.css -o ./app/tailwind.css",
+    "generate:css": "tailwindcss -i ./app/styles/tailwind.css -o ./app/styles/generated.css",
     "start": "cross-env NODE_ENV=production npm run dev:wrangler",
     "fmt": "prettier -w ."
   },
   "dependencies": {
     "@open-ayame/ayame-web-sdk": "^2022.1.0",
+    "@react-spring/web": "^9.4.4",
     "@remix-run/cloudflare-pages": "^1.2.3",
     "@remix-run/react": "^1.2.3",
+    "@use-gesture/react": "^10.2.10",
     "eventmit": "^1.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

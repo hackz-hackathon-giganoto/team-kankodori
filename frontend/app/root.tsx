@@ -9,9 +9,13 @@ import {
   useCatch,
 } from 'remix';
 import type { MetaFunction } from 'remix';
-import styles from './tailwind.css';
+import tailwind from '~/styles/generated.css';
+import { googleFontLinks } from '~/utils/googleFontLinks';
 
-export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: tailwind },
+  ...googleFontLinks(),
+];
 
 export const meta: MetaFunction = () => {
   return { title: 'Inol' };
@@ -27,7 +31,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <div className="bg-gradient-to-b from-[#fae5b9] to-[#f7db8e] h-screen max-h-screen overflow-hidden">
+          <Outlet />
+        </div>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

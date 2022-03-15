@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@cloudflare/workers-types': ^3.2.0
   '@open-ayame/ayame-web-sdk': ^2022.1.0
+  '@react-spring/web': ^9.4.4
   '@remix-run/cloudflare-pages': ^1.2.3
   '@remix-run/dev': ^1.2.3
   '@remix-run/eslint-config': ^1.2.3
@@ -10,6 +11,7 @@ specifiers:
   '@types/react': ^17.0.24
   '@types/react-dom': ^17.0.9
   '@types/uuid': ^8.3.4
+  '@use-gesture/react': ^10.2.10
   autoprefixer: ^10.4.2
   cross-env: ^7.0.3
   eslint: ^8.9.0
@@ -28,8 +30,10 @@ specifiers:
 
 dependencies:
   '@open-ayame/ayame-web-sdk': 2022.1.0
+  '@react-spring/web': 9.4.4_react-dom@17.0.2+react@17.0.2
   '@remix-run/cloudflare-pages': 1.2.3_abc5c18a24dffdd7ae2647150b801da6
   '@remix-run/react': 1.2.3_react-dom@17.0.2+react@17.0.2
+  '@use-gesture/react': 10.2.10_react@17.0.2
   eventmit: 1.1.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -622,6 +626,60 @@ packages:
     resolution: {integrity: sha512-WPPqQTfGmOVcJUOR87lxNbUpwtIZVbzwrk9DqoSGh/hhtmDPuVU3GUzyNR1CUdxtFDVI8sS7VhWVyIOfWIqCrQ==}
     dev: false
 
+  /@react-spring/animated/9.4.4_react@17.0.2:
+    resolution: {integrity: sha512-e9xnuBaUTD+NolKikUmrGWjX8AVCPyj1GcEgjgq9E+0sXKv46UY7cm2EmB6mUDTxWIDVKebARY++xT4nGDraBQ==}
+    peerDependencies:
+      react: ^16.8.0  || ^17.0.0
+    dependencies:
+      '@react-spring/shared': 9.4.4_react@17.0.2
+      '@react-spring/types': 9.4.4
+      react: 17.0.2
+    dev: false
+
+  /@react-spring/core/9.4.4_react@17.0.2:
+    resolution: {integrity: sha512-llgb0ljFyjMB0JhWsaFHOi9XFT8n1jBMVs1IFY2ipIBerWIRWrgUmIpakLPHTa4c4jwqTaDSwX90s2a0iN7dxQ==}
+    peerDependencies:
+      react: ^16.8.0  || ^17.0.0
+    dependencies:
+      '@react-spring/animated': 9.4.4_react@17.0.2
+      '@react-spring/rafz': 9.4.4
+      '@react-spring/shared': 9.4.4_react@17.0.2
+      '@react-spring/types': 9.4.4
+      react: 17.0.2
+    dev: false
+
+  /@react-spring/rafz/9.4.4:
+    resolution: {integrity: sha512-5ki/sQ06Mdf8AuFstSt5zbNNicRT4LZogiJttDAww1ozhuvemafNWEHxhzcULgCPCDu2s7HsroaISV7+GQWrhw==}
+    dev: false
+
+  /@react-spring/shared/9.4.4_react@17.0.2:
+    resolution: {integrity: sha512-ySVgScDZlhm/+Iy2smY9i/DDrShArY0j6zjTS/Re1lasKnhq8qigoGiAxe8xMPJNlCaj3uczCqHy3TY9bKRtfQ==}
+    peerDependencies:
+      react: ^16.8.0  || ^17.0.0
+    dependencies:
+      '@react-spring/rafz': 9.4.4
+      '@react-spring/types': 9.4.4
+      react: 17.0.2
+    dev: false
+
+  /@react-spring/types/9.4.4:
+    resolution: {integrity: sha512-KpxKt/D//q/t/6FBcde/RE36LKp8PpWu7kFEMLwpzMGl9RpcexunmYOQJWwmJWtkQjgE1YRr7DzBMryz6La1cQ==}
+    dev: false
+
+  /@react-spring/web/9.4.4_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-iJmOLdhcuizriUlu/xqBc5y8KaFts+UI+iC+GxyTwBtzxA9czKiSAZW2ESuhG8stafa3jncwjfTQQp84KN36cw==}
+    peerDependencies:
+      react: ^16.8.0  || ^17.0.0
+      react-dom: ^16.8.0  || ^17.0.0
+    dependencies:
+      '@react-spring/animated': 9.4.4_react@17.0.2
+      '@react-spring/core': 9.4.4_react@17.0.2
+      '@react-spring/shared': 9.4.4_react@17.0.2
+      '@react-spring/types': 9.4.4
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
+
   /@remix-run/cloudflare-pages/1.2.3_abc5c18a24dffdd7ae2647150b801da6:
     resolution: {integrity: sha512-Z1gYM4dXgTUbF/BUoRZzan9bdc7xuq+FKkT++irHkhXHEtTjVrQN3WI5cMnbS+v0PcVOTs7Bl0BHitZpLfX1Rw==}
     peerDependencies:
@@ -1030,6 +1088,19 @@ packages:
       '@typescript-eslint/types': 5.14.0
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /@use-gesture/core/10.2.10:
+    resolution: {integrity: sha512-7WFIDfeTB+7RBui8YOrB2xbgmvMsvaCDjyzrdvECKkgOpIynNSdhlLXjiFuqQMtnK71IL/9WNZNU0P8xuaLuUQ==}
+    dev: false
+
+  /@use-gesture/react/10.2.10_react@17.0.2:
+    resolution: {integrity: sha512-znChnKVAMMGXD9J7fCKN686BJNBlUJaRtCu92IQXVWdcxg4MqS0SgsBslGnTWXTlsHVkg5zcGjKYf7qYkOf0Rg==}
+    peerDependencies:
+      react: '>= 16.8.0'
+    dependencies:
+      '@use-gesture/core': 10.2.10
+      react: 17.0.2
+    dev: false
 
   /acorn-jsx/5.3.2_acorn@8.7.0:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}

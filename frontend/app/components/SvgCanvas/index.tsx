@@ -1,4 +1,11 @@
-import { PointerEvent, useCallback, useEffect, useRef, VFC } from 'react';
+import {
+  CSSProperties,
+  PointerEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  VFC,
+} from 'react';
 import { v4 as uuid } from 'uuid';
 import { useCanvasFrame } from '~/utils/useCanvasFrame';
 import { useControls, usePointerIdRef, useStrokeRef } from './hooks';
@@ -20,6 +27,8 @@ export type Props = {
   BackgroundSvg?: () => JSX.Element;
   networkController?: NetworkController;
   mode?: Mode;
+  className?: string;
+  style?: CSSProperties;
 };
 
 export const SvgCanvas: VFC<Props> = ({
@@ -28,6 +37,8 @@ export const SvgCanvas: VFC<Props> = ({
   networkController,
   BackgroundSvg,
   mode = 'pen',
+  className = '',
+  style,
 }: Props) => {
   const { strokeRef, appendPoint, setStroke } = useStrokeRef();
   const canvasRef = useCanvasFrame((ctx) => drawFrame(ctx, strokeRef.current));
@@ -160,11 +171,11 @@ export const SvgCanvas: VFC<Props> = ({
   }, [appendControl, networkController, controls]);
 
   return (
-    <div style={{ position: 'relative', width: '50vmin', height: '50vmin' }}>
+    <div className={`relative ${className}`} style={style}>
       <Svg
         width={width}
         height={height}
-        style={{ width: '100%', height: '100%', position: 'absolute' }}
+        className="absolute w-full h-full"
         controls={controls}
         BackgroundSvg={BackgroundSvg}
       />
@@ -172,7 +183,7 @@ export const SvgCanvas: VFC<Props> = ({
         ref={canvasRef}
         width={width}
         height={height}
-        style={{ width: '100%', height: '100%', position: 'absolute' }}
+        className="absolute w-full h-full"
         onPointerDown={onStrokeBegin}
         onPointerMove={onStrokeMove}
         onPointerUp={onStrokeEnd}

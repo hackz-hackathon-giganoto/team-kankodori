@@ -1,7 +1,8 @@
-import { json, LoaderFunction, useLoaderData } from 'remix';
+import { json, LoaderFunction, useLoaderData, useNavigate } from 'remix';
 import type { MetaFunction } from 'remix';
 import type { Item, Address } from '~/data/types';
 import { getItemByAddress } from '~/data/getItemByAddress';
+import { ItemDetails } from '~/components/ItemDetails';
 
 export const loader: LoaderFunction = async ({ params }) => {
   if (
@@ -40,12 +41,18 @@ export const meta: MetaFunction = ({ data }) => {
 };
 
 export default function Inol() {
+  const navigate = useNavigate();
   const item = useLoaderData<Item>();
+
+  const onOutsideClick = () => {
+    navigate('../..');
+  };
   return (
-    <div>
-      <h1>単体で見るページ</h1>
-      <p>OGP画像とかが生える</p>
-      <img src={item.svg_url} alt="test" />
+    <div
+      className="fixed top-0 left-0 w-full h-full flex justify-center items-center"
+      onClick={onOutsideClick}
+    >
+      <ItemDetails item={item} />
     </div>
   );
 }
