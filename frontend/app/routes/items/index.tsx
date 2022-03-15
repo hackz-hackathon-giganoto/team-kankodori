@@ -1,58 +1,50 @@
 import { Link } from 'remix';
+import { Logo } from '~/components/Logo';
 
 export default function CountrySelector() {
   return (
     <main className="h-full w-full">
-      <div className="overflow-x-auto flex touch-pan-x text-[20vw]">
-        <Link
-          to="./1"
-          className="aspect-square w-2/3 flex-shrink-0 flex-grow-0"
-        >
-          <span className="block rotate-45 -translate-y-1/2 origin-bottom-left">
+      <h1>
+        <Logo className="w-1/4" />
+      </h1>
+      <ul className="text-[7.5vw]">
+        <li className="hover:translate-x-[2.5vw] transition-transform">
+          <Link to="./1" className="flex">
+            <div className="w-[5vw] bg-red-700" />
             其の壱
-          </span>
-        </Link>
-        <Link
-          to="./2"
-          className="aspect-square w-2/3 flex-shrink-0 flex-grow-0"
-        >
-          <span className="block rotate-45 -translate-y-1/2 origin-bottom-left">
+          </Link>
+        </li>
+        <li className="hover:translate-x-[2.5vw] transition-transform">
+          <Link to="./2" className="flex">
+            <div className="w-[5vw] bg-orange-700" />
             其の弐
-          </span>
-        </Link>
-        <Link
-          to="./3"
-          className="aspect-square w-2/3 flex-shrink-0 flex-grow-0"
-        >
-          <span className="block rotate-45 -translate-y-1/2 origin-bottom-left">
+          </Link>
+        </li>
+        <li className="hover:translate-x-[2.5vw] transition-transform">
+          <Link to="./3" className="flex">
+            <div className="w-[5vw] bg-yellow-600" />
             其の参
-          </span>
-        </Link>
-        <Link
-          to="./4"
-          className="aspect-square w-2/3 flex-shrink-0 flex-grow-0"
-        >
-          <span className="block rotate-45 -translate-y-1/2 origin-bottom-left">
+          </Link>
+        </li>
+        <li className="hover:translate-x-[2.5vw] transition-transform">
+          <Link to="./4" className="flex">
+            <div className="w-[5vw] bg-green-700" />
             其の肆
-          </span>
-        </Link>
-        <Link
-          to="./5"
-          className="aspect-square w-2/3 flex-shrink-0 flex-grow-0"
-        >
-          <span className="block rotate-45 -translate-y-1/2 origin-bottom-left">
+          </Link>
+        </li>
+        <li className="hover:translate-x-[2.5vw] transition-transform">
+          <Link to="./5" className="flex">
+            <div className="w-[5vw] bg-blue-700" />
             其の伍
-          </span>
-        </Link>
-        <Link
-          to="./6"
-          className="aspect-square w-2/3 flex-shrink-0 flex-grow-0"
-        >
-          <span className="block rotate-45 -translate-y-1/2 origin-bottom-left">
+          </Link>
+        </li>
+        <li className="hover:translate-x-[2.5vw] transition-transform">
+          <Link to="./6" className="flex">
+            <div className="w-[5vw] bg-purple-800" />
             其の陸
-          </span>
-        </Link>
-      </div>
+          </Link>
+        </li>
+      </ul>
     </main>
   );
 }

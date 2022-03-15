@@ -1,4 +1,5 @@
 import { json, Link, LoaderFunction, Outlet, useLoaderData } from 'remix';
+import { Logo } from '~/components/Logo';
 import { getItems } from '~/data/getItems';
 import { Item } from '~/data/types';
 
@@ -37,6 +38,7 @@ export default function Country() {
   const itemsArray = useLoaderData<Item[][]>();
   return (
     <>
+      <Logo className="w-1/4" />
       <main className="h-full w-full relative">
         {itemsArray.flatMap((items) =>
           items.map((item) => (
