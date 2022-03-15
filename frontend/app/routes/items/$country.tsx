@@ -38,7 +38,7 @@ export default function Country() {
   const itemsArray = useLoaderData<Item[][]>();
   return (
     <>
-      <Logo className="w-1/4" />
+      <Logo className="w-1/3" />
       <main className="h-full w-full relative">
         {itemsArray.flatMap((items) =>
           items.map((item) => (
@@ -46,7 +46,7 @@ export default function Country() {
               key={item.name}
               className="absolute w-[30%]"
               style={{
-                top: `${(Number(item.city) - 1) * 12}%`,
+                top: `${(Number(item.city) - 1) * 14}%`,
                 left: `${(Number(item.pref) - 1) * 14}%`,
               }}
             >

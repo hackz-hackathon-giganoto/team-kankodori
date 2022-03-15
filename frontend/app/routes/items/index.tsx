@@ -5,9 +5,9 @@ export default function CountrySelector() {
   return (
     <main className="h-full w-full">
       <h1>
-        <Logo className="w-1/4" />
+        <Logo className="w-1/3" />
       </h1>
-      <ul className="text-[7.5vw]">
+      <ul className="text-[12vw]">
         <li className="hover:translate-x-[2.5vw] transition-transform">
           <Link to="./1" className="flex">
             <div className="w-[5vw] bg-red-700" />
@@ -38,12 +38,12 @@ export default function CountrySelector() {
             其の伍
           </Link>
         </li>
-        <li className="hover:translate-x-[2.5vw] transition-transform">
+        {/* <li className="hover:translate-x-[2.5vw] transition-transform">
           <Link to="./6" className="flex">
             <div className="w-[5vw] bg-purple-800" />
             其の陸
           </Link>
-        </li>
+        </li> */}
       </ul>
     </main>
   );
