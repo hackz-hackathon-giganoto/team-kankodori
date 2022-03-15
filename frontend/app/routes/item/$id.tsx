@@ -1,15 +1,11 @@
 import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix';
+import { ItemDetails } from '~/components/ItemDetails';
 import { getItemById } from '~/data/getItemById';
 import { Item } from '~/data/types';
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { id } = params;
-  if (id === undefined) {
-    throw new Response('address is not defind', {
-      status: 404,
-      statusText: 'Not Found',
-    });
-  }
+  if (id === undefined) throw new Error('Unexpected error (id=null)');
   try {
     const item = await getItemById(id);
     return json(item);
@@ -43,10 +39,8 @@ export const meta: MetaFunction = ({ data }) => {
 export default function Inol() {
   const item = useLoaderData<Item>();
   return (
-    <main>
-      <h1>単体で見るページ</h1>
-      <p>OGP画像とかが生える</p>
-      <img src={item.svg_url} alt="test" />
+    <main className="flex justify-center items-center h-full">
+      <ItemDetails item={item} />
     </main>
   );
 }
