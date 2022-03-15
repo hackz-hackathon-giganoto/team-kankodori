@@ -91,10 +91,19 @@ func (s *Service) UploadSVGToBlob(ctx context.Context, id, svg string) (string, 
 	}
 
 	// Upload data to the block blob
-	if _, err = blockBlob.Upload(ctx, streaming.NopCloser(bytes.NewReader(data)), nil); err != nil {
+	opt := azblob.UploadBlockBlobOptions{
+		HTTPHeaders: &azblob.BlobHTTPHeaders{
+			BlobContentType: getStringPtr("image/svg+xml"),
+		},
+	}
+	if _, err = blockBlob.Upload(ctx, streaming.NopCloser(bytes.NewReader(data)), &opt); err != nil {
 		return "", errors.Wrap(err, "failed to upload")
 	}
 
 	upload_path := fmt.Sprintf("https://inolstorageaccount.blob.core.windows.net/%s/%s", CONTAINER_NAME, filename)
 	return upload_path, nil
+}
+
+func getStringPtr(s string) *string {
+	return &s
 }
