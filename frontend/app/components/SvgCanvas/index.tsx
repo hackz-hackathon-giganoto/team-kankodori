@@ -164,28 +164,31 @@ export const SvgCanvas: VFC<Props> = ({
     const onSync = (data: SyncData) => {
       if (onBackgroundChange !== undefined && data.background !== undefined)
         onBackgroundChange(data.background);
-      controls.forEach((c) => appendControl(c));
+      data.controls.forEach((c) => appendControl(c));
     };
-    const onOpen = () => networkController?.syncRequest();
+    const onOpen = () => networkController.syncRequest();
     networkController.addEventListener('open', onOpen);
     networkController.addEventListener('stroke', appendControl);
     if (onBackgroundChange !== undefined)
       networkController.addEventListener('background', onBackgroundChange);
-    else console.log('no bg handler');
     networkController.addEventListener('syncrequest', onSyncRequest);
     networkController.addEventListener('sync', onSync);
-    networkController.addEventListener('close', location.reload);
-    networkController.addEventListener('error', location.reload);
+    // if (typeof window !== 'undefined') {
+    //   networkController.addEventListener('close', window.location.reload);
+    //   networkController.addEventListener('error', window.location.reload);
+    // }
     return () => {
       networkController.removeEventListener('open', onOpen);
       networkController.removeEventListener('stroke', appendControl);
       if (onBackgroundChange !== undefined)
         networkController.removeEventListener('background', onBackgroundChange);
-      else console.log('no bg handler');
+
       networkController.removeEventListener('syncrequest', onSyncRequest);
       networkController.removeEventListener('sync', onSync);
-      networkController.removeEventListener('close', location.reload);
-      networkController.removeEventListener('error', location.reload);
+      // if (typeof window !== 'undefined') {
+      //   networkController.removeEventListener('close', window.location.reload);
+      //   networkController.removeEventListener('error', window.location.reload);
+      // }
     };
   }, [
     appendControl,

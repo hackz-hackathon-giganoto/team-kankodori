@@ -125,7 +125,6 @@ export class AyameController implements NetworkController {
   }
 
   private handleMessage(message: Message) {
-    console.log(message);
     switch (message.type) {
       case 'control':
         this.eventmitters.stroke.emit(message.control);
