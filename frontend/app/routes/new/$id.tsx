@@ -4,6 +4,7 @@ import {
   Form,
   json,
   LoaderFunction,
+  MetaFunction,
   redirect,
   useLoaderData,
   useTransition,
@@ -40,6 +41,23 @@ export const action: ActionFunction = async ({ request }) => {
 
   const item = await uplodeItem({ owner: 'test-user', svg });
   return redirect(`/item/${item.name}`);
+};
+
+export const meta: MetaFunction = () => {
+  const ogImage = `https://inol.cf/assets/inol-icon.png`;
+  const description = 'PRAY WITH YOU. inolで一緒に誓いを立てませんか？';
+  return {
+    'application-name': 'inol',
+    title: 'inolで一緒に祈誓しませんか？',
+    description,
+    'og:title': 'inol',
+    'og:description': description,
+    'og:image': ogImage,
+    'twitter:card': 'summary_large_image',
+    'twitter:title': 'inol',
+    'twitter:description': description,
+    'twitter:image': ogImage,
+  };
 };
 
 export default function Index() {

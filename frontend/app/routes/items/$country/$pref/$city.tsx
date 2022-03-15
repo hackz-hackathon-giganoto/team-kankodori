@@ -33,10 +33,20 @@ export const loader: LoaderFunction = async ({ params }) => {
 };
 
 export const meta: MetaFunction = ({ data }) => {
+  const ogImage = `https://inol.cf/png/${data.id}`;
+  const description =
+    'PRAY WITH YOU, PRAY WITH ME. インターネット神社inolで誓いを立てました';
   return {
-    title: 'inol',
-    description: 'PRAY WITH YOU, PRAY WITH ME',
-    'og:image': `https://inol.cf/png/${data.id}`,
+    'application-name': 'inol',
+    title: 'inolで誓いを立てました',
+    description,
+    'og:title': 'inol',
+    'og:description': description,
+    'og:image': ogImage,
+    'twitter:card': 'summary_large_image',
+    'twitter:title': 'inol',
+    'twitter:description': description,
+    'twitter:image': ogImage,
   };
 };
 
