@@ -1,6 +1,9 @@
 # .github/workflows/build.yml
 
-on: pull_request
+on:
+  push:
+    branches:
+      - main
 
 permissions:
   id-token: write
