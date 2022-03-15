@@ -128,7 +128,7 @@ export default function Index() {
             className="bg-white/50"
           />
           <Selector
-            selectedIndex={background}
+            selectedIndex={color}
             items={[
               {
                 el: () => <span className="px-4 py-2">黒</span>,
