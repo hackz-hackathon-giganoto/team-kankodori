@@ -1,1 +1,1 @@
-# ![Inol](./logo.svg)
+# ![Inol](./brand/logo.svg)
