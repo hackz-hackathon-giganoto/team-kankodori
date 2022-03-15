@@ -14,7 +14,7 @@ import { usePointerIdRef, useStrokeRef } from './hooks';
 import { NetworkController } from './network';
 import { SyncData } from './network/interface';
 import { Svg } from './Svg';
-import { Background, Control, Mode, Point } from './types';
+import { Background, Control, Mode, Point, StrokeColor } from './types';
 import {
   controlsToStrokes,
   createControlFromPoints,
@@ -35,6 +35,7 @@ export type Props = {
   mode?: Mode;
   className?: string;
   style?: CSSProperties;
+  color?: StrokeColor;
 };
 
 export const SvgCanvas: VFC<Props> = ({
@@ -48,9 +49,12 @@ export const SvgCanvas: VFC<Props> = ({
   mode = 'pen',
   className = '',
   style,
+  color = 'black',
 }: Props) => {
   const { strokeRef, appendPoint, setStroke } = useStrokeRef();
-  const canvasRef = useCanvasFrame((ctx) => drawFrame(ctx, strokeRef.current));
+  const canvasRef = useCanvasFrame((ctx) =>
+    drawFrame(ctx, strokeRef.current, color),
+  );
   const [pointerIdRef, setPointerId] = usePointerIdRef();
   const prevErasePointRef = useRef<Point>();
 
@@ -136,6 +140,7 @@ export const SvgCanvas: VFC<Props> = ({
         case 'pen':
           const control = createControlFromPoints(
             strokeRef.current.map(roundPoint),
+            color,
           );
           appendControl(control);
           networkController?.addControl(control);

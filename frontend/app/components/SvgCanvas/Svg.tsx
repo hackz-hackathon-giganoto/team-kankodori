@@ -46,7 +46,7 @@ export const Svg = ({
         const d = stroke.points
           .map(({ x, y }, i) => `${i === 0 ? 'M' : ''}${x},${y}`)
           .join(' ');
-        return <path key={k} d={d} />;
+        return <path key={k} d={d} stroke={stroke.color} />;
       })}
     </g>
   </svg>

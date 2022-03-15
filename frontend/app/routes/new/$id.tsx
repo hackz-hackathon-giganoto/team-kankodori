@@ -64,6 +64,7 @@ export default function Index() {
   const transition = useTransition();
   const [controls, appendControl] = useControls();
   const [mode, setMode] = useState<number>(0);
+  const [color, setColor] = useState<number>(0);
   const [background, setBackground] = useState<number>(0);
   const id = useLoaderData<string>();
   const controller = useMemo<NetworkController | undefined>(
@@ -91,6 +92,7 @@ export default function Index() {
           onBackgroundChange={(bg) => setBackground(bg === 'ema' ? 0 : 1)}
           mode={mode === 0 ? 'pen' : 'eraser'}
           className="h-[90vmin] w-[90vmin] mx-auto bg-white/50 rounded-xl select-none"
+          color={color === 0 ? 'black' : color === 1 ? 'red' : 'blue'}
         />
         <div>
           <Selector
@@ -123,6 +125,26 @@ export default function Index() {
             ]}
             name="background"
             onChange={setBackground}
+            className="bg-white/50"
+          />
+          <Selector
+            selectedIndex={color}
+            items={[
+              {
+                el: () => <span className="px-4 py-2">黒</span>,
+                key: 'black',
+              },
+              {
+                el: () => <span className="px-4 py-2">赤</span>,
+                key: 'red',
+              },
+              {
+                el: () => <span className="px-4 py-2">青</span>,
+                key: 'blue',
+              },
+            ]}
+            name="background"
+            onChange={setColor}
             className="bg-white/50"
           />
           <Button
