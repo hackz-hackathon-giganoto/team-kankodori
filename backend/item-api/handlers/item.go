@@ -68,6 +68,8 @@ func (ctr *Handler) CreateItem(c echo.Context) error {
 	if err := c.Bind(createItemRequest); err != nil {
 		return c.String(http.StatusBadRequest, err.Error())
 	}
+
+	c.Logger().Info("go createItemRequest", createItemRequest)
 	item, err := ctr.Service.CreateItem(createItemRequest)
 	if err != nil {
 		c.Logger().Error(err.Error())
