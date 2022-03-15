@@ -73,14 +73,7 @@ export default function Index() {
           }),
     [id],
   );
-  const getuserId = useLiffUserId();
-  const [userId, setUserId] = useState<string | undefined>(undefined);
-  useEffect(() => {
-    if (getuserId !== undefined) {
-      setUserId(userId);
-    }
-  }, [getuserId, userId]);
-
+  const userId = useLiffUserId();
   return (
     <>
       <div>
