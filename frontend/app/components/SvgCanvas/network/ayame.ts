@@ -2,7 +2,11 @@ import { connection, defaultOptions } from '@open-ayame/ayame-web-sdk';
 import type { ConnectionOptions } from '@open-ayame/ayame-web-sdk/dist/connection/options';
 import { eventmit, Eventmitter } from 'eventmit';
 import type { Control, Stroke } from '../types';
-import type { NetworkController, NetworkControllerEventMap } from './interface';
+import type {
+  NetworkController,
+  NetworkControllerEventMap,
+  SyncData,
+} from './interface';
 import type { Message } from './message';
 
 export type AyameOptions = Partial<ConnectionOptions> & {
@@ -83,22 +87,22 @@ export class AyameController implements NetworkController {
   }
   async addControl(control: Control): Promise<void> {
     const message: Message = {
-      type: 'stroke',
-      data: control,
+      type: 'control',
+      control,
     };
     await this.send(message);
   }
   async changeBackground(background: string): Promise<void> {
     const message: Message = {
       type: 'background',
-      data: background,
+      background,
     };
     await this.send(message);
   }
-  async sync(strokes: Stroke[]): Promise<void> {
+  async sync(data: SyncData): Promise<void> {
     const message: Message = {
       type: 'sync',
-      data: strokes,
+      data,
     };
     await this.send(message);
   }
@@ -123,8 +127,8 @@ export class AyameController implements NetworkController {
   private handleMessage(message: Message) {
     console.log(message);
     switch (message.type) {
-      case 'stroke':
-        this.eventmitters.stroke.emit(message.data);
+      case 'control':
+        this.eventmitters.stroke.emit(message.control);
         break;
       case 'sync':
         this.eventmitters.sync.emit(message.data);
@@ -133,7 +137,7 @@ export class AyameController implements NetworkController {
         this.eventmitters.syncrequest.emit(undefined);
         break;
       case 'background':
-        this.eventmitters.background.emit(message.data);
+        this.eventmitters.background.emit(message.background);
         break;
     }
   }
