@@ -24,11 +24,11 @@ export const meta: MetaFunction = () => {
   return {
     title: 'Inol',
     description: description,
-    'og:title': 'inol',
+    'og:title': 'Inol',
     'og:description': description,
     'og:image': ogImage,
     'twitter:card': 'summary_large_image',
-    'twitter:title': 'inol',
+    'twitter:title': 'Inol',
     'twitter:description': description,
     'twitter:image': ogImage,
   };
