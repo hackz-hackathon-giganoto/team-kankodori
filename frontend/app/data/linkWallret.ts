@@ -9,7 +9,7 @@ export const linkWallet = async ({
   const res = await fetch(url.href, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(user_id),
+    body: JSON.stringify({ user_id }),
   });
 
   if (res.status !== 200) {
