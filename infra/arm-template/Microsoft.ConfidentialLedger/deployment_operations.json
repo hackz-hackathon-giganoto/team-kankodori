@@ -1,0 +1,31 @@
+[
+  {
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/Microsoft.ConfidentialLedger-20220312005458/operations/103F7AEA30D8C540",
+    "operationId": "103F7AEA30D8C540",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2022-03-11T16:00:49.4537339Z",
+      "duration": "PT4M34.2506384S",
+      "trackingId": "730c0af8-f6ca-46a1-ab75-5edfffdbce31",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.ConfidentialLedger/ledgers/inol-test",
+        "resourceType": "Microsoft.ConfidentialLedger/ledgers",
+        "resourceName": "inol-test"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/Microsoft.ConfidentialLedger-20220312005458/operations/08585545927135487566",
+    "operationId": "08585545927135487566",
+    "properties": {
+      "provisioningOperation": "EvaluateDeploymentOutput",
+      "provisioningState": "Succeeded",
+      "timestamp": "2022-03-11T16:00:49.61711Z",
+      "duration": "PT4M34.4140145S",
+      "trackingId": "a682b1c2-c3bf-47e5-b792-eb8aaa6e1079",
+      "statusCode": "OK"
+    }
+  }
+]

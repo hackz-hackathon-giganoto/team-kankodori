@@ -1,0 +1,65 @@
+[
+  {
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/inolstorageaccount_1647174717168/operations/FFFBEF1C3E437B48",
+    "operationId": "FFFBEF1C3E437B48",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2022-03-13T12:32:44.6354283Z",
+      "duration": "PT38.0248688S",
+      "trackingId": "e352a99f-81f3-4349-8769-502cf77e4f15",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Storage/storageAccounts/inolstorageaccount/fileservices/default",
+        "resourceType": "Microsoft.Storage/storageAccounts/fileservices",
+        "resourceName": "inolstorageaccount/default"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/inolstorageaccount_1647174717168/operations/31533B2BDD4C7CD7",
+    "operationId": "31533B2BDD4C7CD7",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2022-03-13T12:32:44.1393162Z",
+      "duration": "PT37.5287567S",
+      "trackingId": "9140827f-5aee-4ca7-b111-61d4aa01c64f",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Storage/storageAccounts/inolstorageaccount/blobServices/default",
+        "resourceType": "Microsoft.Storage/storageAccounts/blobServices",
+        "resourceName": "inolstorageaccount/default"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/inolstorageaccount_1647174717168/operations/BE8B84F1B91D47A9",
+    "operationId": "BE8B84F1B91D47A9",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2022-03-13T12:32:41.1752613Z",
+      "duration": "PT34.5647018S",
+      "trackingId": "c26dd725-dfca-4b1a-8557-a9a865458c7e",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Storage/storageAccounts/inolstorageaccount",
+        "resourceType": "Microsoft.Storage/storageAccounts",
+        "resourceName": "inolstorageaccount"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/589247e3-867c-4255-be94-035ed9ac7a97/resourceGroups/inol/providers/Microsoft.Resources/deployments/inolstorageaccount_1647174717168/operations/08585544321623297818",
+    "operationId": "08585544321623297818",
+    "properties": {
+      "provisioningOperation": "EvaluateDeploymentOutput",
+      "provisioningState": "Succeeded",
+      "timestamp": "2022-03-13T12:32:44.7975254Z",
+      "duration": "PT38.1869659S",
+      "trackingId": "2a91e024-affa-4668-9eca-350a92a9aaf2",
+      "statusCode": "OK"
+    }
+  }
+]
