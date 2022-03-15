@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   ActionFunction,
   Form,
@@ -22,6 +22,7 @@ import {
 import { Control } from '~/components/SvgCanvas/types';
 import { renderSvgComponent } from '~/data/renderSvgComponent.server';
 import { uplodeItem } from '~/data/uplodeItem';
+import { useLiffUserId } from '~/utils/liff';
 
 export const loader: LoaderFunction = async ({ params }) => {
   return json(params.id);
@@ -31,7 +32,8 @@ export const action: ActionFunction = async ({ request }) => {
   const body = await request.formData();
   const backgroundString = body.get('background')?.toString();
   const controlsString = body.get('strokes')?.toString();
-  if (controlsString == null || backgroundString == null)
+  const owner = body.get('owner')?.toString();
+  if (controlsString == null || backgroundString == null || owner == null)
     throw new Response('Unexpected error', { status: 500 });
   const controls = JSON.parse(controlsString) as Control[];
   const svg = renderSvgComponent(
@@ -39,24 +41,14 @@ export const action: ActionFunction = async ({ request }) => {
     backgroundString === 'ema' ? Ema : Padlock,
   );
 
-  const item = await uplodeItem({ owner: 'test-user', svg });
+  const item = await uplodeItem({ owner, svg });
   return redirect(`/item/${item.name}`);
 };
 
 export const meta: MetaFunction = () => {
-  const ogImage = `https://inol.cf/assets/inol-icon.png`;
-  const description = 'PRAY WITH YOU. inolで一緒に誓いを立てませんか？';
+  const description = 'PRAY WITH YOU. inolで一緒に祈誓しませんか？';
   return {
-    'application-name': 'inol',
-    title: 'inolで一緒に祈誓しませんか？',
-    description,
-    'og:title': 'inol',
     'og:description': description,
-    'og:image': ogImage,
-    'twitter:card': 'summary_large_image',
-    'twitter:title': 'inol',
-    'twitter:description': description,
-    'twitter:image': ogImage,
   };
 };
 
@@ -64,6 +56,7 @@ export default function Index() {
   const transition = useTransition();
   const [controls, appendControl] = useControls();
   const [mode, setMode] = useState<number>(0);
+  const [color, setColor] = useState<number>(0);
   const [background, setBackground] = useState<number>(0);
   const id = useLoaderData<string>();
   const controller = useMemo<NetworkController | undefined>(
@@ -80,6 +73,7 @@ export default function Index() {
           }),
     [id],
   );
+  const userId = useLiffUserId();
   return (
     <>
       <div>
@@ -91,6 +85,7 @@ export default function Index() {
           onBackgroundChange={(bg) => setBackground(bg === 'ema' ? 0 : 1)}
           mode={mode === 0 ? 'pen' : 'eraser'}
           className="h-[90vmin] w-[90vmin] mx-auto bg-white/50 rounded-xl select-none"
+          color={color === 0 ? 'black' : color === 1 ? 'red' : 'blue'}
         />
         <div>
           <Selector
@@ -125,6 +120,26 @@ export default function Index() {
             onChange={setBackground}
             className="bg-white/50"
           />
+          <Selector
+            selectedIndex={color}
+            items={[
+              {
+                el: () => <span className="px-4 py-2">黒</span>,
+                key: 'black',
+              },
+              {
+                el: () => <span className="px-4 py-2">赤</span>,
+                key: 'red',
+              },
+              {
+                el: () => <span className="px-4 py-2">青</span>,
+                key: 'blue',
+              },
+            ]}
+            name="background"
+            onChange={setColor}
+            className="bg-white/50"
+          />
           <Button
             onClick={() =>
               window.navigator.share({
@@ -149,6 +164,7 @@ export default function Index() {
             name="strokes"
             value={JSON.stringify(controls)}
           />
+          <input type="hidden" name="owner" value={userId ?? 'anonymous_user'} />
           <input type="submit" value="完了" />
         </Form>
       </div>

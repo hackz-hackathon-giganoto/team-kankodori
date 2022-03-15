@@ -95,7 +95,7 @@ func (s *Service) ListItemsByCountryAndPref(country, pref string) (*[]Item, erro
 func (s *Service) CreateItem(createItemRequest *CreateItemRequest) (*Item, error) {
 	ctx := context.TODO()
 
-	tmpId := generateId(createItemRequest.UserId)
+	tmpId := generateId()
 	log.Infof("create NFT: %s", tmpId)
 	tx, err := s.CreateNonFungible(tmpId)
 	if err != nil {
@@ -154,10 +154,10 @@ func mustGetEnv(key string) string {
 }
 
 // TODO: must be replaced other logic
-func generateId(id string) string {
+func generateId() string {
 	h := fnv.New32()
 	h.Write([]byte(time.Now().String()))
-	return id + fmt.Sprintf("%x", h.Sum(nil))
+	return fmt.Sprintf("%x", h.Sum(nil))
 }
 
 func getAttributeFromTx(tx *Transaction, key string) string {

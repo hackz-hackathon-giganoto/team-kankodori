@@ -14,7 +14,7 @@ import { usePointerIdRef, useStrokeRef } from './hooks';
 import { NetworkController } from './network';
 import { SyncData } from './network/interface';
 import { Svg } from './Svg';
-import { Background, Control, Mode, Point } from './types';
+import { Background, Control, Mode, Point, StrokeColor } from './types';
 import {
   controlsToStrokes,
   createControlFromPoints,
@@ -35,6 +35,7 @@ export type Props = {
   mode?: Mode;
   className?: string;
   style?: CSSProperties;
+  color?: StrokeColor;
 };
 
 export const SvgCanvas: VFC<Props> = ({
@@ -48,9 +49,12 @@ export const SvgCanvas: VFC<Props> = ({
   mode = 'pen',
   className = '',
   style,
+  color = 'black',
 }: Props) => {
   const { strokeRef, appendPoint, setStroke } = useStrokeRef();
-  const canvasRef = useCanvasFrame((ctx) => drawFrame(ctx, strokeRef.current));
+  const canvasRef = useCanvasFrame((ctx) =>
+    drawFrame(ctx, strokeRef.current, color),
+  );
   const [pointerIdRef, setPointerId] = usePointerIdRef();
   const prevErasePointRef = useRef<Point>();
 
@@ -136,6 +140,7 @@ export const SvgCanvas: VFC<Props> = ({
         case 'pen':
           const control = createControlFromPoints(
             strokeRef.current.map(roundPoint),
+            color,
           );
           appendControl(control);
           networkController?.addControl(control);
@@ -148,6 +153,7 @@ export const SvgCanvas: VFC<Props> = ({
     [
       appendControl,
       canvasRef,
+      color,
       mode,
       networkController,
       pointerIdRef,
@@ -164,28 +170,31 @@ export const SvgCanvas: VFC<Props> = ({
     const onSync = (data: SyncData) => {
       if (onBackgroundChange !== undefined && data.background !== undefined)
         onBackgroundChange(data.background);
-      controls.forEach((c) => appendControl(c));
+      data.controls.forEach((c) => appendControl(c));
     };
-    const onOpen = () => networkController?.syncRequest();
+    const onOpen = () => networkController.syncRequest();
     networkController.addEventListener('open', onOpen);
     networkController.addEventListener('stroke', appendControl);
     if (onBackgroundChange !== undefined)
       networkController.addEventListener('background', onBackgroundChange);
-    else console.log('no bg handler');
     networkController.addEventListener('syncrequest', onSyncRequest);
     networkController.addEventListener('sync', onSync);
-    networkController.addEventListener('close', location.reload);
-    networkController.addEventListener('error', location.reload);
+    // if (typeof window !== 'undefined') {
+    //   networkController.addEventListener('close', window.location.reload);
+    //   networkController.addEventListener('error', window.location.reload);
+    // }
     return () => {
       networkController.removeEventListener('open', onOpen);
       networkController.removeEventListener('stroke', appendControl);
       if (onBackgroundChange !== undefined)
         networkController.removeEventListener('background', onBackgroundChange);
-      else console.log('no bg handler');
+
       networkController.removeEventListener('syncrequest', onSyncRequest);
       networkController.removeEventListener('sync', onSync);
-      networkController.removeEventListener('close', location.reload);
-      networkController.removeEventListener('error', location.reload);
+      // if (typeof window !== 'undefined') {
+      //   networkController.removeEventListener('close', window.location.reload);
+      //   networkController.removeEventListener('error', window.location.reload);
+      // }
     };
   }, [
     appendControl,
