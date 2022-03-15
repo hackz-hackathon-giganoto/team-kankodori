@@ -14,11 +14,15 @@ export const share = async (
 ): Promise<ShareType> => {
   if (typeof window === 'undefined') throw new Error('Invalid Environment');
   if (liff?.isApiAvailable('shareTargetPicker')) {
+    const { id } = liff;
+    const url = new URL(
+      `https://liff.line.me/${id}${new URL(content.url).pathname}`,
+    );
     return liff
       .shareTargetPicker([
         {
           type: 'text',
-          text: `${content.text}\n\n${content.url}`,
+          text: `${content.text}\n\n${url}`,
         },
       ])
       .then(() => 'liff');
