@@ -3,12 +3,7 @@ import type { ConnectionOptions } from '@open-ayame/ayame-web-sdk/dist/connectio
 import { eventmit, Eventmitter } from 'eventmit';
 import type { Control, Stroke } from '../types';
 import type { NetworkController, NetworkControllerEventMap } from './interface';
-import type {
-  CompleteMessage,
-  Message,
-  ControlMessage,
-  SyncMessage,
-} from './message';
+import type { Message } from './message';
 
 export type AyameOptions = Partial<ConnectionOptions> & {
   signalingUrl: string;
@@ -87,7 +82,7 @@ export class AyameController implements NetworkController {
     eventmitter.off(listener);
   }
   async addControl(control: Control): Promise<void> {
-    const message: ControlMessage = {
+    const message: Message = {
       type: 'stroke',
       data: control,
     };
@@ -112,7 +107,7 @@ export class AyameController implements NetworkController {
     await this.send(message);
   }
   async complete(): Promise<void> {
-    const message: CompleteMessage = { type: 'complete' };
+    const message: Message = { type: 'complete' };
     await this.send(message);
   }
 
@@ -136,6 +131,9 @@ export class AyameController implements NetworkController {
         break;
       case 'syncrequest':
         this.eventmitters.syncrequest.emit(undefined);
+        break;
+      case 'background':
+        this.eventmitters.background.emit(message.data);
         break;
     }
   }

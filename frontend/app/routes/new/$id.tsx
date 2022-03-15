@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { json, LoaderFunction, useLoaderData, useLocation } from 'remix';
+import { json, LoaderFunction, useLoaderData } from 'remix';
 import { Ema, Padlock } from '~/components/baseSvg';
 import { Button } from '~/components/Button';
 import { Selector } from '~/components/Selector';
@@ -37,6 +37,7 @@ export default function Index() {
       <SvgCanvas
         networkController={controller}
         BackgroundSvg={background === 0 ? Ema : Padlock}
+        onBackgroundChange={(bg) => setBackground(bg === Ema.name ? 0 : 1)}
         mode={mode === 0 ? 'pen' : 'eraser'}
         className="h-[90vmin] w-[90vmin] mx-auto bg-white/50 rounded-xl select-none"
       />

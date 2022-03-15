@@ -25,6 +25,7 @@ export type Props = {
   width?: number;
   height?: number;
   BackgroundSvg?: () => JSX.Element;
+  onBackgroundChange?: (bg: string) => unknown;
   networkController?: NetworkController;
   mode?: Mode;
   className?: string;
@@ -36,6 +37,7 @@ export const SvgCanvas: VFC<Props> = ({
   height = 640,
   networkController,
   BackgroundSvg,
+  onBackgroundChange,
   mode = 'pen',
   className = '',
   style,
@@ -157,6 +159,9 @@ export const SvgCanvas: VFC<Props> = ({
     const onOpen = () => networkController?.syncRequest();
     networkController.addEventListener('open', onOpen);
     networkController.addEventListener('stroke', appendControl);
+    if (onBackgroundChange !== undefined)
+      networkController.addEventListener('background', onBackgroundChange);
+    else console.log('no bg handler');
     networkController.addEventListener('syncrequest', onSyncRequest);
     networkController.addEventListener('sync', onSync);
     networkController.addEventListener('close', location.reload);
@@ -164,12 +169,20 @@ export const SvgCanvas: VFC<Props> = ({
     return () => {
       networkController.removeEventListener('open', onOpen);
       networkController.removeEventListener('stroke', appendControl);
+      if (onBackgroundChange !== undefined)
+        networkController.removeEventListener('background', onBackgroundChange);
+      else console.log('no bg handler');
       networkController.removeEventListener('syncrequest', onSyncRequest);
       networkController.removeEventListener('sync', onSync);
       networkController.removeEventListener('close', location.reload);
       networkController.removeEventListener('error', location.reload);
     };
-  }, [appendControl, networkController, controls]);
+  }, [appendControl, networkController, controls, onBackgroundChange]);
+
+  useEffect(() => {
+    if (BackgroundSvg !== undefined)
+      networkController?.changeBackground(BackgroundSvg.name);
+  }, [BackgroundSvg, networkController]);
 
   return (
     <div className={`relative ${className}`} style={style}>
