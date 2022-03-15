@@ -18,3 +18,8 @@ export type ItemInput = {
   owner: string;
   svg: string;
 };
+
+export type Wallet = {
+  user_id: string;
+  nft_id: string;
+};
