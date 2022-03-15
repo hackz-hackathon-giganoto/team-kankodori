@@ -37,13 +37,16 @@ export const meta: MetaFunction = ({ data }) => {
   return {
     'application-name': 'inol',
     title: 'inolで誓いを立てました',
-    description: 'あなたもインターネット神社inolで祈誓しませんか?',
+    description:
+      'PRAY WITH YOU, PRAY WITH ME.インターネット神社inolで誓いを立てました',
     'og:title': 'inol',
-    'og:description': 'あなたもインターネット神社inolで祈誓しませんか?',
+    'og:description':
+      'PRAY WITH YOU, PRAY WITH ME.インターネット神社inolで誓いを立てました',
     'og:image': ogImage,
     'twitter:card': 'summary_large_image',
     'twitter:title': 'inol',
-    'twitter:description': 'あなたもインターネット神社inolで祈誓しませんか',
+    'twitter:description':
+      'PRAY WITH YOU, PRAY WITH ME.インターネット神社inolで誓いを立てました',
     'twitter:image': ogImage,
   };
 };
