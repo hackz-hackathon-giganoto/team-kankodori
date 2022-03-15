@@ -39,7 +39,7 @@ func (ctr *Handler) GetTransaction(c echo.Context) error {
 }
 
 type MintNFTRequest struct {
-	UserID string `json:"userId"`
+	UserID string `json:"user_id"`
 }
 
 func (ctr *Handler) MintNFTById(c echo.Context) error {
