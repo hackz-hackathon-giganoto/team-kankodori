@@ -28,7 +28,7 @@
 
 OGP 画像とかが生える
 
-## `/items/:country/:pref`
+## `/items/:country`
 
 - 一覧見るページ
 
