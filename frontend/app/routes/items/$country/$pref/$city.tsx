@@ -35,7 +35,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 export const meta: MetaFunction = ({ data }) => {
   const ogImage = `https://inol.cf/png/${data.id}`;
   const description =
-    'PRAY WITH YOU, PRAY WITH ME.インターネット神社inolで誓いを立てました';
+    'PRAY WITH YOU, PRAY WITH ME. インターネット神社inolで誓いを立てました';
   return {
     'application-name': 'inol',
     title: 'inolで誓いを立てました',
