@@ -37,8 +37,8 @@ export default function Inol() {
   const item = useLoaderData<Item>();
   return (
     <>
-      <Logo />
-      <main className="flex justify-center items-center h-full">
+      <Logo className="w-1/3" />
+      <main className="flex justify-center items-center">
         <ItemDetails item={item} />
       </main>
     </>
