@@ -6,6 +6,7 @@ export type Item = {
   pref: number;
   city: number;
   owner: string;
+  created_at: string;
 };
 
 export type Address = {
