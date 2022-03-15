@@ -29,7 +29,7 @@ export const action: ActionFunction = async ({ request }) => {
   const backgroundString = body.get('background')?.toString();
   const controlsString = body.get('strokes')?.toString();
   if (controlsString == null || backgroundString == null)
-    throw new Error('Unexpected error');
+    throw new Response('Unexpected error', { status: 500 });
   const controls = JSON.parse(controlsString) as Control[];
   const svg = renderSvgComponent(
     controls,
