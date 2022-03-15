@@ -21,7 +21,7 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
 	Client ->> Server: 書いた svg を送信 (POST /v1/item)
-	Server ->> LINE Blockchain: Item を inol の chain に mint
+	Server ->> LINE Blockchain: Item を Inol の chain に mint
 	LINE Blockchain -->> Server: NFT の id を返却
 	Server ->> LINE Blockchain: 上で作成した NFT を ユーザに transfer
 
