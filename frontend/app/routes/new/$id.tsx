@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 import {
   ActionFunction,
   Form,
@@ -22,7 +23,8 @@ import {
 import { Control } from '~/components/SvgCanvas/types';
 import { renderSvgComponent } from '~/data/renderSvgComponent.server';
 import { uplodeItem } from '~/data/uplodeItem';
-import { useLiffUserId } from '~/utils/liff';
+import { useLiff, useLiffUserId } from '~/utils/liff';
+import { share } from '~/utils/share';
 
 export const loader: LoaderFunction = async ({ params }) => {
   return json(params.id);
@@ -73,6 +75,7 @@ export default function Index() {
           }),
     [id],
   );
+  const liff = useLiff();
   const userId = useLiffUserId();
   return (
     <>
@@ -112,10 +115,15 @@ export default function Index() {
           <Button
             className="m-2"
             onClick={() =>
-              window.navigator.share({
-                url: window.location.href,
-                text: '一緒に祈りましょう！',
-                title: 'PRAY WITH YOU - Inol',
+              share(
+                {
+                  url: window.location.href,
+                  text: '一緒に祈りましょう！',
+                  title: 'PRAY WITH YOU - Inol',
+                },
+                liff,
+              ).then((type) => {
+                if (type === 'clipboard') toast.info('URL Copied!');
               })
             }
           >
@@ -162,6 +170,7 @@ export default function Index() {
           `}
         />
       )}
+      <ToastContainer position="bottom-right" autoClose={2000} />
     </>
   );
 }

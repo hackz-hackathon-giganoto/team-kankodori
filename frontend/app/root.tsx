@@ -11,9 +11,11 @@ import {
 import type { MetaFunction } from 'remix';
 import tailwind from '~/styles/generated.css';
 import { googleFontLinks } from '~/utils/googleFontLinks';
+import toast from 'react-toastify/dist/ReactToastify.css';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: tailwind },
+  { rel: 'stylesheet', href: toast },
   ...googleFontLinks(),
 ];
 
