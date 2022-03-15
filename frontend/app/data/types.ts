@@ -19,7 +19,7 @@ export type ItemInput = {
   svg: string;
 };
 
-export type Wallet = {
+export type MintRequestInput = {
   user_id: string;
   item_id: string;
 };
