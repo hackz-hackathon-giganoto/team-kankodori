@@ -134,8 +134,14 @@ export default function Index() {
           <input type="submit" value="完了" />
         </Form>
       </div>
-      {transition.state === 'submitting' && <Overlay />}
-      {transition.state === 'loading' && <Overlay />}
+      {(transition.state === 'submitting' ||
+        transition.state === 'loading') && (
+        <Overlay
+          className={`${
+            transition.state === 'loading' ? 'opacity-100' : 'opacity-50'
+          } transition-opacity`}
+        />
+      )}
     </>
   );
 }
