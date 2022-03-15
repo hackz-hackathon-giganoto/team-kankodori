@@ -52,7 +52,7 @@ export const SvgCanvas: VFC<Props> = ({
   color = "black",
 }: Props) => {
   const { strokeRef, appendPoint, setStroke } = useStrokeRef();
-  const canvasRef = useCanvasFrame((ctx) => drawFrame(ctx, strokeRef.current));
+  const canvasRef = useCanvasFrame((ctx) => drawFrame(ctx, strokeRef.current, color));
   const [pointerIdRef, setPointerId] = usePointerIdRef();
   const prevErasePointRef = useRef<Point>();
 

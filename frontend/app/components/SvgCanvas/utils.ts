@@ -30,12 +30,13 @@ export const getCanvasPoint = (e: PointerEvent<HTMLCanvasElement>) => {
 export const drawFrame = (
   ctx: CanvasRenderingContext2D,
   stroke: Point[],
+  color: StrokeColor
 ): number | undefined => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   if (stroke.length < 2) return undefined;
   const [first, ...rest] = stroke;
   ctx.save();
-  ctx.strokeStyle = 'black';
+  ctx.strokeStyle = color;
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
   ctx.lineWidth = 5;
