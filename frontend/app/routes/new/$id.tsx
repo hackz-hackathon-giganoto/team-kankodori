@@ -1,27 +1,54 @@
 import { useMemo, useState } from 'react';
-import { json, LoaderFunction, useLoaderData } from 'remix';
+import {
+  ActionFunction,
+  Form,
+  json,
+  LoaderFunction,
+  redirect,
+  useLoaderData,
+} from 'remix';
 import { Ema, Padlock } from '~/components/baseSvg';
 import { Button } from '~/components/Button';
 import { Selector } from '~/components/Selector';
 import { SvgCanvas } from '~/components/SvgCanvas';
+import { useControls } from '~/components/SvgCanvas/hooks';
 import {
   AyameController,
-  DummyController,
   NetworkController,
 } from '~/components/SvgCanvas/network';
+import { Control } from '~/components/SvgCanvas/types';
+import { renderSvgComponent } from '~/data/renderSvgComponent.server';
+import { uplodeItem } from '~/data/uplodeItem';
 
 export const loader: LoaderFunction = async ({ params }) => {
   return json(params.id);
 };
 
+export const action: ActionFunction = async ({ request }) => {
+  const body = await request.formData();
+  const backgroundString = body.get('background')?.toString();
+  const controlsString = body.get('strokes')?.toString();
+  if (controlsString == null || backgroundString == null)
+    throw new Error('Unexpected error');
+  const controls = JSON.parse(controlsString) as Control[];
+  const svg = renderSvgComponent(
+    controls,
+    backgroundString === 'Ema' ? Ema : Padlock,
+  );
+
+  const item = await uplodeItem({ owner: 'test-user', svg });
+  return redirect(`/item/${item.name}`);
+};
+
 export default function Index() {
+  const [controls, appendControl] = useControls();
   const [mode, setMode] = useState<number>(0);
   const [background, setBackground] = useState<number>(0);
   const id = useLoaderData<string>();
-  const controller = useMemo<NetworkController>(
+  const controller = useMemo<NetworkController | undefined>(
     () =>
       typeof document === 'undefined'
-        ? new DummyController()
+        ? undefined
         : new AyameController({
             signalingUrl: 'wss://ayame-labo.shiguredo.jp/signaling',
             roomId: `ssssota@${id}`,
@@ -35,6 +62,8 @@ export default function Index() {
   return (
     <div>
       <SvgCanvas
+        controls={controls}
+        appendControl={appendControl}
         networkController={controller}
         BackgroundSvg={background === 0 ? Ema : Padlock}
         onBackgroundChange={(bg) => setBackground(bg === Ema.name ? 0 : 1)}
@@ -82,10 +111,20 @@ export default function Index() {
               title: 'PRAY WITH YOU - Inol',
             })
           }
+          className="bg-white/50"
         >
           一緒に描く
         </Button>
       </div>
+      <Form method="post">
+        <input
+          type="hidden"
+          name="background"
+          value={background === 0 ? 'Ema' : 'Padlock'}
+        />
+        <input type="hidden" name="strokes" value={JSON.stringify(controls)} />
+        <input type="submit" value="完了" />
+      </Form>
     </div>
   );
 }

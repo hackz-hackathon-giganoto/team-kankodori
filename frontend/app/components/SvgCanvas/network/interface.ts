@@ -2,7 +2,7 @@ import { Control } from '../types';
 
 export type SyncData = {
   controls: Control[];
-  background: string;
+  background?: string;
 };
 
 export type NetworkControllerEventMap = {
