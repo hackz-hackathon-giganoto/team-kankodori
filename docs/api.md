@@ -275,3 +275,90 @@ nft の id を指定する.
 
 | パラメータ名 | 型  | 内容 |
 | ------------ | --- | ---- |
+
+## 作成した Item の NFT を アカウントに紐付けてる
+
+### 概要
+
+作成した item の NFT を user の　アカウントに紐付ける
+作成した user のみアカウントに紐付けることが可能
+
+### パス
+
+`/v1/item`
+
+### メソッド
+
+- POST
+  - json (Req/Res)
+
+### パラメータ
+
+| パラメータ名 | 型     | 内容                                    |
+| ------------ | ------ | --------------------------------------- |
+| user_id        | string | user id                                 |
+| item_id           | string | item の id|
+
+- user id には LIFF で取得される情報の `sub` を利用予定
+
+#### LIFF で取れるユーザー情報のサンプル
+
+```json
+{
+  "iss": "https://access.line.me",
+  "sub": "U1234567890abcdef1234567890abcdef ",
+  "aud": "1234567890",
+  "exp": 1504169092,
+  "iat": 1504263657,
+  "amr": ["pwd"],
+  "name": "Taro Line",
+  "picture": "https://sample_line.me/aBcdefg123456"
+}
+```
+
+#### リクエストサンプル
+
+```json
+{
+  "user_id": "U1234567890abcdef1234567890abcdef",
+  "item_id": "123445"
+}
+```
+
+## レスポンス
+
+### 成功時
+
+- ステータスコード:200
+
+#### パラメータ
+
+| パラメータ名 | 型   | 内容              |
+| ------------ | ---- | ----------------- |
+| item         | item | item オブジェクト |
+
+#### item オブジェクト
+
+| パラメータ名 | 型     | 内容                |
+| ------------ | ------ | ------------------- |
+| id           | string | item id ≒NFT の id  |
+| svg_url      | string | svg の保存先の URL  |
+| country      | number | 区画の番号(1－×－×) |
+| pref         | number | 区画の番号(×－1－×) |
+| city         | number | 区画の番号(×－×-1)  |
+| name         | string | 区画の番号(1－1－1) |
+| owner        | string | user id             |
+
+#### レスポンスサンプル
+
+```json
+{
+  "id": "1234abcd",
+  "svg_url": "https://raw.githubusercontent.com/ssssota/svg2png-wasm/main/logo.svg",
+  "country": 1,
+  "pref": 2,
+  "city": 3,
+  "name": "1-2-3",
+  "owner": "U1234567890abcdef1234567890abcdef"
+}
+```
