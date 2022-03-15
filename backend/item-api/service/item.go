@@ -33,11 +33,11 @@ func CreateNewItem(id string) *Item {
 	pref := 1 + rand.Intn(5)
 	city := 1 + rand.Intn(5)
 	return &Item{
-		Id:      fmt.Sprintf("%s-%d-%d-%d", id, country, pref, city),
+		Id:      id,
 		Country: strconv.Itoa(country),
 		Pref:    strconv.Itoa(pref),
 		City:    strconv.Itoa(city),
-		Name:    fmt.Sprintf("%d-%d-%d", country, pref, city),
+		Name:    id,
 	}
 
 }
@@ -91,10 +91,31 @@ func (s *Service) ListItemsByCountryAndPref(country, pref string) (*[]Item, erro
 }
 
 func (s *Service) CreateItem(createItemRequest *CreateItemRequest) (*Item, error) {
-	// ('test-item-1111', 'https://cdn.shopify.com/s/files/1/0496/1029/files/Freesample.svg', 5,5,5, '5-5-5', NOW())
 	ctx := context.TODO()
 
-	id := generateId(createItemRequest.UserId) // might be replaced by NFT id (?)
+	tmpId := generateId(createItemRequest.UserId) // might be replaced by NFT id (?)
+	log.Infof("create NFT: %s", tmpId)
+	tx, err := s.CreateNonFungible(tmpId)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to create NFT")
+	}
+
+	var id string
+	for {
+		transaction, err := s.GetTransaction(tx.TxHash)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to get Transaction")
+		}
+		log.Debug("transaction", transaction)
+		id = getAttributeFromTx(transaction, "token_type") // jq -r '.logs[0].events[0].attributes[] | select(.key == "token_type") |.value'
+		if id == "" {
+			time.Sleep(1 * time.Second)
+			continue
+		}
+		break
+	}
+
+	log.Infof("token_type: %v", id)
 	svgUrl, err := s.UploadSVGToBlob(ctx, id, createItemRequest.Svg)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to upload svg to blob storage")
@@ -133,6 +154,24 @@ func mustGetEnv(key string) string {
 // TODO: must be replaced other logic
 func generateId(id string) string {
 	h := fnv.New32()
-	h.Write([]byte(id + time.Now().String()))
-	return fmt.Sprintf("%x", h.Sum(nil))
+	h.Write([]byte(time.Now().String()))
+	return id + fmt.Sprintf("%x", h.Sum(nil))
+}
+
+func getAttributeFromTx(tx *Transaction, key string) string {
+	if tx.Logs != nil {
+		if tx.Logs[0].Events != nil {
+			if tx.Logs[0].Events[0].Attributes != nil {
+				log.Debug("Attributes: %v", tx.Logs[0].Events[0].Attributes)
+				for _, at := range tx.Logs[0].Events[0].Attributes {
+					if at.Key == key {
+						log.Debugf("found %s: %s", at.Key, at.Value)
+						return at.Value
+					}
+				}
+				return ""
+			}
+		}
+	}
+	return ""
 }
