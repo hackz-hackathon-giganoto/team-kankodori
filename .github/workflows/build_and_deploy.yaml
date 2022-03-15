@@ -35,5 +35,5 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: get pods -n item-api
+          args: set image deployment/item-api item-api=kankodori.azurecr.io/onsd/test-api:${{ github.sha }} -n item-api
 
