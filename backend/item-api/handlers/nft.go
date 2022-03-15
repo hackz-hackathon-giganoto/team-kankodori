@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/hackz-hackathon-giganoto/team-kankodori/backend/item-api/service"
 	"github.com/labstack/echo/v4"
 )
 
@@ -19,19 +18,11 @@ func (ctr *Handler) CreateNFT(c echo.Context) error {
 	}
 	c.Logger().Debugf("CreateNFT: %v", createNFTRequest)
 	c.Logger().Debug(c.ParamValues())
-	tx, err := service.CreateNonFungible(createNFTRequest.Name)
+	tx, err := ctr.Service.CreateNonFungible(createNFTRequest.Name)
 	if err != nil {
 		return c.String(http.StatusInternalServerError, err.Error())
 	}
 
-	// for {
-	// 	txRef, err := service.GetTransaction(tx.TxHash)
-	// 	if err == nil {
-	// 		break
-	// 	}
-	// }
-
-	// tx, _ := service.CreateNonFungible()
 	return c.JSON(http.StatusOK, tx)
 }
 
@@ -41,7 +32,7 @@ type GetTransactionRequest struct {
 
 func (ctr *Handler) GetTransaction(c echo.Context) error {
 	txHash := c.QueryParam("txhash")
-	tx, err := service.GetTransaction(txHash)
+	tx, err := ctr.Service.GetTransaction(txHash)
 	if err != nil {
 		return c.String(http.StatusInternalServerError, err.Error())
 	}
@@ -65,7 +56,7 @@ func (ctr *Handler) MintNFT(c echo.Context) error {
 	}
 
 	fmt.Println(MintNFTRequest)
-	tx, err := service.MintNonFungible(MintNFTRequest.Name, MintNFTRequest.UserID, MintNFTRequest.NFTType)
+	tx, err := ctr.Service.MintNonFungible(MintNFTRequest.Name, MintNFTRequest.UserID, MintNFTRequest.NFTType)
 	if err != nil {
 		return c.String(http.StatusInternalServerError, err.Error())
 	}
