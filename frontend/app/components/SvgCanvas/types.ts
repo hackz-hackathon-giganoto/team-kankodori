@@ -33,4 +33,4 @@ export type Control = Stroke | Erase;
 
 export type Background = 'ema' | 'padlock';
 
-export type StrokeColor = 'black' | 'red' | 'blue'
+export type StrokeColor = 'black' | 'red' | 'blue';

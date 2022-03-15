@@ -49,10 +49,12 @@ export const SvgCanvas: VFC<Props> = ({
   mode = 'pen',
   className = '',
   style,
-  color = "black",
+  color = 'black',
 }: Props) => {
   const { strokeRef, appendPoint, setStroke } = useStrokeRef();
-  const canvasRef = useCanvasFrame((ctx) => drawFrame(ctx, strokeRef.current, color));
+  const canvasRef = useCanvasFrame((ctx) =>
+    drawFrame(ctx, strokeRef.current, color),
+  );
   const [pointerIdRef, setPointerId] = usePointerIdRef();
   const prevErasePointRef = useRef<Point>();
 
@@ -138,7 +140,7 @@ export const SvgCanvas: VFC<Props> = ({
         case 'pen':
           const control = createControlFromPoints(
             strokeRef.current.map(roundPoint),
-            color
+            color,
           );
           appendControl(control);
           networkController?.addControl(control);

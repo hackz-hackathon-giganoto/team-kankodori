@@ -1,5 +1,12 @@
 import type { PointerEvent } from 'react';
-import type { Point, Control, Stroke, Erase, BoundingRect, StrokeColor } from './types';
+import type {
+  Point,
+  Control,
+  Stroke,
+  Erase,
+  BoundingRect,
+  StrokeColor,
+} from './types';
 import { v4 as uuid } from 'uuid';
 
 const getElementOffset = (
@@ -30,7 +37,7 @@ export const getCanvasPoint = (e: PointerEvent<HTMLCanvasElement>) => {
 export const drawFrame = (
   ctx: CanvasRenderingContext2D,
   stroke: Point[],
-  color: StrokeColor
+  color: StrokeColor,
 ): number | undefined => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   if (stroke.length < 2) return undefined;
@@ -53,11 +60,14 @@ export const roundPoint = ({ x, y }: Point): Point => ({
   y: roundNum(y),
 });
 
-export const createControlFromPoints = (pts: Point[], color: StrokeColor): Control => ({
+export const createControlFromPoints = (
+  pts: Point[],
+  color: StrokeColor,
+): Control => ({
   type: 'pen',
   id: uuid(),
   points: pts,
-  color
+  color,
 });
 
 export const controlsToStrokes = (controls: Control[]): Stroke[] => {
