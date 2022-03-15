@@ -285,7 +285,7 @@ nft の id を指定する.
 
 ### パス
 
-`/v1/item`
+`/v1/item/:id/mint`
 
 ### メソッド
 
@@ -297,7 +297,6 @@ nft の id を指定する.
 | パラメータ名 | 型     | 内容                                    |
 | ------------ | ------ | --------------------------------------- |
 | user_id        | string | user id                                 |
-| item_id           | string | item の id|
 
 - user id には LIFF で取得される情報の `sub` を利用予定
 
@@ -321,7 +320,6 @@ nft の id を指定する.
 ```json
 {
   "user_id": "U1234567890abcdef1234567890abcdef",
-  "item_id": "123445"
 }
 ```
 
