@@ -23,7 +23,7 @@ var (
 type CreateItemRequest struct {
 	// Svg contains base64-decoded svg image
 	Svg    string `json:"svg"`
-	UserId string `json:"user_id"`
+	UserId string `json:"owner"`
 }
 
 type Service struct {
