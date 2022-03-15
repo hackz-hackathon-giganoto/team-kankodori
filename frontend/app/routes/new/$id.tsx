@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   ActionFunction,
   Form,
@@ -22,6 +22,7 @@ import {
 import { Control } from '~/components/SvgCanvas/types';
 import { renderSvgComponent } from '~/data/renderSvgComponent.server';
 import { uplodeItem } from '~/data/uplodeItem';
+import { useLiffUserId } from '~/utils/liff';
 
 export const loader: LoaderFunction = async ({ params }) => {
   return json(params.id);
@@ -31,7 +32,8 @@ export const action: ActionFunction = async ({ request }) => {
   const body = await request.formData();
   const backgroundString = body.get('background')?.toString();
   const controlsString = body.get('strokes')?.toString();
-  if (controlsString == null || backgroundString == null)
+  const ownerString = body.get('owner')?.toString();
+  if (controlsString == null || backgroundString == null || ownerString == null)
     throw new Response('Unexpected error', { status: 500 });
   const controls = JSON.parse(controlsString) as Control[];
   const svg = renderSvgComponent(
@@ -39,7 +41,7 @@ export const action: ActionFunction = async ({ request }) => {
     backgroundString === 'ema' ? Ema : Padlock,
   );
 
-  const item = await uplodeItem({ owner: 'test-user', svg });
+  const item = await uplodeItem({ owner: ownerString, svg });
   return redirect(`/item/${item.name}`);
 };
 
@@ -71,6 +73,14 @@ export default function Index() {
           }),
     [id],
   );
+  const getuserId = useLiffUserId();
+  const [userId, setUserId] = useState<string | undefined>(undefined);
+  useEffect(() => {
+    if (getuserId !== undefined) {
+      setUserId(userId);
+    }
+  }, [getuserId, userId]);
+
   return (
     <>
       <div>
@@ -161,6 +171,7 @@ export default function Index() {
             name="strokes"
             value={JSON.stringify(controls)}
           />
+          <input type="hidden" name="owner" value={userId} />
           <input type="submit" value="完了" />
         </Form>
       </div>
