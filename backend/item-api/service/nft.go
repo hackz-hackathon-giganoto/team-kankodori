@@ -48,8 +48,8 @@ func (s *Service) CreateNonFungible(name string) (*TransactionAccepted, error) {
 	return txAccepted, nil
 }
 
-func (s *Service) MintNonFungible(name, userID, tokenType string) (*TransactionAccepted, error) {
-	path := fmt.Sprintf("/v1/item-tokens/%s/non-fungibles/%s/mint", mustGetEnv("ITEM_CONTRACT_ID"), tokenType)
+func (s *Service) MintNonFungible(userID, tokenId string) (*TransactionAccepted, error) {
+	path := fmt.Sprintf("/v1/item-tokens/%s/non-fungibles/%s/mint", mustGetEnv("ITEM_CONTRACT_ID"), tokenId)
 
 	// marshaledMeta, err := json.Marshal(meta)
 	// if err != nil {
@@ -58,7 +58,7 @@ func (s *Service) MintNonFungible(name, userID, tokenType string) (*TransactionA
 
 	params := map[string]interface{}{
 		"toUserId": userID,
-		"name":     name,
+		"name":     "YOUR PRAY",
 		// "meta":         string(marshaledMeta),
 		"ownerAddress": mustGetEnv("WALLET_ADDRESS"),
 		"ownerSecret":  mustGetEnv("WALLET_SECRET"),
