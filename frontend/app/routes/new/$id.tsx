@@ -36,7 +36,7 @@ export const action: ActionFunction = async ({ request }) => {
   const controls = JSON.parse(controlsString) as Control[];
   const svg = renderSvgComponent(
     controls,
-    backgroundString === 'Ema' ? Ema : Padlock,
+    backgroundString === 'ema' ? Ema : Padlock,
   );
 
   const item = await uplodeItem({ owner: 'test-user', svg });
@@ -88,7 +88,7 @@ export default function Index() {
           appendControl={appendControl}
           networkController={controller}
           background={background === 0 ? 'ema' : 'padlock'}
-          onBackgroundChange={(bg) => setBackground(bg === Ema.name ? 0 : 1)}
+          onBackgroundChange={(bg) => setBackground(bg === 'ema' ? 0 : 1)}
           mode={mode === 0 ? 'pen' : 'eraser'}
           className="h-[90vmin] w-[90vmin] mx-auto bg-white/50 rounded-xl select-none"
         />
@@ -142,7 +142,7 @@ export default function Index() {
           <input
             type="hidden"
             name="background"
-            value={background === 0 ? 'Ema' : 'Padlock'}
+            value={background === 0 ? 'ema' : 'padlock'}
           />
           <input
             type="hidden"
