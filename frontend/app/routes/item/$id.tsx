@@ -4,9 +4,9 @@ import {
   json,
   LoaderFunction,
   MetaFunction,
-  redirect,
   useLoaderData,
 } from 'remix';
+import { Button } from '~/components/Button';
 import { ItemDetails } from '~/components/ItemDetails';
 import { Logo } from '~/components/Logo';
 import { getItemById } from '~/data/getItemById';
@@ -44,17 +44,15 @@ export const meta: MetaFunction = ({ data }) => {
 };
 
 export const action: ActionFunction = async ({ request, params }) => {
-  const item_id = params.id;
+  const itemId = params.id;
   const body = await request.formData();
   const ownerString = body.get('owner')?.toString();
-  const user_id = body.get('userId')?.toString();
-  if (ownerString == null || user_id == null || item_id == null) {
+  const userId = body.get('userId')?.toString();
+  if (ownerString == null || userId == null || itemId == null) {
     throw new Response('Unexpected error', { status: 500 });
   }
-  if (ownerString === user_id) {
-    linkWallet({ user_id, item_id });
-  }
-  return redirect(`/item/${item_id}`);
+  if (ownerString === userId) await linkWallet({ userId, itemId });
+  return json({});
 };
 
 export default function Inol() {
@@ -62,15 +60,19 @@ export default function Inol() {
   const userId = useLiffUserId();
   return (
     <>
-      <Logo className="w-1/3" />
-      <main className="flex justify-center items-center">
-        <ItemDetails item={item} />
+      <main>
+        <Logo className="w-1/3" />
+        <div className="flex justify-center items-center">
+          <ItemDetails item={item} />
+        </div>
+        {item.owner === userId && (
+          <Form method="post">
+            <input type="hidden" name="owner" value={item.owner} />
+            <input type="hidden" name="userId" value={userId} />
+            <Button type="submit">Mint</Button>
+          </Form>
+        )}
       </main>
-      <Form method="post">
-        <input type="hidden" name="owner" value={item.owner} />
-        <input type="hidden" name="userId" value={userId} />
-        <input type="submit" value="NFTを作成する" />
-      </Form>
     </>
   );
 }
