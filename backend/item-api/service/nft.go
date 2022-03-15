@@ -7,7 +7,7 @@ import (
 	"github.com/hackz-hackathon-giganoto/team-kankodori/backend/item-api/api"
 )
 
-func GetTransaction(txHash string) (*Transaction, error) {
+func (s *Service) GetTransaction(txHash string) (*Transaction, error) {
 	path := fmt.Sprintf("/v1/transactions/%s", txHash)
 
 	apiResult, err := api.CallAPI(path, "GET", nil, nil)
@@ -25,7 +25,7 @@ func GetTransaction(txHash string) (*Transaction, error) {
 	return &tx, nil
 }
 
-func CreateNonFungible(name string) (*TransactionAccepted, error) {
+func (s *Service) CreateNonFungible(name string) (*TransactionAccepted, error) {
 	path := fmt.Sprintf("/v1/item-tokens/%s/non-fungibles/", mustGetEnv("ITEM_CONTRACT_ID"))
 
 	params := map[string]interface{}{
@@ -48,7 +48,7 @@ func CreateNonFungible(name string) (*TransactionAccepted, error) {
 	return txAccepted, nil
 }
 
-func MintNonFungible(name, userID, tokenType string) (*TransactionAccepted, error) {
+func (s *Service) MintNonFungible(name, userID, tokenType string) (*TransactionAccepted, error) {
 	path := fmt.Sprintf("/v1/item-tokens/%s/non-fungibles/%s/mint", mustGetEnv("ITEM_CONTRACT_ID"), tokenType)
 
 	// marshaledMeta, err := json.Marshal(meta)
