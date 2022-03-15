@@ -21,5 +21,5 @@ export type ItemInput = {
 
 export type Wallet = {
   user_id: string;
-  nft_id: string;
+  item_id: string;
 };

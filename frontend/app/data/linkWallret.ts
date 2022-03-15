@@ -1,16 +1,12 @@
 import { API_ENDPOINT } from './constants';
 import { Wallet } from './types';
 
-export const linkWallet = async ({ user_id, nft_id }: Wallet) => {
-  const url = new URL(`${API_ENDPOINT}/item`);
-  const input = {
-    user_id,
-    nft_id,
-  };
+export const linkWallet = async ({ user_id, item_id }: Wallet) => {
+  const url = new URL(`${API_ENDPOINT}/item/${item_id}/mint`);
   const res = await fetch(url.href, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(input),
+    body: JSON.stringify(user_id),
   });
 
   if (res.status !== 200) {
