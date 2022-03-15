@@ -19,6 +19,9 @@ export class DummyController implements NetworkController {
   async addControl(control: Control): Promise<void> {
     noop();
   }
+  async changeBackground(background: string): Promise<void> {
+    noop();
+  }
   async sync(_strokes: Stroke[]): Promise<void> {
     noop();
   }

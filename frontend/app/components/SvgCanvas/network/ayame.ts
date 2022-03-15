@@ -26,6 +26,7 @@ export class AyameController implements NetworkController {
   } = {
     open: eventmit(),
     stroke: eventmit(),
+    background: eventmit(),
     sync: eventmit(),
     close: eventmit(),
     error: eventmit(),
@@ -90,22 +91,29 @@ export class AyameController implements NetworkController {
       type: 'stroke',
       data: control,
     };
-    this.send(message);
+    await this.send(message);
+  }
+  async changeBackground(background: string): Promise<void> {
+    const message: Message = {
+      type: 'background',
+      data: background,
+    };
+    await this.send(message);
   }
   async sync(strokes: Stroke[]): Promise<void> {
-    const message: SyncMessage = {
+    const message: Message = {
       type: 'sync',
       data: strokes,
     };
-    this.send(message);
+    await this.send(message);
   }
   async syncRequest(): Promise<void> {
     const message: Message = { type: 'syncrequest' };
-    this.send(message);
+    await this.send(message);
   }
   async complete(): Promise<void> {
     const message: CompleteMessage = { type: 'complete' };
-    this.send(message);
+    await this.send(message);
   }
 
   async close(message = 'success'): Promise<void> {
@@ -113,7 +121,7 @@ export class AyameController implements NetworkController {
     Object.values(this.eventmitters).forEach((e) => e.offAll());
   }
 
-  private send(message: Message) {
+  private async send(message: Message) {
     this.dataChannel?.send(JSON.stringify(message));
   }
 
