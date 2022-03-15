@@ -44,10 +44,9 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export const meta: MetaFunction = () => {
-  const description = 'PRAY WITH YOU. inolで一緒に誓いを立てませんか？';
+  const description = 'PRAY WITH YOU. inolで一緒に祈誓しませんか？';
   return {
-    title: 'inolで一緒に祈誓しませんか？',
-    description,
+    'og:title': description,
   };
 };
 

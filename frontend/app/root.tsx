@@ -20,10 +20,10 @@ export const links: LinksFunction = () => [
 export const meta: MetaFunction = () => {
   const ogImage = `https://inol.cf/brand/logo.png`;
   const description =
-    'PRAY WITH YOU, PRAY WITH ME. インターネット神社inolはあなたの大切な誓いをブロックチェーンに乗せて保存することできます。友達や恋人と一緒に誓うことも可能です';
+    'PRAY WITH YOU, PRAY WITH ME. インターネット神社inolであなたの願いをNFTに保存しましょう!友達や恋人と一緒に誓うこともできます！';
   return {
     title: 'Inol',
-    description: '',
+    description: description,
     'og:title': 'inol',
     'og:description': description,
     'og:image': ogImage,
