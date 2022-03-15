@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
-import { json, LoaderFunction, useLoaderData } from 'remix';
+import { json, LoaderFunction, useLoaderData, useLocation } from 'remix';
 import { Ema, Padlock } from '~/components/baseSvg';
+import { Button } from '~/components/Button';
 import { Selector } from '~/components/Selector';
 import { SvgCanvas } from '~/components/SvgCanvas';
 import {
@@ -72,6 +73,17 @@ export default function Index() {
           onChange={setBackground}
           className="bg-white/50"
         />
+        <Button
+          onClick={() =>
+            window.navigator.share({
+              url: window.location.href,
+              text: '一緒に祈りましょう！',
+              title: 'PRAY WITH YOU - Inol',
+            })
+          }
+        >
+          一緒に描く
+        </Button>
       </div>
     </div>
   );
