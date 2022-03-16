@@ -41,3 +41,6 @@ export const useLiffUserId = (): string | undefined => {
   }, [liff]);
   return userId;
 };
+
+export const pathToLiffUrl = (path: string, liffId: string): string =>
+  new URL(`https://liff.line.me/${liffId}${path}`).href;
