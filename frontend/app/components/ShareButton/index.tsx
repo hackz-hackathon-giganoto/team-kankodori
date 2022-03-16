@@ -1,12 +1,10 @@
 import { CSSProperties, useCallback, VFC } from 'react';
 import { toast } from 'react-toastify';
-import { pathToLiffUrl } from '~/utils/liff';
 import icon from './ShareIcon.svg';
 
 export type Props = {
   style?: CSSProperties;
   className?: string;
-  liffId: string;
   path: string;
   title?: string;
   text?: string;
@@ -15,14 +13,13 @@ export type Props = {
 export const ShareButton: VFC<Props> = ({
   style,
   className,
-  liffId,
   path,
   title = 'Inol',
   text = '',
 }) => {
   const onClick = useCallback(() => {
     if (typeof window === 'undefined') return;
-    const url = pathToLiffUrl(path, liffId);
+    const url = `https://inol.cf${path}`;
     if (typeof window.navigator.share === 'function') {
       window.navigator.share({
         title,
@@ -34,7 +31,7 @@ export const ShareButton: VFC<Props> = ({
         .writeText(url)
         .then(() => toast.info('Copy URL into clipboard!'));
     }
-  }, [liffId, path, text, title]);
+  }, [path, text, title]);
 
   return (
     <button className={className} style={style} onClick={onClick}>
