@@ -12,6 +12,7 @@ import type { MetaFunction } from 'remix';
 import tailwind from '~/styles/generated.css';
 import { googleFontLinks } from '~/utils/googleFontLinks';
 import toast from 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: tailwind },
@@ -49,6 +50,7 @@ export default function App() {
         <div className="bg-gradient-to-b from-[#fae5b9] to-[#f7db8e] h-screen max-h-screen overflow-hidden">
           <Outlet />
         </div>
+        <ToastContainer />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

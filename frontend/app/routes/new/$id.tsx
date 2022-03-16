@@ -125,7 +125,11 @@ export default function Index() {
                 },
                 liff,
               ).then((type) => {
-                if (type === 'clipboard') toast.info('URL Copied!');
+                if (type === 'clipboard')
+                  toast.info('URL Copied!', {
+                    position: 'bottom-right',
+                    autoClose: 2000,
+                  });
               })
             }
           >
@@ -172,7 +176,6 @@ export default function Index() {
           `}
         />
       )}
-      <ToastContainer position="bottom-right" autoClose={2000} />
     </>
   );
 }
