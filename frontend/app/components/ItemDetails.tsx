@@ -2,12 +2,10 @@ import { useEffect, useState, VFC } from 'react';
 import { Link, useLocation } from 'remix';
 import { Item } from '~/data/types';
 import { areas } from '~/utils/areas';
-import { useLiff } from '~/utils/liff';
 import { ShareButton } from './ShareButton';
 
 export const ItemDetails: VFC<{ item: Item }> = ({ item }) => {
   const location = useLocation();
-  const { liffId } = useLiff();
   const [createdAt, setCreatedAt] = useState(
     new Date(item.created_at).toLocaleString(),
   );
@@ -29,11 +27,7 @@ export const ItemDetails: VFC<{ item: Item }> = ({ item }) => {
           {areas[item.country - 1].name}
         </Link>
         <div className="grow" />
-        <ShareButton
-          path={location.pathname}
-          liffId={liffId}
-          className="w-[5vw]"
-        />
+        <ShareButton path={location.pathname} className="w-[5vw]" />
       </header>
       <pre className="text-sm">created at: {createdAt}</pre>
       <p className="flex justify-center">
