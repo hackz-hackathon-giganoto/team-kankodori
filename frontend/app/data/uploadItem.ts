@@ -1,7 +1,7 @@
 import { API_ENDPOINT } from './constants';
 import { Item, ItemInput } from './types';
 
-export const uplodeItem = async ({ owner, svg }: ItemInput): Promise<Item> => {
+export const uploadItem = async ({ owner, svg }: ItemInput): Promise<Item> => {
   const url = new URL(`${API_ENDPOINT}/item/`);
 
   const res = await fetch(url.href, {

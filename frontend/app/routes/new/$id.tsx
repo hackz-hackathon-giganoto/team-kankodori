@@ -22,7 +22,7 @@ import {
 } from '~/components/SvgCanvas/network';
 import { Control } from '~/components/SvgCanvas/types';
 import { renderSvgComponent } from '~/data/renderSvgComponent.server';
-import { uplodeItem } from '~/data/uplodeItem';
+import { uploadItem } from '~/data/uploadItem';
 import { useLiff, useLiffUserId } from '~/utils/liff';
 import { share } from '~/utils/share';
 
@@ -43,7 +43,8 @@ export const action: ActionFunction = async ({ request }) => {
     backgroundString === 'ema' ? Ema : Padlock,
   );
 
-  const item = await uplodeItem({ owner, svg });
+  const item = await uploadItem({ owner, svg });
+
   return redirect(`/item/${item.name}`);
 };
 
