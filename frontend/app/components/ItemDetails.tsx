@@ -7,7 +7,7 @@ import { ShareButton } from './ShareButton';
 
 export const ItemDetails: VFC<{ item: Item }> = ({ item }) => {
   const location = useLocation();
-  const liff = useLiff();
+  const { liffId } = useLiff();
   const [createdAt, setCreatedAt] = useState(
     new Date(item.created_at).toLocaleString(),
   );
@@ -31,7 +31,7 @@ export const ItemDetails: VFC<{ item: Item }> = ({ item }) => {
         <div className="grow" />
         <ShareButton
           path={location.pathname}
-          liffId={liff?.id ?? ''}
+          liffId={liffId}
           className="w-[5vw]"
         />
       </header>

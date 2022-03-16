@@ -77,7 +77,7 @@ export default function Index() {
           }),
     [id],
   );
-  const liff = useLiff();
+  const {liff} = useLiff();
   const userId = useLiffUserId();
   return (
     <>
