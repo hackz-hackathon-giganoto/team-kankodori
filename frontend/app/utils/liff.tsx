@@ -5,13 +5,13 @@ import type { Liff } from '@line/liff';
 // SSR を考慮すると undefined
 const initialValue = {
   liff: undefined,
-  liffId: ""
+  liffId: '',
 };
 
 type LiffContextValue = {
-  liff: Liff | undefined,
-  liffId: string
-}
+  liff: Liff | undefined;
+  liffId: string;
+};
 
 const LiffContext = createContext<LiffContextValue>(initialValue);
 
@@ -33,7 +33,11 @@ export const LiffProvider: FC<Props> = ({ children, liffId }) => {
     })();
   }, [liffId, setLiff]);
 
-  return <LiffContext.Provider value={{liff, liffId}}>{children}</LiffContext.Provider>;
+  return (
+    <LiffContext.Provider value={{ liff, liffId }}>
+      {children}
+    </LiffContext.Provider>
+  );
 };
 
 export const useLiff = () => useContext(LiffContext);
