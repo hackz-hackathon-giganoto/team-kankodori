@@ -35,6 +35,8 @@ export const loader: LoaderFunction = async ({ params }) => {
 export const meta: MetaFunction = ({ data }) => {
   const ogImage = `https://inol.cf/png/${data.id}`;
   return {
+    title: 'inolを見つけました',
+    'og:title': 'inol',
     'og:image': ogImage,
     'twitter:image': ogImage,
   };
