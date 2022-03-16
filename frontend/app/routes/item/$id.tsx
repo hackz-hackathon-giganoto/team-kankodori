@@ -34,11 +34,11 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export const meta: MetaFunction = ({ data }) => {
   const ogImage = `https://inol.cf/png/${data.id}`;
-  const description =
-    'PRAY WITH YOU, PRAY WITH ME. インターネット神社inolで祈誓しました';
+  const description = 'PRAY WITH YOU, PRAY WITH ME. inolを捧げました';
   return {
     description,
-    'og:title': 'inolで祈誓しました',
+    title: 'inolを捧げました',
+    'og:title': 'inol',
     'og:description': description,
     'og:image': ogImage,
     'twitter:description': description,

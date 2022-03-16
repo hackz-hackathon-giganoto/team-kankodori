@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 import {
   ActionFunction,
   Form,
@@ -21,8 +22,9 @@ import {
 } from '~/components/SvgCanvas/network';
 import { Control } from '~/components/SvgCanvas/types';
 import { renderSvgComponent } from '~/data/renderSvgComponent.server';
-import { useLiffUserId } from '~/utils/liff';
 import { uploadItem } from '~/data/uploadItem';
+import { useLiff, useLiffUserId } from '~/utils/liff';
+import { share } from '~/utils/share';
 
 export const loader: LoaderFunction = async ({ params }) => {
   return json(params.id);
@@ -47,8 +49,9 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export const meta: MetaFunction = () => {
-  const description = 'PRAY WITH YOU. inolで一緒に祈誓しませんか？';
+  const description = 'PRAY WITH YOU. Inolで一緒に祈誓(きせい)しませんか？';
   return {
+    title: 'edit inol',
     'og:description': description,
   };
 };
@@ -74,6 +77,7 @@ export default function Index() {
           }),
     [id],
   );
+  const liff = useLiff();
   const userId = useLiffUserId();
   return (
     <>
@@ -113,10 +117,15 @@ export default function Index() {
           <Button
             className="m-2"
             onClick={() =>
-              window.navigator.share({
-                url: window.location.href,
-                text: '一緒に祈りましょう！',
-                title: 'PRAY WITH YOU - Inol',
+              share(
+                {
+                  url: window.location.href,
+                  text: '一緒に祈りましょう！',
+                  title: 'PRAY WITH YOU - Inol',
+                },
+                liff,
+              ).then((type) => {
+                if (type === 'clipboard') toast.info('URL Copied!');
               })
             }
           >
@@ -163,6 +172,7 @@ export default function Index() {
           `}
         />
       )}
+      <ToastContainer position="bottom-right" autoClose={2000} />
     </>
   );
 }

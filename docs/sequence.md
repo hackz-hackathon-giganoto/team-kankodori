@@ -1,14 +1,15 @@
-
-
 ## Item を表示
+
 ### リスト表示
+
 ```mermaid
 sequenceDiagram
 	Client ->> Server: country, pref をもとに Item のリストを要求 (GET /v1/items/:country/:pref)
 	Server -->> Client: Item のリストを返却
 ```
 
-### 特定のItem を表示
+### 特定の Item を表示
+
 ```mermaid
 sequenceDiagram
 	Client ->> Server: country, pref, city か、 ID をもとに Item を要求 (GET /v1/item/:country/:pref/:city or GET /v1/item/:id)
@@ -16,13 +17,14 @@ sequenceDiagram
 ```
 
 ## Item を保存
+
 ```mermaid
 sequenceDiagram
 	Client ->> Server: 書いた svg を送信 (POST /v1/item)
-	Server ->> LINE Blockchain: Item を inol の chain に mint
+	Server ->> LINE Blockchain: Item を Inol の chain に mint
 	LINE Blockchain -->> Server: NFT の id を返却
 	Server ->> LINE Blockchain: 上で作成した NFT を ユーザに transfer
-	
+
 	Server -->> Client: 保存された Item を送信
 ```
 

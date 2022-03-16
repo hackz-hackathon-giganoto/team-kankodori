@@ -11,16 +11,18 @@ import {
 import type { MetaFunction } from 'remix';
 import tailwind from '~/styles/generated.css';
 import { googleFontLinks } from '~/utils/googleFontLinks';
+import toast from 'react-toastify/dist/ReactToastify.css';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: tailwind },
+  { rel: 'stylesheet', href: toast },
   ...googleFontLinks(),
 ];
 
 export const meta: MetaFunction = () => {
   const ogImage = `https://inol.cf/brand/logo.png`;
   const description =
-    'PRAY WITH YOU, PRAY WITH ME. インターネット神社inolであなたの願いをNFTに保存しましょう!友達や恋人と一緒に誓うこともできます！';
+    'PRAY WITH YOU, PRAY WITH ME. 願い事,叶えたいことをInolで祈誓(きせい)しよう!';
   return {
     title: 'Inol',
     description: description,
