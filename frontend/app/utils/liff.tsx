@@ -3,15 +3,24 @@ import type { Liff } from '@line/liff';
 
 // 初期値
 // SSR を考慮すると undefined
-const initialValue = undefined;
-const LiffContext = createContext<Liff | undefined>(initialValue);
+const initialValue = {
+  liff: undefined,
+  liffId: '',
+};
+
+type LiffContextValue = {
+  liff: Liff | undefined;
+  liffId: string;
+};
+
+const LiffContext = createContext<LiffContextValue>(initialValue);
 
 type Props = {
   liffId: string;
 };
 
 export const LiffProvider: FC<Props> = ({ children, liffId }) => {
-  const [liff, setLiff] = useState<Liff | undefined>(initialValue);
+  const [liff, setLiff] = useState<Liff | undefined>(undefined);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -24,13 +33,17 @@ export const LiffProvider: FC<Props> = ({ children, liffId }) => {
     })();
   }, [liffId, setLiff]);
 
-  return <LiffContext.Provider value={liff}>{children}</LiffContext.Provider>;
+  return (
+    <LiffContext.Provider value={{ liff, liffId }}>
+      {children}
+    </LiffContext.Provider>
+  );
 };
 
 export const useLiff = () => useContext(LiffContext);
 
 export const useLiffUserId = (): string | undefined => {
-  const liff = useLiff();
+  const { liff } = useLiff();
   const [userId, setUserId] = useState<string | undefined>();
   useEffect(() => {
     // ユーザーの生ID
